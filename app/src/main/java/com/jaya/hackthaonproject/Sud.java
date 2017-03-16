@@ -5,4 +5,5 @@ package com.jaya.hackthaonproject;
  */
 
 public class Sud {
+int al;
 }
