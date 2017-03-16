@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_timeline_report"
+            android:icon="@drawable/ic_timeline_report"
+            android:title="Timeline Report" />
+        <item
+            android:id="@+id/nav_view_database"
+            android:icon="@drawable/ic_view_database"
+            android:title="View Database" />
+        <item
+            android:id="@+id/nav_track_resources"
+            android:icon="@drawable/ic_track_resources"
+            android:title="Track Resources" />
+        <item
+            android:id="@+id/nav_allocate_demand"
+            android:icon="@drawable/ic_allocate_demand"
+            android:title="Allocate A Demand" />
+    </group>
+
+    <item android:title="Site Manager">
+        <menu>
+            <item
+                android:id="@+id/nav_create_sm"
+                android:icon="@drawable/ic_create_sm"
+                android:title="Create A New SM Account" />
+            <item
+                android:id="@+id/nav_view_sm_database"
+                android:icon="@drawable/ic_view_sm_database"
+                android:title="View SM Database" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/nav_guidelines"
+        android:icon="@drawable/ic_guidelines"
+        android:title="GuideLines"/>
+
+
+</menu>

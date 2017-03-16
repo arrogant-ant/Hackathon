@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    tools:context="com.jaya.hackthaonproject.show">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Site Managers Database"
+        android:id="@+id/site"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="#000000"/>
+    ////////////////////////
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:id="@+id/lay"
+        android:layout_below="@+id/site"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#ffffff">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="#DCDCDC"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/adapter"
+                android:text="empID"
+                android:textColor="#FF4081"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="104"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#FF4081"
+                android:layout_weight="1"
+                >
+            </LinearLayout>
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/email"
+                android:text="email"
+                android:textColor="#FF4081"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="105"
+
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FF4081"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/pass"
+                android:text="password"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="104"
+
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_weight="1"
+                >
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/phone"
+                android:text="phone"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_weight="105"
+                android:textSize="15dp"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#ffffff">
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:background="#000000"
+    android:layout_below="@+id/lay"></LinearLayout>
+
+
+
+    ///////////////////
+
+
+
+
+    <ListView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listitem1"
+        android:layout_below="@+id/lay"
+        ></ListView>
+
+
+
+</RelativeLayout>

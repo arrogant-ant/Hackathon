@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jaya.hackthaonproject.MainActivity">
+    <com.synnapps.carouselview.CarouselView
+        android:layout_marginTop="50dp"
+        android:id="@+id/carouselView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:fillColor="#FFFFFFFF"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wangle"
+        android:layout_below="@+id/carouselView"
+        android:id="@+id/Head"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textStyle="normal|bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The Resource Management App"
+        android:layout_below="@+id/Head"
+        android:id="@+id/Head2"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:layout_below="@+id/Head2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_margin="10dp"
+        android:lineSpacingExtra="5dp"
+        android:textColor="#000000"
+        android:text="Wangle is a project developed by ministry of steel and is useful in allocating the resources dynamically .It saves the time of the Project Cordinator and Site Manager.It Can Track Resource.It is an efficient way of allocating the resources.It gives a userfriendly enviroment to work.It is a hassle free Application"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif"
+
+        android:elevation="0dp" />
+
+
+</RelativeLayout>

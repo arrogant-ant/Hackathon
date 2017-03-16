@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_release_resource"
+            android:icon="@drawable/ic_release_resource"
+            android:title="Free a Resource" />
+        <item
+            android:id="@+id/nav_requested_demands"
+            android:icon="@drawable/ic_requested_demand"
+            android:title="View Requested Demands" />
+        <item
+            android:id="@+id/nav_granted_demands"
+            android:icon="@drawable/ic_granted_demands"
+            android:title="Granted Demands"/>
+
+        <item
+            android:id="@+id/nav_guidelines_user"
+            android:icon="@drawable/ic_guidelines_user"
+            android:title="GuideLines"/>
+
+    </group>
+
+
+
+
+
+</menu>
