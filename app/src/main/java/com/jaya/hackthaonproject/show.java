@@ -119,14 +119,15 @@ public class show extends AppCompatActivity {
             String password;
             String emailid;
             String phone_no;
+
             while (count < jsonArray.length()) {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
                 empid = jo.getString("empid");
-                password=jo.getString("password");
-                emailid=jo.getString("emailid");
-                phone_no=jo.getString("phone_no");
-                Contacts c=new Contacts(empid,password,emailid,phone_no);
+                password = jo.getString("password");
+                emailid = jo.getString("emailid");
+                phone_no = jo.getString("phone_no");
+                Contacts c = new Contacts(empid, password, emailid, phone_no);
                 ca.add(c);
                 count++;
 

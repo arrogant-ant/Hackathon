@@ -30,10 +30,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Admin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-   /* String result;
+    String result;
     TextView tx;
-    ContactAdapter ca;
-    ListView listView;*/
+    ContactAdapterDemand ca;
+    ListView listView;
 
 
     @Override
@@ -53,13 +53,14 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_admin);
         navigationView.setNavigationItemSelectedListener(this);
 ///////////////////////////////////////////////////////////////
-        /*ca=new ContactAdapter(this,R.layout.individual_layout);
-        listView=(ListView)findViewById(R.id.listitem);
+        ca = new ContactAdapterDemand(this, R.layout.activity_layout_individual_admin);
+        listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
-        Showview show = new Showview(this);
-        show.execute();*/
+        Showviewss show = new Showviewss(this);
+        show.execute();
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
@@ -69,11 +70,13 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             super.onBackPressed();
         }
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_admin, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -107,15 +110,13 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
 
 
         } else if (id == R.id.nav_create_sm) {
-             Intent i=new Intent(this,Register.class);
+            Intent i = new Intent(this, Register.class);
             startActivity(i);
-        }
-        else if (id == R.id.nav_view_sm_database) {
-            Intent i=new Intent(this,show.class);
+        } else if (id == R.id.nav_view_sm_database) {
+            Intent i = new Intent(this, show.class);
             startActivity(i);
 
-        }
-        else if (id == R.id.nav_guidelines) {
+        } else if (id == R.id.nav_guidelines) {
 
         }
 
@@ -124,12 +125,12 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         return true;
     }
 
-    /* class Showview extends AsyncTask<String, String, String> {
+    class Showviewss extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showview(Context ctx) {
+        Showviewss(Context ctx) {
             this.ctx = ctx;
 
 
@@ -139,7 +140,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/try.php";
+            json_url = "http://www.wangle.16mb.com/demand.php";
 
         }
 
@@ -185,43 +186,50 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
 
             result = s;
 
+
             parse(ctx);
 
-          Intent i=new Intent(ctx,result.class);
-            i.putExtra("result",result);
-            startActivity(i);
-
 
         }
 
-       )
+
         void parse(Context ctx) {
-        JSONObject jsonObject;
-        JSONArray jsonArray;
+            JSONObject jsonObject;
+            JSONArray jsonArray;
 
 
-        try {
-            jsonObject = new JSONObject(result);
-            jsonArray = jsonObject.getJSONArray("server_response");
-            int count = 0;
-            String empid;
-            String password;
-            String emailid;
-            String phone_no;
-            while (count < jsonArray.length()) {
+            try {
+                jsonObject = new JSONObject(result);
+                jsonArray = jsonObject.getJSONArray("server_response");
+                int count = 0;
 
-                JSONObject jo = jsonArray.getJSONObject(count);
-                empid = jo.getString("empid");
-                password=jo.getString("password");
-                emailid=jo.getString("emailid");
-                phone_no=jo.getString("phone_no");
-                Contacts c=new Contacts(empid,password,emailid,phone_no);
-                ca.add(c);
-                count++;
+                String resource_type;
+                String no_of_resources;
+                String completion_time;
+                String Deadline;
+                String location_id;
+                String date_of_demand;
+                String priority;
+                while (count < jsonArray.length()) {
 
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    resource_type = jo.getString("resource_type");
+                    no_of_resources=jo.getString("no_of_resources");
+                    completion_time=jo.getString("completion_time");
+                    priority=jo.getString("priority");
+                    Deadline=jo.getString("Deadline");
+                    location_id=jo.getString("location_id");
+                    date_of_demand=jo.getString("date_of_demand");
+
+
+                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand);
+                    ca.add(c);
+                    count++;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }*/
+    }
 }

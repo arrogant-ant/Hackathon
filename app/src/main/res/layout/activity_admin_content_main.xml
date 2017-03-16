@@ -4,16 +4,26 @@
     android:id="@+id/activity_admin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:layout_marginTop="50dp"
 
     tools:context="com.jaya.hackthaonproject.Admin">
-<!---
+
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Demands"
+    android:id="@+id/head_text"
+    android:gravity="center"
+    android:textSize="25dp"
+    android:textColor="#000000"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
         android:id="@+id/lay"
-               >
+        android:layout_below="@+id/head_text"
+        >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="10dp"
@@ -21,14 +31,14 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:orientation="horizontal"
             android:background="#DCDCDC"
             android:weightSum="220"
             >
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="#ffffff"
                 android:layout_weight="5"
                 >
@@ -38,17 +48,17 @@
 
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:id="@+id/adapter"
-                android:text="empID"
-                android:textColor="#00897B"
+                android:id="@+id/location_id"
+                android:text="Location Id"
+                android:textColor="#FF4081"
                 android:gravity="center"
                 android:textSize="15dp"
                 android:layout_weight="104"
                 />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:background="#00897B"
+                android:layout_height="35dp"
+                android:background="#FF4081"
                 android:layout_weight="1"
                 >
             </LinearLayout>
@@ -56,9 +66,9 @@
 
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:id="@+id/email"
-                android:text="email"
-                android:textColor="#00897B"
+                android:id="@+id/resource_type"
+                android:text="Resource Type"
+                android:textColor="#FF4081"
                 android:gravity="center"
                 android:textSize="15dp"
                 android:layout_weight="105"
@@ -67,7 +77,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="#ffffff"
                 android:layout_weight="5"
                 >
@@ -76,13 +86,13 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#00897B"
+            android:layout_height="35dp"
+            android:background="#FF4081"
             android:weightSum="220"
             >
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="#ffffff"
                 android:layout_weight="5"
                 >
@@ -90,8 +100,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/pass"
-                android:text="password"
+                android:id="@+id/no_of_resources"
+                android:text="No of Resources"
                 android:textColor="#ffffff"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -100,7 +110,7 @@
                 />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="#ffffff"
                 android:layout_weight="1"
                 >
@@ -109,8 +119,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/phone"
-                android:text="phone"
+                android:id="@+id/completion_time"
+                android:text="Completion Time"
                 android:textColor="#ffffff"
                 android:gravity="center"
                 android:layout_weight="105"
@@ -118,7 +128,7 @@
                 />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="#ffffff"
                 android:layout_weight="5"
                 >
@@ -126,29 +136,106 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:background="#ffffff">
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="#DCDCDC"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/priority"
+                android:text="Priority"
+                android:textColor="#FF4081"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="104"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#FF4081"
+                android:layout_weight="1"
+                >
+            </LinearLayout>
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/deadline"
+                android:text="Deadline"
+                android:textColor="#FF4081"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="105"
+
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="#FF4081"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/date_of_demand"
+                android:text="Date Of Demand"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="210"
+
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
         </LinearLayout>
 
 
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#ffffff">
+        </LinearLayout>
+    </LinearLayout>-->
 
-    </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////
 
 
 
@@ -157,9 +244,12 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listitem"
+        android:id="@+id/listitems"
         android:layout_below="@+id/lay"
-        ></ListView>-->
+        >
+
+
+    </ListView>
 
 
 
