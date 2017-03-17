@@ -191,8 +191,26 @@
             android:text="Date Of Demand"
             android:textColor="#ffffff"
             android:gravity="center"
+            android:textSize="10dp"
+            android:layout_weight="104"
+
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="1"
+            >
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/demand_id"
+            android:text="Demand Id"
+            android:textColor="#ffffff"
+            android:gravity="center"
             android:textSize="15dp"
-            android:layout_weight="210"
+            android:layout_weight="105"
 
             />
 

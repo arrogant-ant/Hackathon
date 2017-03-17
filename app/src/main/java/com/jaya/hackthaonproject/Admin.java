@@ -68,8 +68,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
 
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 alert();
 
             }
@@ -254,7 +254,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-
+                String demand_id;
                 String resource_type;
                 String no_of_resources;
                 String completion_time;
@@ -265,6 +265,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
+                    demand_id=jo.getString("demand_id");
                     resource_type = jo.getString("resource_type");
                     no_of_resources=jo.getString("no_of_resources");
                     completion_time=jo.getString("completion_time");
@@ -274,7 +275,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                     date_of_demand=jo.getString("date_of_demand");
 
 
-                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand);
+                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand,demand_id);
                     ca.add(c);
                     count++;
 
