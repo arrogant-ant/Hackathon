@@ -168,6 +168,15 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         return true;
     }
 
+    /*//Listener function
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+
+        alert();
+
+    }
+*/
     class Showviewss extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;

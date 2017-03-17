@@ -37,7 +37,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
     public void demands(View v)
     {
 
-        Intent i=new Intent(this,Demand.class);
+        Intent i=new Intent(this,AddDemand.class);
         startActivity(i);
     }
 
