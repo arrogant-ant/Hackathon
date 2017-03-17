@@ -1,6 +1,7 @@
 package com.jaya.hackthaonproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -10,12 +11,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +64,45 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         Showviewss show = new Showviewss(this);
         show.execute();
 
+        //listview listener setup
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+
+                alert();
+
+            }
+        });
+
+
     }
+
+    //alert dialog generation
+    void alert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Admin.this);
+        builder.setTitle("Request");
+        builder.setMessage("what should be done?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"confirmed",Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"deleted",Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNeutralButton("cancel",null);
+        AlertDialog alertDialog= builder.create();
+        alertDialog.show();
+
+    }
+
+
 
     @Override
     public void onBackPressed() {
