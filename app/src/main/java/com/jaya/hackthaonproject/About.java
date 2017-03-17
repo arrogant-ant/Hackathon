@@ -1,7 +1,9 @@
 package com.jaya.hackthaonproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 
@@ -33,5 +35,10 @@ public class About extends AppCompatActivity {
             imageView.setImageResource(sampleImages[position]);
         }
     };
+
+    public void newDemand(View view) {
+        Intent i=new Intent(this,AddDemand.class);
+        startActivity(i);
+    }
 }
 

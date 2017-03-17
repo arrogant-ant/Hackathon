@@ -54,8 +54,10 @@
             android:name=".show"
             android:theme="@style/AppTheme.NoActionBars" />
         <activity android:name=".Demand" />
-        <activity android:name=".About"
-            android:theme="@style/AppTheme.NoActionBars" ></activity>
+        <activity
+            android:name=".About"
+            android:theme="@style/AppTheme.NoActionBars" />
+        <activity android:name=".AddDemand"></activity>
     </application>
 
 </manifest>
