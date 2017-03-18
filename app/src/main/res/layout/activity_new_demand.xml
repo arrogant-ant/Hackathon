@@ -16,6 +16,40 @@
         android:layout_height="wrap_content"
         android:text="New Demand"
         android:textAlignment="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Priority"
+        android:textSize="18sp"
+        android:paddingStart="10dp"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prioritySpinner"
+        android:spinnerMode="dropdown"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Deadline"
+        android:textSize="18sp"
+        android:paddingStart="10dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline"/>
+    <!-- adding resources -->
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.jaya.hackthaonproject.Add"
+        android:id="@+id/resDetail"
+        tools:layout="@layout/fragment_add" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Requested Resource"
+        android:layout_marginTop="10dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,52 +57,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <fragment
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.jaya.hackthaonproject.Add"
-                android:id="@+id/resDetail"
-                tools:layout="@layout/fragment_add" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Priority"
-                android:textSize="18sp"
-                android:paddingStart="10dp"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/prioritySpinner"
-                android:spinnerMode="dropdown"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Deadline"
-                android:textSize="18sp"
-                android:paddingStart="10dp"/>
-            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/deadline"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add more dependent demands"
-                    android:onClick="addMore"
-                    android:background="@color/btn_login"
-                    android:layout_marginRight="15dp"/>
+                android:name="com.jaya.hackthaonproject.ReqResource"
+                tools:layout="@layout/fragment_req_resource"
+                android:layout_marginTop="5dp"
+                android:id="@+id/req_res"/>
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Submit"
-                    android:background="@color/btn_login"/>
-            </LinearLayout>
+                    android:background="@color/btn_login"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </ScrollView>
 

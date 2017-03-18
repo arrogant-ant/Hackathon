@@ -5,5 +5,5 @@ package com.jaya.hackthaonproject;
  */
 
 public interface Communicator {
-    void response(String deadline,String priority);
+    void response(String type,String no, String time);
 }
