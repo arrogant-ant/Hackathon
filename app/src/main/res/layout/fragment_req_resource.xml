@@ -2,24 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jaya.hackthaonproject.ReqResource">
+    tools:context="com.jaya.hackthaonproject.ReqResource"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="100dp"
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:id="@+id/type"/>
+        android:id="@android:id/list"/>
     <TextView
-        android:layout_width="80dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:id="@+id/no"/>
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Type"
-        android:id="@+id/time"/>
+        android:text="No Resources added"
+        android:id="@android:id/empty"/>
 
 
 

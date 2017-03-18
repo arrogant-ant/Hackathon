@@ -58,6 +58,7 @@
             android:name=".About"
             android:theme="@style/AppTheme.NoActionBars" />
         <activity android:name=".NewDemand"></activity>
+
     </application>
 
 </manifest>
