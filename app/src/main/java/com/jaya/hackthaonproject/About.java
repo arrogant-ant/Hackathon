@@ -36,7 +36,9 @@ public class About extends AppCompatActivity {
         }
     };
 
-    public void newDemand(View view) {
+
+
+    public void add(View view) {
         Intent i=new Intent(this,AddDemand.class);
         startActivity(i);
     }
