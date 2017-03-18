@@ -4,7 +4,6 @@ package com.jaya.hackthaonproject;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,7 @@ public class DependentDemand extends Fragment{
     TextView priorityView;
     TextView deadlineView;
     String priority, deadline;
-    @NonNull
-    Bundle b= new Bundle();
+
     private final String priorityKey="priority";
 
     public DependentDemand() {
@@ -35,26 +33,26 @@ public class DependentDemand extends Fragment{
                              Bundle savedInstanceState) {
 
        View v= inflater.inflate(R.layout.fragment_dependent_demand, container, false);
-       b = getArguments();
+       deadlineView = (TextView) v.findViewById(R.id.deadlineText);
+       priorityView = (TextView) v.findViewById(R.id.priorityText);
+       setText("a","c");
        return v;
    }
 
-    @Override
+   /* @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         deadlineView = (TextView) getActivity().findViewById(R.id.deadlineText);
         priorityView = (TextView) getActivity().findViewById(R.id.priorityText);
-        setText();
-    }
 
-    void setText()
+    }*/
+
+    void setText(String deadline, String priority)
     {
 
-        b=getArguments();
-        priority=b.getString(priorityKey);
-       // deadline=b.getString(deadline);
-        priorityView.setText(priority);
-       // deadlineView.setText(deadline);
+
+        priorityView.setText("5");
+        deadlineView.setText("6");
 
     }
 

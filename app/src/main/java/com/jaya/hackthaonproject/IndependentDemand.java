@@ -58,9 +58,14 @@ public class IndependentDemand extends Fragment implements AdapterView.OnItemSel
         Toast.makeText(getActivity(),"yo baby",Toast.LENGTH_SHORT).show();
         deadline= deadline_view.getText().toString();
         priority= parent.getItemAtPosition(position).toString();
+
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         comm.response(deadline,priority);
-
-
     }
 
     @Override
