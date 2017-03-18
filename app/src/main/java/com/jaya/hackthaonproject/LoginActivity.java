@@ -343,7 +343,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/another_try.php";
+            json_url = "http://www.wangle.website/another_try.php";
 
         }
 

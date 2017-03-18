@@ -19,28 +19,31 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class show extends AppCompatActivity {
+public class Track extends AppCompatActivity {
     String result;
-    TextView tx;
-    ContactAdapter ca;
-    ListView listView;
+      ListView listView;
+    ContactAdapterTrack ca;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show);
-        ca=new ContactAdapter(this,R.layout.individual_layout);
-        listView=(ListView)findViewById(R.id.listitem1);
+        setContentView(R.layout.activity_track);
+        getSupportActionBar().setTitle("Track Resources");
+        ca = new ContactAdapterTrack(this, R.layout.layout_individual_track_resources);
+        listView = (ListView) findViewById(R.id.list_view_track);
         listView.setAdapter(ca);
-        Showviews show =new Showviews(this);
+      TracksResources show = new TracksResources(this);
         show.execute();
+
+
     }
-    class Showviews extends AsyncTask<String, String, String> {
+
+    class TracksResources extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showviews(Context ctx) {
+        TracksResources(Context ctx) {
             this.ctx = ctx;
 
 
@@ -50,7 +53,7 @@ public class show extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/try.php";
+            json_url = "http://www.wangle.website/Track.php";
 
         }
 
@@ -96,45 +99,44 @@ public class show extends AppCompatActivity {
 
             result = s;
 
+
             parse(ctx);
 
-         /*  Intent i=new Intent(ctx,result.class);
-            i.putExtra("result",result);
-            startActivity(i);*/
-
 
         }
-    }
-
-    void parse(Context ctx) {
-        JSONObject jsonObject;
-        JSONArray jsonArray;
 
 
-        try {
-            jsonObject = new JSONObject(result);
-            jsonArray = jsonObject.getJSONArray("server_response");
-            int count = 0;
-            String empid;
-            String password;
-            String emailid;
-            String phone_no;
+        void parse(Context ctx) {
+            JSONObject jsonObject;
+            JSONArray jsonArray;
 
-            while (count < jsonArray.length()) {
 
-                JSONObject jo = jsonArray.getJSONObject(count);
-                empid = jo.getString("empid");
-                password = jo.getString("password");
-                emailid = jo.getString("emailid");
-                phone_no = jo.getString("phone_no");
-                Contacts c = new Contacts(empid, password, emailid, phone_no);
-                ca.add(c);
-                count++;
+            try {
+                jsonObject = new JSONObject(result);
+                jsonArray = jsonObject.getJSONArray("server_response");
+                int count = 0;
+                String Resource_id;
+                String Resource_type;
+                String location_id;
+                String Status;
+                while (count < jsonArray.length()) {
 
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    Resource_id = jo.getString("Resource_id");
+                    Resource_type = jo.getString("Resource_type");
+                    location_id = jo.getString("location_id");
+                    Status = jo.getString("Status");
+
+
+                    Contacts_track c = new Contacts_track(Resource_id, Resource_type, location_id, Status);
+                    ca.add(c);
+                    count++;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
-
 }
+

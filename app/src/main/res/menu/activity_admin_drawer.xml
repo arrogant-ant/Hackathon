@@ -7,18 +7,22 @@
             android:id="@+id/nav_timeline_report"
             android:icon="@drawable/ic_timeline_report"
             android:title="Timeline Report" />
-        <item
-            android:id="@+id/nav_view_database"
-            android:icon="@drawable/ic_view_database"
-            android:title="View Database" />
+
+
+
+
         <item
             android:id="@+id/nav_track_resources"
             android:icon="@drawable/ic_track_resources"
             android:title="Track Resources" />
         <item
+            android:id="@+id/nav_view"
+            android:icon="@drawable/ic_view_database"
+            android:title="View Database Of Resources"/> >
+        <item
             android:id="@+id/nav_allocate_demand"
             android:icon="@drawable/ic_allocate_demand"
-            android:title="Allocate A Demand" />
+            android:title="View A Demand" />
     </group>
 
     <item android:title="Site Manager">
