@@ -12,8 +12,9 @@ public class Contacts_demand {
     private String location_id;
     private String date_of_demand;
     private String priority;
+    private String demand_id;
         public Contacts_demand(String resource_type,String no_of_resources,String completion_time,String priority,String Deadline
-        ,String location_id,String date_of_demand)
+        ,String location_id,String date_of_demand,String demand_id)
         {
             this.resource_type=resource_type;
             this.no_of_resources=no_of_resources;
@@ -22,6 +23,7 @@ public class Contacts_demand {
             this.location_id=location_id;
             this.date_of_demand=date_of_demand;
             this.priority=priority;
+            this.demand_id=demand_id;
         }
     public String getPriority() {
         return priority;
@@ -79,7 +81,13 @@ public class Contacts_demand {
         this.date_of_demand = date_of_demand;
     }
 
+    public String getDemand_id() {
+        return demand_id;
+    }
 
+    public void setDemand_id(String demand_id) {
+        this.demand_id = demand_id;
+    }
 
 
 

@@ -54,6 +54,7 @@ public class ContactAdapterDemand extends ArrayAdapter {
             ch.location_id=(TextView)row.findViewById(R.id.location_id);
             ch.date_of_demand=(TextView)row.findViewById(R.id.date_of_demand);
             ch.priority=(TextView)row.findViewById(R.id.priority);
+            ch.demand_id=(TextView)row.findViewById(R.id.demand_id);
             row.setTag(ch);
         }
         else
@@ -62,6 +63,7 @@ public class ContactAdapterDemand extends ArrayAdapter {
 
         }
         Contacts_demand contacts=(Contacts_demand)this.getItem(position);
+        ch.demand_id.setText(contacts.getDemand_id());
         ch.resource_type.setText(contacts.getResource_type());
         ch.no_of_resources.setText(contacts.getNo_of_resources());
         ch.completion_time.setText(contacts.getCompletion_time());
@@ -80,6 +82,7 @@ public class ContactAdapterDemand extends ArrayAdapter {
         TextView location_id;
         TextView date_of_demand;
         TextView priority;
+        TextView demand_id;
 
     }
 }

@@ -27,18 +27,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class Admin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String result;
     TextView tx;
     ContactAdapterDemand ca;
     ListView listView;
+    String delete;
+    String accept_data;
 
 
     @Override
@@ -68,9 +74,13 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
-
-                alert();
+                TextView t=(TextView)view.findViewById(R.id.demand_id);
+                String demand_id=t.getText().toString();
+                TextView t1=(TextView)view.findViewById(R.id.resource_type);
+                String resource_type=t1.getText().toString();
+                TextView t2=(TextView)view.findViewById(R.id.no_of_resources);
+                String no_of_resources=t2.getText().toString();
+                alert(demand_id,resource_type,no_of_resources);
 
             }
         });
@@ -79,21 +89,27 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     //alert dialog generation
-    void alert()
+    void alert(final String demand_id,final String resource_type,final String no_of_resources)
     {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(Admin.this);
-        builder.setTitle("Request");
+        builder.setTitle("Request from:"+demand_id);
         builder.setMessage("what should be done?");
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"confirmed",Toast.LENGTH_SHORT).show();
+                Accept a=new Accept(Admin.this);
+                a.execute(demand_id,resource_type,no_of_resources);
             }
         });
         builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"deleted",Toast.LENGTH_SHORT).show();
+                Delete d=new Delete(Admin.this);
+                d.execute(demand_id);
+
+
+
             }
         });
         builder.setNeutralButton("cancel",null);
@@ -246,7 +262,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-
+                String demand_id;
                 String resource_type;
                 String no_of_resources;
                 String completion_time;
@@ -254,19 +270,22 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 String location_id;
                 String date_of_demand;
                 String priority;
+                String date;
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
+                    demand_id=jo.getString("demand_id");
                     resource_type = jo.getString("resource_type");
                     no_of_resources=jo.getString("no_of_resources");
                     completion_time=jo.getString("completion_time");
                     priority=jo.getString("priority_arr");
                     Deadline=jo.getString("Deadline");
                     location_id=jo.getString("location_id");
-                    date_of_demand=jo.getString("date_of_demand");
+                    date=jo.getString("date_of_demand");
+                    date_of_demand=date.substring(0,10);
 
 
-                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand);
+                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand,demand_id);
                     ca.add(c);
                     count++;
 
@@ -276,4 +295,209 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             }
         }
     }
-}
+    class Delete extends AsyncTask<String, String, String> {
+        String json_string;
+        String json_url;
+        Context ctx;
+
+        Delete(Context ctx) {
+            this.ctx = ctx;
+
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            json_url = "http://www.wangle.16mb.com/accept.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String first = params[0];
+
+
+
+            try {
+
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                // reading from the server
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                StringBuffer buffer = new StringBuffer();
+                while ((line = bufferedReader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return buffer.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            delete=s;
+            parse(ctx);
+
+
+        }
+
+        void parse(Context ctx) {
+            try {
+                JSONObject jp = new JSONObject(delete);
+                Boolean b=jp.getBoolean("final");
+
+
+                Intent i=new Intent(ctx,Admin.class);
+                startActivity(i);
+
+
+
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    class Accept extends AsyncTask<String, String, String> {
+        String json_string;
+        String json_url;
+        Context ctx;
+
+        Accept(Context ctx) {
+            this.ctx = ctx;
+
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            json_url = "http://www.wangle.16mb.com/delete.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String first = params[0];
+            String second=params[1];
+            String third=params[2];
+
+
+            try {
+
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8")+ "&" +  URLEncoder.encode("resource_type", "UTF-8") + "=" + URLEncoder.encode(second, "UTF-8")+ "&" +  URLEncoder.encode("no_of_resources", "UTF-8") + "=" + URLEncoder.encode(third, "UTF-8") ;
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                // reading from the server
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                StringBuffer buffer = new StringBuffer();
+                while ((line = bufferedReader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return buffer.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            accept_data=s;
+            parse(ctx);
+
+
+        }
+
+        void parse(Context ctx) {
+            try {
+                JSONObject jp = new JSONObject(accept_data);
+                Boolean b=jp.getBoolean("final");
+
+
+
+
+
+
+                  Intent i=new Intent(ctx,Admin.class);
+                    startActivity(i);
+
+
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    }
+
