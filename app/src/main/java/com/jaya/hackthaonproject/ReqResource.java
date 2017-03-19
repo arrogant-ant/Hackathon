@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class ReqResource extends ListFragment {
 
 
-   // ListView listView;
+    ListView listView;
     ResourceAdapter ra;
 
     public ReqResource() {
@@ -39,7 +39,7 @@ public class ReqResource extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ra=new ResourceAdapter(getActivity(),R.layout.req_res_row);
-        //listView= getListView();
+        listView= getListView();
         setListAdapter(ra);
     }
 
