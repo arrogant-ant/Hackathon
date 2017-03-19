@@ -2,9 +2,7 @@ package com.jaya.hackthaonproject;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -34,15 +29,16 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     ArrayList<Resource> demand;
     EditText dealine_et;
     String priority, deadline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_demand);
         String[] priority={"1","2","3","4","5"};
-        demand= new ArrayList<Resource>();
+        demand= new ArrayList<>();
         dealine_et= (EditText) findViewById(R.id.deadline);
 
-        priority_ad=new ArrayAdapter<String>(NewDemand.this,android.R.layout.simple_spinner_dropdown_item,priority);
+        priority_ad=new ArrayAdapter<>(NewDemand.this,android.R.layout.simple_spinner_dropdown_item,priority);
         priority_sp= (Spinner) findViewById(R.id.prioritySpinner);
         priority_sp.setAdapter(priority_ad);
         priority_sp.setOnItemSelectedListener(NewDemand.this);
@@ -91,10 +87,13 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         add.execute(priority,deadline);
     }
 
+    public static void setEmpID(String s1) {
+    }
+
     //pass the data
     class AddDemand extends AsyncTask<String,String,Void> {
 
-        String json_url;
+        String demand_url, id_url,id;
         String type, time,no;
         int i;
 
@@ -103,7 +102,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/another_try.php";
+            demand_url = "http://www.wangle.website/";
+            id_url=" ";
 
         }
 
@@ -113,15 +113,28 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             String deadline=params[1];
 
             try {
+
+                //getting demand id
+                URL url = new URL(id_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                //httpURLConnection.connect();
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+               //String get_data=
+
+               //sending the demands
                 for (i=0;i<demand.size();i++) {
-                    URL url = new URL(json_url);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    url = new URL(demand_url);
+                    httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);
                     httpURLConnection.connect();
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    outputStream = httpURLConnection.getOutputStream();
+                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                     Resource r = demand.get(i);
                     type = r.getType();

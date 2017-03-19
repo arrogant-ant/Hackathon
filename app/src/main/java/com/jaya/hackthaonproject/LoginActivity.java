@@ -220,6 +220,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             String s2=et2.getText().toString();
              g=new Getjason(this);
             g.execute(s1,s2);
+            NewDemand.setEmpID(s1);
         }
     }
 
