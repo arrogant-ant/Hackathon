@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,28 +18,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class show extends AppCompatActivity {
-    String result;
-    TextView tx;
-    ContactAdapter ca;
+public class Timeline extends AppCompatActivity {
+    ContactAdapterTimeline ca;
     ListView listView;
-
-
+    String result;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show);
-        ca=new ContactAdapter(this,R.layout.individual_layout);
-        listView=(ListView)findViewById(R.id.listitem1);
+        setContentView(R.layout.activity_timeline);
+        ca = new ContactAdapterTimeline(this, R.layout.layout_individual_timeline_report);
+        listView = (ListView) findViewById(R.id.list_view_timeline);
         listView.setAdapter(ca);
-        Showviews show =new Showviews(this);
+        Timelineview show = new Timelineview(this);
         show.execute();
     }
-    class Showviews extends AsyncTask<String, String, String> {
+    class Timelineview extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showviews(Context ctx) {
+        Timelineview(Context ctx) {
             this.ctx = ctx;
 
 
@@ -50,7 +47,7 @@ public class show extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/try.php";
+            json_url = "http://www.wangle.website/timeline.php";
 
         }
 
@@ -96,45 +93,47 @@ public class show extends AppCompatActivity {
 
             result = s;
 
+
             parse(ctx);
 
-         /*  Intent i=new Intent(ctx,result.class);
-            i.putExtra("result",result);
-            startActivity(i);*/
-
 
         }
-    }
-
-    void parse(Context ctx) {
-        JSONObject jsonObject;
-        JSONArray jsonArray;
 
 
-        try {
-            jsonObject = new JSONObject(result);
-            jsonArray = jsonObject.getJSONArray("server_response");
-            int count = 0;
-            String empid;
-            String password;
-            String emailid;
-            String phone_no;
+        void parse(Context ctx) {
+            JSONObject jsonObject;
+            JSONArray jsonArray;
 
-            while (count < jsonArray.length()) {
 
-                JSONObject jo = jsonArray.getJSONObject(count);
-                empid = jo.getString("empid");
-                password = jo.getString("password");
-                emailid = jo.getString("emailid");
-                phone_no = jo.getString("phone_no");
-                Contacts c = new Contacts(empid, password, emailid, phone_no);
-                ca.add(c);
-                count++;
+            try {
+                jsonObject = new JSONObject(result);
+                jsonArray = jsonObject.getJSONArray("server_response");
+                int count = 0;
 
+                String Demand_id;
+                String Resource_type;
+                String No_of_resources;
+                String Status;
+                String Modified_by;
+                String Modified_on;
+                while (count < jsonArray.length()) {
+
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    Demand_id = jo.getString("Demand_id");
+                    Resource_type = jo.getString("Resource_type");
+                    No_of_resources = jo.getString("No_of_resources");
+                    Status = jo.getString("Status");
+                    Modified_by = jo.getString("Modified_by");
+                    Modified_on = jo.getString("Modified_on");
+
+
+                    Contacts_timeline c = new Contacts_timeline(Demand_id, Resource_type, No_of_resources, Status,Modified_by,Modified_on);
+                    ca.add(c);
+                    count++;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }
-
-}
+    }}

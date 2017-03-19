@@ -57,8 +57,12 @@
         <activity
             android:name=".About"
             android:theme="@style/AppTheme.NoActionBars" />
-        <activity android:name=".NewDemand"></activity>
 
+        <activity android:name=".NewDemand" />
+        <activity android:name=".Track" />
+        <activity android:name=".Timeline" />
+        <activity android:name=".View" />
+        <activity android:name=".Resources"></activity>
     </application>
 
 </manifest>

@@ -159,11 +159,17 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         int id = item.getItemId();
 
         if (id == R.id.nav_timeline_report) {
+            Intent i=new Intent(this,Timeline.class);
+            startActivity(i);
 
 
-        } else if (id == R.id.nav_view_database) {
+        } else if (id == R.id.nav_view) {
+            Intent i=new Intent(this,Resource.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_track_resources) {
+            Intent i=new Intent(this,Track.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_allocate_demand) {
 
@@ -200,7 +206,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/demand.php";
+            json_url = "http://www.wangle.website/demand.php";
 
         }
 
@@ -278,7 +284,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                     resource_type = jo.getString("resource_type");
                     no_of_resources=jo.getString("no_of_resources");
                     completion_time=jo.getString("completion_time");
-                    priority=jo.getString("priority_arr");
+                    priority=jo.getString("priority");
                     Deadline=jo.getString("Deadline");
                     location_id=jo.getString("location_id");
                     date=jo.getString("date_of_demand");
@@ -310,7 +316,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/accept.php";
+            json_url = "http://www.wangle.website/accept.php";
 
         }
 
@@ -410,7 +416,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/delete.php";
+            json_url = "http://www.wangle.website/delete.php";
 
         }
 

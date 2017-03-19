@@ -1,9 +1,13 @@
 package com.jaya.hackthaonproject;
 
+
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,28 +23,49 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class show extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class AllocatedTable extends android.app.Fragment{
+       ListView l;
+    ContactAdapterallocated ca;
     String result;
-    TextView tx;
-    ContactAdapter ca;
-    ListView listView;
+    TextView t;
+    String Resource_Type;
+    String No_Of_Resources;
 
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show);
-        ca=new ContactAdapter(this,R.layout.individual_layout);
-        listView=(ListView)findViewById(R.id.listitem1);
-        listView.setAdapter(ca);
-        Showviews show =new Showviews(this);
-        show.execute();
+    public AllocatedTable() {
+        // Required empty public constructor
     }
-    class Showviews extends AsyncTask<String, String, String> {
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+
+        View v= inflater.inflate(R.layout.fragment_allocated_table, container, false);
+        l=(ListView)v.findViewById(R.id.list_allocated);
+        t=(TextView)v.findViewById(R.id.text_allocated);
+        ca = new ContactAdapterallocated(getActivity(), R.layout.layout_individual_allocated_demand);
+        l.setAdapter(ca);
+        Allocated show =new Allocated(getActivity());
+        show.execute();
+
+
+
+
+        return v;
+    }
+    class Allocated extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showviews(Context ctx) {
+        Allocated(Context ctx) {
             this.ctx = ctx;
 
 
@@ -50,7 +75,7 @@ public class show extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/try.php";
+            json_url = "http://www.wangle.website/allocated.php";
 
         }
 
@@ -96,45 +121,39 @@ public class show extends AppCompatActivity {
 
             result = s;
 
+
             parse(ctx);
 
-         /*  Intent i=new Intent(ctx,result.class);
-            i.putExtra("result",result);
-            startActivity(i);*/
-
 
         }
-    }
-
-    void parse(Context ctx) {
-        JSONObject jsonObject;
-        JSONArray jsonArray;
 
 
-        try {
-            jsonObject = new JSONObject(result);
-            jsonArray = jsonObject.getJSONArray("server_response");
-            int count = 0;
-            String empid;
-            String password;
-            String emailid;
-            String phone_no;
+        void parse(Context ctx) {
+            JSONObject jsonObject;
+            JSONArray jsonArray;
 
-            while (count < jsonArray.length()) {
 
-                JSONObject jo = jsonArray.getJSONObject(count);
-                empid = jo.getString("empid");
-                password = jo.getString("password");
-                emailid = jo.getString("emailid");
-                phone_no = jo.getString("phone_no");
-                Contacts c = new Contacts(empid, password, emailid, phone_no);
-                ca.add(c);
-                count++;
+            try {
+                jsonObject = new JSONObject(result);
+                jsonArray = jsonObject.getJSONArray("server_response");
+                int count = 0;
 
+
+                while (count < jsonArray.length()) {
+
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    Resource_Type = jo.getString("Resource_Type");
+                    No_Of_Resources = jo.getString("No_Of_Resources");
+
+
+                    Contacts_allocated c = new Contacts_allocated(Resource_Type, No_Of_Resources);
+                    ca.add(c);
+                    count++;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }
 
-}
+    }}

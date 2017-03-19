@@ -1,0 +1,78 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="#ffffff">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:background="#DCDCDC"
+        android:weightSum="220"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="5"
+            >
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:id="@+id/resource_type_allocated"
+            android:text="Resource Type"
+            android:textColor="#00897B"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_weight="105"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#00897B"
+            android:layout_weight="1"
+            >
+        </LinearLayout>
+        <TextView
+
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:id="@+id/no_of_resources_allocated"
+            android:text="No Of Resources"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_weight="104"
+            android:background="#00897B"
+            />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="5"
+            >
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="#ffffff">
+    </LinearLayout>
+</LinearLayout>
+

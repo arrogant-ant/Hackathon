@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.16mb.com/anyone.php";
+            json_url = "http://www.wangle.website/anyone.php";
 
         }
 

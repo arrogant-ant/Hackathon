@@ -1,8 +1,5 @@
 package com.jaya.hackthaonproject;
 
-/**
- * Created by Sabita_Sant on 18/03/17.
- */
 
 public class Resource {
     private String type;
@@ -29,3 +26,5 @@ public class Resource {
 
 
 }
+
+
