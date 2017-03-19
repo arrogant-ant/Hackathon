@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,6 +93,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         d_ID.execute();
         d_ID.execute();
     }
+
+    //to upload all demands
     void uploadDemand(String s) throws JSONException {
 
         AddDemand add= new AddDemand();
@@ -104,12 +107,19 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         add.execute(priority,deadline,demand_id,location_id);
     }
 
+    void display(String result)
+    {
+        if(result.equals("true"))
+            Toast.makeText(NewDemand.this,"demand placed",Toast.LENGTH_LONG);
+        else
+            Toast.makeText(NewDemand.this,"demand NOT placed",Toast.LENGTH_LONG);
+    }
+
     public static void setEmpID(String s1) {
         empID=s1;
     }
 
     //to get demand id n loc id
-
     class GetID extends AsyncTask<String,String,String>
     {
         StringBuffer buffer = new StringBuffer();
@@ -237,6 +247,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     String line = "";
+                    buffer = new StringBuffer();
                     while ((line = bufferedReader.readLine()) != null) {
                         buffer.append(line);
                     }
@@ -259,6 +270,16 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            String result= new String();
+            JSONObject js= null;
+            try {
+                js = new JSONObject(s);
+                result= js.getString("result");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            display(result);
+
         }
     }
 }
