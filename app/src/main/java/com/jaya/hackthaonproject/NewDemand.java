@@ -11,13 +11,21 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -29,6 +37,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     ArrayList<Resource> demand;
     EditText dealine_et;
     String priority, deadline;
+    static String empID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +54,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
 
     }
-
-
-
-
 
 
 
@@ -83,17 +88,100 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     public void submit(View view) {
         deadline= dealine_et.getText().toString();
         int total=demand.size();
+        GetID d_ID= new GetID();
+        d_ID.execute();
+        d_ID.execute();
+    }
+    void uploadDemand(String s) throws JSONException {
+
         AddDemand add= new AddDemand();
-        add.execute(priority,deadline);
+        String demand_id;
+        String location_id;
+        JSONObject js =new JSONObject(s);
+        demand_id= js.getString("demad");
+        location_id= js.getString("location");
+
+        add.execute(priority,deadline,demand_id,location_id);
     }
 
     public static void setEmpID(String s1) {
+        empID=s1;
+    }
+
+    //to get demand id n loc id
+
+    class GetID extends AsyncTask<String,String,String>
+    {
+        StringBuffer buffer = new StringBuffer();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String url_string=" ";
+            try {
+                URL url = new URL(url_string);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data=URLEncoder.encode("emp_ID","UTF-8")+"="+URLEncoder.encode(NewDemand.empID,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+
+                // reading from the server
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        return buffer.toString().trim();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                uploadDemand(s);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //pass the data
-    class AddDemand extends AsyncTask<String,String,Void> {
+    class AddDemand extends AsyncTask<String,String,String> {
 
-        String demand_url, id_url,id;
+        String url_string,data;
         String type, time,no;
         int i;
 
@@ -102,59 +190,57 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            demand_url = "http://www.wangle.website/";
-            id_url=" ";
+
+
 
         }
 
         @Override
-        protected Void doInBackground(String... params) {
-            String priority=params[0];
-            String deadline=params[1];
+        protected String doInBackground(String... params) {
 
-            try {
+            StringBuffer buffer = new StringBuffer();
 
-                //getting demand id
-                URL url = new URL(id_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                //httpURLConnection.connect();
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-               //String get_data=
+            url_string=" ";
+            String priority = params[0];
+            String deadline = params[1];
+            String demand_id = params[1];
+            String location_id = params[1];
 
+            try
+            {
                //sending the demands
                 for (i=0;i<demand.size();i++) {
-                    url = new URL(demand_url);
-                    httpURLConnection = (HttpURLConnection) url.openConnection();
+                    URL url = new URL(url_string);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);
                     httpURLConnection.connect();
-                    outputStream = httpURLConnection.getOutputStream();
-                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                     Resource r = demand.get(i);
                     type = r.getType();
                     no = r.getNo();
                     time = r.getTime();
-                    String data = URLEncoder.encode("Type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") +
+                    data = URLEncoder.encode("Type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") +
                             "&" + URLEncoder.encode("No", "UTF-8") + "=" + URLEncoder.encode(no, "UTF-8") +
                             "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8") +
                             "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority, "UTF-8") +
+                            "&" + URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(demand_id, "UTF-8") +
+                            "&" + URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
                             "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8");
                     bufferedWriter.write(data);
                     bufferedWriter.flush();
-
                     bufferedWriter.close();
                     outputStream.close();
-
-
-                    // reading from the server
-
+                         // reading from the server
                     InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        buffer.append(line);
+                    }
+                    bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
                 }
@@ -165,11 +251,15 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 e.printStackTrace();
             }
 
-            return null;
+
+
+            return buffer.toString().trim();
         }
 
-
-
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 }
 

@@ -220,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             String s2=et2.getText().toString();
              g=new Getjason(this);
             g.execute(s1,s2);
-            NewDemand.setEmpID(s1);
+
         }
     }
 
@@ -423,11 +423,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Boolean priority;
             priority=js.getBoolean("is_admin");
             find=js.getString("status");
-
+            String emp_id= js.getString("emp_id");
 
 
             if(find.equals("successful"))
             {
+                NewDemand.setEmpID(emp_id);
                 if(priority==true)
                 {
                     Intent i=new Intent(ctx,Admin.class);
