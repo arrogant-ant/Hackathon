@@ -98,8 +98,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         String demand_id;
         String location_id;
         JSONObject js =new JSONObject(s);
-        demand_id= js.getString("demad");
-        location_id= js.getString("location");
+        demand_id= js.getString("demand_id");
+        location_id= js.getString("location_id");
 
         add.execute(priority,deadline,demand_id,location_id);
     }
@@ -121,7 +121,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         @Override
         protected String doInBackground(String... params) {
-            String url_string=" ";
+            String url_string="http://www.wangle.website/demand/id.php";
             try {
                 URL url = new URL(url_string);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -200,7 +200,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
             StringBuffer buffer = new StringBuffer();
 
-            url_string=" ";
+            url_string="http://www.wangle.website/place_demand.php";
             String priority = params[0];
             String deadline = params[1];
             String demand_id = params[1];
