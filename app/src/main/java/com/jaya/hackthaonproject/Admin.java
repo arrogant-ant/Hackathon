@@ -164,10 +164,17 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
 
 
         } else if (id == R.id.nav_view) {
-            Intent i=new Intent(this,Resources.class);
-            startActivity(i);
 
-        } else if (id == R.id.nav_track_resources) {
+       //   Intent i=new Intent(this,);
+           // startActivity(i);
+
+        }
+        else if (id == R.id.nav_view) {
+           // Intent i=new Intent(this,);
+          //  startActivity(i);
+
+
+        }else if (id == R.id.nav_track_resources) {
             Intent i=new Intent(this,Track.class);
             startActivity(i);
 
@@ -431,6 +438,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             try {
 
                 URL url = new URL(json_url);
+
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);

@@ -40,7 +40,6 @@
         <activity
             android:name=".Features"
             android:theme="@style/AppTheme.NoActionBars" />
-        <activity android:name=".Call" />
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme.NoActionBars" />
@@ -57,12 +56,11 @@
         <activity
             android:name=".About"
             android:theme="@style/AppTheme.NoActionBars" />
-
         <activity android:name=".NewDemand" />
         <activity android:name=".Track" />
         <activity android:name=".Timeline" />
         <activity android:name=".View" />
-        <activity android:name=".Resources"></activity>
+        <activity android:name=".Multiple"></activity>
     </application>
 
 </manifest>

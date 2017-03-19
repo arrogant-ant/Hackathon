@@ -16,13 +16,17 @@
             android:icon="@drawable/ic_track_resources"
             android:title="Track Resources" />
         <item
-            android:id="@+id/nav_view"
+            android:id="@+id/nav_view_ALLOCATED"
             android:icon="@drawable/ic_view_database"
-            android:title="View Database Of Resources"/> >
+            android:title="View Available Resources"/>
+        <item
+            android:id="@+id/nav_view_available"
+            android:icon="@drawable/ic_view_database"
+            android:title="View Allocated Resources"/>
         <item
             android:id="@+id/nav_allocate_demand"
             android:icon="@drawable/ic_allocate_demand"
-            android:title="View A Demand" />
+            android:title="View DemandS" />
     </group>
 
     <item android:title="Site Manager">
