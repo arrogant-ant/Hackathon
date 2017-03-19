@@ -102,8 +102,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            demand_url = "http://www.wangle.website/";
-            id_url=" ";
+            demand_url = "http://www.wangle.website/place_demand.php";
+            id_url="http://www.wangle.website/demand_id.php";
 
         }
 

@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity
             Intent i=new Intent(this,About.class);
             startActivity(i);
         } else if (id == R.id.nav_manage) {
-
+            Intent i=new Intent(this,Multiple.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_share) {
             Intent i = new Intent(this,Call.class);
