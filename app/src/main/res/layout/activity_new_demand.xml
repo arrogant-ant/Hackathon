@@ -11,48 +11,48 @@
     tools:context="com.jaya.hackthaonproject.NewDemand"
     android:orientation="vertical">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Demand"
-        android:textAlignment="center"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Priority"
         android:textSize="18sp"
-        android:paddingStart="10dp"/>
+        android:layout_marginLeft="5dp"/>
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:id="@+id/prioritySpinner"
         android:spinnerMode="dropdown"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Deadline"
         android:textSize="18sp"
-        android:paddingStart="10dp"/>
+        android:layout_marginLeft="10dp"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/deadline"/>
+</LinearLayout>
     <!-- adding resources -->
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:name="com.jaya.hackthaonproject.Add"
-        android:id="@+id/resDetail"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Requested Resource"
-        android:layout_marginTop="10dp"/>
+/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/listScroll">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,18 +64,19 @@
                 tools:layout="@layout/fragment_req_resource"
                 android:layout_marginTop="5dp"
                 android:id="@+id/req_res"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Submit"
-                    android:background="@color/btn_login"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="submit"/>
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:background="@color/btn_login"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="submit"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/submitBtn"/>
 
 
 </LinearLayout>

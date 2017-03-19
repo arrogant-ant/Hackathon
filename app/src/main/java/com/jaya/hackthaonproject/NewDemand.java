@@ -34,6 +34,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     ArrayList<Resource> demand;
     EditText dealine_et;
     String priority, deadline;
+    String type_ar[],time_ar[],no_ar[],deadline_ar[],priority_ar[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +87,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void submit(View view) {
         deadline= dealine_et.getText().toString();
-        int total=demand.size();
         AddDemand add= new AddDemand();
         add.execute(priority,deadline);
     }
@@ -95,7 +95,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     class AddDemand extends AsyncTask<String,String,Void> {
 
         String json_url;
-        String type, time,no;
+
         int i;
 
 
@@ -111,6 +111,14 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         protected Void doInBackground(String... params) {
             String priority=params[0];
             String deadline=params[1];
+            for (i=0;i<demand.size();i++) {
+                Resource r = demand.get(i);
+                type_ar[i] = r.getType();
+                no_ar[i] = r.getNo();
+                time_ar[i] = r.getTime();
+                priority_ar[i]=priority;
+                deadline_ar[i]=deadline;
+            }
 
             try {
 
@@ -122,21 +130,16 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 httpURLConnection.connect();
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                for (i=0;i<demand.size();i++) {
-                    Resource r = demand.get(i);
-                    type= r.getType();
-                    no= r.getNo();
-                    time= r.getTime();
-                    String data = URLEncoder.encode("Type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") +
-                            "&" + URLEncoder.encode("No", "UTF-8") + "=" + URLEncoder.encode(no, "UTF-8") +
-                            "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8") +
-                            "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority, "UTF-8") +
-                            "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8");
-                    bufferedWriter.write(data);
-                    bufferedWriter.flush();
-                }
-                    bufferedWriter.close();
-                    outputStream.close();
+
+                String data = URLEncoder.encode("Type", "UTF-8") + "=" + URLEncoder.encode(type_ar[], "UTF-8") +
+                        "&" + URLEncoder.encode("No", "UTF-8") + "=" + URLEncoder.encode(no_ar[], "UTF-8") +
+                        "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(time_ar[], "UTF-8") +
+                        "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority_ar[], "UTF-8") +
+                        "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline_ar[], "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
 
 
                 // reading from the server

@@ -15,11 +15,18 @@ import java.util.List;
  * Created by Sabita_Sant on 18/03/17.
  */
 
-public class ResourceAdapter extends ArrayAdapter {
-    List list= new ArrayList();
-    public ResourceAdapter(Context context, int resource) {
+public class ResourceAdapter extends ArrayAdapter<Resource> {
+    List<Resource> list= new ArrayList();
+    Context ctx;
+
+    public ResourceAdapter(Context context, int resource, List<Resource> objects) {
+        super(context, resource, objects);
+        list=objects;
+    }
+   /* public ResourceAdapter(Context context, int resource) {
         super(context, resource);
     }
+    */
 
     public void add(Resource object) {
         super.add(object);
@@ -32,7 +39,7 @@ public class ResourceAdapter extends ArrayAdapter {
     }
 
 
-    public Object getItem(int position) {
+    public Resource getItem(int position) {
         return list.get(position);
     }
 
@@ -58,7 +65,7 @@ public class ResourceAdapter extends ArrayAdapter {
             rh=(ResourceAdapter.ResourceHolder)row.getTag();
 
         }
-        Resource resource= (Resource) this.getItem(position);
+        Resource resource= (Resource) list.get(position);
         rh.tx_type.setText(resource.getType());
         rh.tx_no.setText(resource.getNo());
         rh.tx_time.setText(resource.getTime());

@@ -11,6 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +23,7 @@ public class ReqResource extends ListFragment {
 
     ListView listView;
     ResourceAdapter ra;
+    List<Resource> resourceList= new ArrayList<>();
 
     public ReqResource() {
         // Required empty public constructor
@@ -38,7 +42,7 @@ public class ReqResource extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ra=new ResourceAdapter(getActivity(),R.layout.req_res_row);
+        ra=new ResourceAdapter(getActivity(),R.layout.req_res_row,resourceList);
         listView= getListView();
         setListAdapter(ra);
     }
@@ -49,6 +53,7 @@ public class ReqResource extends ListFragment {
         typeView.setText(time);*/
         Resource resource= new Resource(type,no,time);
         ra.add(resource);
+        resourceList.add(resource);
         Toast.makeText(getActivity(),"data"+type+no+time,Toast.LENGTH_SHORT).show();
     }
 

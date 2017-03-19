@@ -1,6 +1,7 @@
 package com.jaya.hackthaonproject;
 
 
+import android.app.ListFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,18 +23,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllocatedTable extends android.app.Fragment{
+public class AllocatedTable extends ListFragment {
        ListView l;
     ContactAdapterallocated ca;
     String result;
     TextView t;
     String Resource_Type;
     String No_Of_Resources;
+    List<Contacts_allocated> list;
 
 
     public AllocatedTable() {
@@ -48,10 +52,10 @@ public class AllocatedTable extends android.app.Fragment{
 
 
         View v= inflater.inflate(R.layout.fragment_allocated_table, container, false);
-        l=(ListView)v.findViewById(R.id.list_allocated);
-        t=(TextView)v.findViewById(R.id.text_allocated);
-        ca = new ContactAdapterallocated(getActivity(), R.layout.layout_individual_allocated_demand);
-        l.setAdapter(ca);
+
+        list= new ArrayList<Contacts_allocated>();
+        ca = new ContactAdapterallocated(getActivity(), R.layout.layout_individual_allocated_demand,list);
+        setListAdapter(ca);
         Allocated show =new Allocated(getActivity());
         show.execute();
 
@@ -148,6 +152,7 @@ public class AllocatedTable extends android.app.Fragment{
 
                     Contacts_allocated c = new Contacts_allocated(Resource_Type, No_Of_Resources);
                     ca.add(c);
+                    list.add(c);
                     count++;
 
                 }
