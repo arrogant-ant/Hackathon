@@ -1,7 +1,10 @@
 package com.jaya.hackthaonproject;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -88,10 +91,9 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void submit(View view) {
         deadline= dealine_et.getText().toString();
-        int total=demand.size();
         GetID d_ID= new GetID();
         d_ID.execute();
-        d_ID.execute();
+
     }
 
     //to upload all demands
@@ -103,16 +105,37 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         JSONObject js =new JSONObject(s);
         demand_id= js.getString("demand_id");
         location_id= js.getString("location_id");
-
+        Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id,Toast.LENGTH_SHORT).show();
         add.execute(priority,deadline,demand_id,location_id);
     }
 
     void display(String result)
     {
         if(result.equals("true"))
-            Toast.makeText(NewDemand.this,"demand placed",Toast.LENGTH_LONG);
+        {
+            AlertDialog.Builder builder= new AlertDialog.Builder(NewDemand.this);
+            builder.setTitle("Demand Placed");
+            builder.setMessage("Do you want to place another independent demand?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent i = new Intent(NewDemand.this, NewDemand.class);
+                    startActivity(i);
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent i = new Intent(NewDemand.this, User.class);
+                    startActivity(i);
+                }
+            });
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
+
+        }
         else
-            Toast.makeText(NewDemand.this,"demand NOT placed",Toast.LENGTH_LONG);
+            Toast.makeText(NewDemand.this,"demand NOT placed, plz retry",Toast.LENGTH_LONG).show();
     }
 
     public static void setEmpID(String s1) {
@@ -131,7 +154,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         @Override
         protected String doInBackground(String... params) {
-            String url_string="http://www.wangle.website/demand/id.php";
+            String url_string="http://www.wangle.website/demand_id.php";
             try {
                 URL url = new URL(url_string);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
