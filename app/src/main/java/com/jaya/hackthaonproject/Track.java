@@ -28,6 +28,9 @@ public class Track extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Track Resources");
 
         ca = new ContactAdapterTrack(this, R.layout.layout_individual_track_resources);
         listView = (ListView) findViewById(R.id.list_view_track);

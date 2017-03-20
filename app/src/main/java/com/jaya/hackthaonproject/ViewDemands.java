@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,29 +19,30 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Timeline extends AppCompatActivity {
-    ContactAdapterTimeline ca;
-    ListView listView;
+public class ViewDemands extends AppCompatActivity {
     String result;
+    ContactAdapterDemand ca;
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_view_demands);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Timeline Report");
-        ca = new ContactAdapterTimeline(this, R.layout.layout_individual_timeline_report);
-        listView = (ListView) findViewById(R.id.list_view_timeline);
+        getSupportActionBar().setTitle("View Demands");
+        ca = new ContactAdapterDemand(this, R.layout.activity_layout_individual_admin);
+        listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
-        Timelineview show = new Timelineview(this);
+        Showviewss show = new Showviewss(this);
         show.execute();
     }
-    class Timelineview extends AsyncTask<String, String, String> {
+    class Showviewss extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Timelineview(Context ctx) {
+        Showviewss(Context ctx) {
             this.ctx = ctx;
 
 
@@ -50,7 +52,7 @@ public class Timeline extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/timeline.php";
+            json_url = "http://www.wangle.website/demand.php";
 
         }
 
@@ -112,25 +114,30 @@ public class Timeline extends AppCompatActivity {
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-
-                String Demand_id;
-                String Resource_type;
-                String No_of_resources;
-                String Status;
-                String Modified_by;
-                String Modified_on;
+                String demand_id;
+                String resource_type;
+                String no_of_resources;
+                String completion_time;
+                String Deadline;
+                String location_id;
+                String date_of_demand;
+                String priority;
+                String date;
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    Demand_id = jo.getString("Demand_id");
-                    Resource_type = jo.getString("Resource_type");
-                    No_of_resources = jo.getString("No_of_resources");
-                    Status = jo.getString("Status");
-                    Modified_by = jo.getString("Modified_by");
-                    Modified_on = jo.getString("Modified_on");
+                    demand_id = jo.getString("demand_id");
+                    resource_type = jo.getString("resource_type");
+                    no_of_resources = jo.getString("no_of_resources");
+                    completion_time = jo.getString("completion_time");
+                    priority = jo.getString("priority");
+                    Deadline = jo.getString("Deadline");
+                    location_id = jo.getString("location_id");
+                    date = jo.getString("date_of_demand");
+                    date_of_demand = date.substring(0, 10);
 
 
-                    Contacts_timeline c = new Contacts_timeline(Demand_id, Resource_type, No_of_resources, Status,Modified_by,Modified_on);
+                    Contacts_demand c = new Contacts_demand(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
                     ca.add(c);
                     count++;
 

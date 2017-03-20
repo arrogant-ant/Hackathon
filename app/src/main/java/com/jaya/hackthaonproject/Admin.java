@@ -41,7 +41,7 @@ import java.net.URLEncoder;
 public class Admin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String result;
     TextView tx;
-    ContactAdapterDemand ca;
+    ContactAdapterFulfill ca;
     ListView listView;
     String delete;
     String accept_data;
@@ -64,8 +64,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_admin);
         navigationView.setNavigationItemSelectedListener(this);
 ///////////////////////////////////////////////////////////////
-        ca = new ContactAdapterDemand(this, R.layout.activity_layout_individual_admin);
-        listView = (ListView) findViewById(R.id.listitems);
+        ca = new ContactAdapterFulfill(this, R.layout.layout_individual_fulfil);
+        listView = (ListView) findViewById(R.id.listitems_fulfill);
         listView.setAdapter(ca);
         Showviewss show = new Showviewss(this);
         show.execute();
@@ -163,15 +163,15 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(i);
 
 
-        } else if (id == R.id.nav_view) {
+        } else if (id == R.id.nav_view_ALLOCATED) {
 
-       //   Intent i=new Intent(this,);
-           // startActivity(i);
+      Intent i=new Intent(this,Allocated.class);
+           startActivity(i);
 
         }
-        else if (id == R.id.nav_view) {
-           // Intent i=new Intent(this,);
-          //  startActivity(i);
+        else if (id == R.id.nav_view_available) {
+            Intent i=new Intent(this,Available.class);
+            startActivity(i);
 
 
         }else if (id == R.id.nav_track_resources) {
@@ -179,7 +179,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(i);
 
         } else if (id == R.id.nav_allocate_demand) {
-
+            Intent i=new Intent(this,ViewDemands.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_create_sm) {
             Intent i = new Intent(this, Register.class);
@@ -213,7 +214,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/demand.php";
+            json_url = "http://www.wangle.website/fulfill.php";
 
         }
 
@@ -275,30 +276,21 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-                String demand_id;
-                String resource_type;
-                String no_of_resources;
-                String completion_time;
-                String Deadline;
-                String location_id;
-                String date_of_demand;
-                String priority;
-                String date;
+                String Resource_Type;
+                String No_Of_Resources;
+                String Demand_Id;
+                String Date_Of_Demand;
+
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    demand_id=jo.getString("demand_id");
-                    resource_type = jo.getString("resource_type");
-                    no_of_resources=jo.getString("no_of_resources");
-                    completion_time=jo.getString("completion_time");
-                    priority=jo.getString("priority");
-                    Deadline=jo.getString("Deadline");
-                    location_id=jo.getString("location_id");
-                    date=jo.getString("date_of_demand");
-                    date_of_demand=date.substring(0,10);
+                    Resource_Type=jo.getString("Resource_Type");
+                    No_Of_Resources = jo.getString("No_Of_Resources");
+                    Demand_Id=jo.getString("Demand_Id");
+                    Date_Of_Demand=jo.getString("Date_Of_Demand");
 
 
-                    Contacts_demand c = new Contacts_demand( resource_type, no_of_resources, completion_time,priority, Deadline,location_id,date_of_demand,demand_id);
+                    Contacts_demand_fulfill c = new Contacts_demand_fulfill( Resource_Type, No_Of_Resources,Demand_Id,Date_Of_Demand);
                     ca.add(c);
                     count++;
 
