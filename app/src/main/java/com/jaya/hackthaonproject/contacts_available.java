@@ -1,7 +1,7 @@
 package com.jaya.hackthaonproject;
 
 
-public class Contacts_allocated{
+public class contacts_available{
 
 
 
@@ -13,7 +13,7 @@ public class Contacts_allocated{
 
 
 
-    public Contacts_allocated(String Resource_Type, String No_Of_Resources)
+    public contacts_available(String Resource_Type, String No_Of_Resources)
     {
         this.Resource_Type=Resource_Type;
         this.No_Of_Resources=No_Of_Resources;

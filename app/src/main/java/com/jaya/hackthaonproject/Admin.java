@@ -163,13 +163,13 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(i);
 
 
-        } else if (id == R.id.nav_view_ALLOCATED) {
+        } else if (id == R.id.nav_view_available) {
 
       Intent i=new Intent(this,Allocated.class);
            startActivity(i);
 
         }
-        else if (id == R.id.nav_view_available) {
+        else if (id == R.id.nav_view_ALLOCATED) {
             Intent i=new Intent(this,Available.class);
             startActivity(i);
 

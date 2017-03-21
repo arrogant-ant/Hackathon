@@ -88,7 +88,7 @@
     </LinearLayout>
     <ListView
         android:layout_below="@+id/layout_allocate_resources"
-        android:id="@+id/list_view_track"
+        android:id="@+id/list_view_alocated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></ListView>
 

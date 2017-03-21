@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactAdapterallocated extends ArrayAdapter {
+public class ContactsAdapteravailabe extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapterallocated(Context context, int resource) {
+    public ContactsAdapteravailabe(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts_allocated object) {
+    public void add(contacts_available object) {
         super.add(object);
         list.add(object);
     }
@@ -45,10 +45,10 @@ public class ContactAdapterallocated extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.layout_individual_allocated_demand,parent,false);
+            row=layoutInflater.inflate(R.layout.layout_individula_available,parent,false);
             ch=new ContactHolders();
-            ch.Resource_Type=(TextView)row.findViewById(R.id.resource_type_allocated);
-            ch.No_Of_Resources=(TextView)row.findViewById(R.id.no_of_resources_allocated);
+            ch.Resource_Type=(TextView)row.findViewById(R.id.resource_type_available);
+            ch.No_Of_Resources=(TextView)row.findViewById(R.id.no_of_resources_available);
 
             row.setTag(ch);
         }
@@ -57,7 +57,7 @@ public class ContactAdapterallocated extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_allocated contacts=(Contacts_allocated) this.getItem(position);
+        contacts_available contacts=(contacts_available) this.getItem(position);
         ch.Resource_Type.setText(contacts.getResource_Type());
         ch.No_Of_Resources.setText(contacts.getNo_Of_Resources());
         return row;
