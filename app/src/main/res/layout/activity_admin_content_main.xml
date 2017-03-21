@@ -4,7 +4,7 @@
     android:id="@+id/activity_admin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="70dp"
 
     tools:context="com.jaya.hackthaonproject.Admin">
 
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="vertical"
-        android:id="@+id/lay"
+        android:id="@+id/layout"
         android:layout_below="@+id/head_text"
         >
         <LinearLayout
@@ -152,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listitems_fulfill"
-        android:layout_below="@+id/lay"
+        android:layout_below="@+id/layout"
         >
 
 

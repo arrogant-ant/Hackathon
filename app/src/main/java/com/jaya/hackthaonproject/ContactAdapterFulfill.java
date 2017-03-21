@@ -21,7 +21,7 @@ public class ContactAdapterFulfill extends ArrayAdapter {
     }
 
 
-    public void add(Contacts_demand object) {
+    public void add(Contacts_demand_fulfill object) {
         super.add(object);
         list.add(object);
     }
@@ -50,7 +50,7 @@ public class ContactAdapterFulfill extends ArrayAdapter {
             ch.Resource_Type=(TextView)row.findViewById(R.id.Resource_Type_fulfill);
             ch.No_Of_Resources=(TextView)row.findViewById(R.id.No_Of_Resources_fulfill);
             ch.Demand_Id=(TextView)row.findViewById(R.id.Demand_Id_fulfill);
-            ch.Date_Of_Demand=(TextView)row.findViewById(R.id.date_of_demand);
+            ch.Date_Of_Demand=(TextView)row.findViewById(R.id.Date_Of_Demand_fulfil);
 
             row.setTag(ch);
         }
@@ -59,11 +59,11 @@ public class ContactAdapterFulfill extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_demand contacts=(Contacts_demand)this.getItem(position);
-        ch.Resource_Type.setText(contacts.getDemand_id());
-        ch.No_Of_Resources.setText(contacts.getResource_type());
-        ch.Demand_Id.setText(contacts.getNo_of_resources());
-        ch.Date_Of_Demand.setText(contacts.getCompletion_time());
+        Contacts_demand_fulfill contacts=(Contacts_demand_fulfill) this.getItem(position);
+        ch.Resource_Type.setText(contacts.getResource_Type());
+        ch.No_Of_Resources.setText(contacts.getNo_Of_Resources());
+        ch.Demand_Id.setText(contacts.getDemand_Id());
+        ch.Date_Of_Demand.setText(contacts.getDate_Of_Demand());
         return row;
     }
     static class ContactHolders

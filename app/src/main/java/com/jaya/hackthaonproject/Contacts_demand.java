@@ -13,6 +13,7 @@ public class Contacts_demand {
     private String date_of_demand;
     private String priority;
     private String demand_id;
+
         public Contacts_demand(String resource_type,String no_of_resources,String completion_time,String priority,String Deadline
         ,String location_id,String date_of_demand,String demand_id)
         {

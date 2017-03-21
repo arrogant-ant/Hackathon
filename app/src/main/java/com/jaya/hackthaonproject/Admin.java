@@ -67,18 +67,18 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         ca = new ContactAdapterFulfill(this, R.layout.layout_individual_fulfil);
         listView = (ListView) findViewById(R.id.listitems_fulfill);
         listView.setAdapter(ca);
-        Showviewss show = new Showviewss(this);
+        ShowviewssData show = new ShowviewssData(this);
         show.execute();
 
         //listview listener setup
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView t=(TextView)view.findViewById(R.id.demand_id);
+                TextView t=(TextView)view.findViewById(R.id.Demand_Id_fulfill);
                 String demand_id=t.getText().toString();
-                TextView t1=(TextView)view.findViewById(R.id.resource_type);
+                TextView t1=(TextView)view.findViewById(R.id.Resource_Type_fulfill);
                 String resource_type=t1.getText().toString();
-                TextView t2=(TextView)view.findViewById(R.id.no_of_resources);
+                TextView t2=(TextView)view.findViewById(R.id.No_Of_Resources_fulfill);
                 String no_of_resources=t2.getText().toString();
                 alert(demand_id,resource_type,no_of_resources);
 
@@ -199,12 +199,12 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
 
-    class Showviewss extends AsyncTask<String, String, String> {
+    class ShowviewssData extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showviewss(Context ctx) {
+        ShowviewssData(Context ctx) {
             this.ctx = ctx;
 
 
@@ -288,8 +288,6 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                     No_Of_Resources = jo.getString("No_Of_Resources");
                     Demand_Id=jo.getString("Demand_Id");
                     Date_Of_Demand=jo.getString("Date_Of_Demand");
-
-
                     Contacts_demand_fulfill c = new Contacts_demand_fulfill( Resource_Type, No_Of_Resources,Demand_Id,Date_Of_Demand);
                     ca.add(c);
                     count++;
@@ -300,7 +298,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             }
         }
     }
-    class Delete extends AsyncTask<String, String, String> {
+   class Delete extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
@@ -485,11 +483,6 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
             try {
                 JSONObject jp = new JSONObject(accept_data);
                 Boolean b=jp.getBoolean("final");
-
-
-
-
-
 
                   Intent i=new Intent(ctx,Admin.class);
                     startActivity(i);

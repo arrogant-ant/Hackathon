@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
             Intent i = new Intent(this,Call.class);
-
             startActivity(i);
 
 
