@@ -97,7 +97,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/completion_time_granted"
+            android:id="@+id/no_granted"
             android:text="No of Resources"
             android:textColor="#ffffff"
             android:gravity="center"
@@ -119,10 +119,6 @@
         android:layout_height="10dp"
         android:background="#ffffff">
     </LinearLayout>
-    <ListView
-        android:layout_below="@+id/listview_granted"
-        android:id="@+id/list_view_alocated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
+
 </LinearLayout>
 

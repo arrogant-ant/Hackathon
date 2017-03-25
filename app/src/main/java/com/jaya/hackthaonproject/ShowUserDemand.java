@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ShowUserDemand extends AppCompatActivity {
-    ContactAdapterShowUserDemand ca;
+   /* ContactAdapterShowUserDemand ca;
     ListView listView;
     String result;
     @Override
@@ -142,4 +142,5 @@ public class ShowUserDemand extends AppCompatActivity {
             }
         }
     }
+   */
 }

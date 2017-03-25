@@ -22,6 +22,8 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
         list= objects;
     }
 
+
+
     @Override
     public void add(GrantedRes object) {
         super.add(object);
@@ -44,10 +46,19 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
             LayoutInflater inflater=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             inflater.inflate(R.layout.granted_row,parent,false);
             h = new Holder();
-            h.date = row.findViewById()
+            h.date = (TextView) row.findViewById(R.id.date_granted);
+            h.id = (TextView) row.findViewById(R.id.id_granted);
+            h.type = (TextView) row.findViewById(R.id.type_granted);
+            h.no = (TextView) row.findViewById(R.id.no_granted);
+            row.setTag(h);
 
         }
-
+        else h= (Holder) row.getTag();
+        GrantedRes res = list.get(position);
+        h.date.setText(res.getDate());
+        h.id.setText(res.getDemand_id());
+        h.type.setText(res.getRes_type());
+        h.no.setText(res.getNo());
         return row;
     }
 

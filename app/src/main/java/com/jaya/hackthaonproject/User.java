@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
@@ -26,6 +28,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 public class User extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   //  FloatingActionMenu materialDesignFAM;
     //com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +89,11 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_user);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
-   public void demands(View v)
+
+
+    public void demands(View v)
     {
 
         Intent i=new Intent(this,NewDemand.class);

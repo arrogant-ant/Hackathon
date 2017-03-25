@@ -29,4 +29,20 @@ public class GrantedRes {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getDemand_id() {
+        return demand_id;
+    }
+
+    public String getRes_type() {
+        return res_type;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }
