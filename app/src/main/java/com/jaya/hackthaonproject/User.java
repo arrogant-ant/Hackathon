@@ -136,6 +136,8 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_release_resource) {
+            Intent i=new Intent(this,FreeResource.class);
+            startActivity(i);
 
 
         } else if (id == R.id.nav_requested_demands) {
