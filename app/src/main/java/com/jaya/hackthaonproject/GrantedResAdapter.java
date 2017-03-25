@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.*;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,22 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row=convertView;
+        Holder h;
+        if(row==null)
+        {
+            LayoutInflater inflater=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater.inflate(R.layout.granted_row,parent,false);
+            h = new Holder();
+            h.date = row.findViewById()
+
+        }
+
+        return row;
     }
 
-    static class holder
+    static class Holder
     {
+        TextView date, id, type,no;
 
     }
 }

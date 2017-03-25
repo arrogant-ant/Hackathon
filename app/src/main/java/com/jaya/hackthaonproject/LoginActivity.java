@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String result;
     EditText et;
     EditText et2;
-
+    static String emp_id, loc_id;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -344,7 +344,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/another_try.php";
+            json_url = "http://www.wangle.website/login.php";
 
         }
 
@@ -423,7 +423,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Boolean priority;
             priority=js.getBoolean("is_admin");
             find=js.getString("status");
-            String emp_id= js.getString("emp_id");
+            emp_id= js.getString("emp_id");
+            loc_id= js.getString("location_id");
+            Toast.makeText(this,"loc "+loc_id,Toast.LENGTH_SHORT);
 
 
             if(find.equals("successful"))

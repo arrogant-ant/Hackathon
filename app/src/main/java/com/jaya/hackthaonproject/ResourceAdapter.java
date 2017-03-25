@@ -71,7 +71,7 @@ public class ResourceAdapter extends ArrayAdapter<Resource> {
         rh.tx_time.setText(resource.getTime());
         return row;
     }
-    static class ResourceHolder
+     class ResourceHolder
     {
         TextView tx_type;
         TextView tx_no;
