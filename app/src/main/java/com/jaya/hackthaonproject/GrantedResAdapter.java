@@ -17,9 +17,9 @@ import java.util.List;
 public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
     List<GrantedRes> list =new ArrayList<>();
 
-    public GrantedResAdapter(Context context, int resource, List<GrantedRes> objects) {
-        super(context, resource, objects);
-        list= objects;
+    public GrantedResAdapter(Context context, int resource) {
+        super(context, resource);
+
     }
 
 
@@ -35,18 +35,21 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
         return list.size();
 
     }
-
+    public GrantedRes getItem(int position) {
+        return list.get(position);
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row=convertView;
+        View row;
+        row=convertView;
         Holder h;
         if(row==null)
         {
             LayoutInflater inflater=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            inflater.inflate(R.layout.granted_row,parent,false);
+           row= inflater.inflate(R.layout.granted_row,parent,false);
             h = new Holder();
-            h.date = (TextView) row.findViewById(R.id.date_granted);
+            h.date = (TextView)row.findViewById(R.id.date_granted);
             h.id = (TextView) row.findViewById(R.id.id_granted);
             h.type = (TextView) row.findViewById(R.id.type_granted);
             h.no = (TextView) row.findViewById(R.id.no_granted);
@@ -54,7 +57,7 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
 
         }
         else h= (Holder) row.getTag();
-        GrantedRes res = list.get(position);
+        GrantedRes res = (GrantedRes)this.getItem(position);
         h.date.setText(res.getDate());
         h.id.setText(res.getDemand_id());
         h.type.setText(res.getRes_type());

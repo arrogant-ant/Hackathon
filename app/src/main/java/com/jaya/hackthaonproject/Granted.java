@@ -25,8 +25,10 @@ import java.util.List;
 
 public class Granted extends AppCompatActivity {
 
-    List<GrantedRes> grantedRes = new ArrayList<>();
+
     ListView listView;
+    String location_id;
+    GrantedResAdapter f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +36,13 @@ public class Granted extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Granted Demands");
+
         listView= (ListView) findViewById(R.id.listview_granted);
-        listView.setAdapter(new GrantedResAdapter(getApplicationContext(),R.layout.granted_row,grantedRes));
+        f=new GrantedResAdapter(getApplicationContext(),R.layout.granted_row);
+        listView.setAdapter(f);
+        location_id=LoginActivity.loc_id;
         ShowGranted showGranted= new  ShowGranted();
-        showGranted.execute();
+        showGranted.execute(location_id);
     }
 
     private class ShowGranted extends AsyncTask<String,String,String> {
@@ -45,7 +50,8 @@ public class Granted extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url= new URL("http://www.wangle.website/GrantedResources.php");
+                String first=params[0];
+                URL url= new URL("http://www.wangle.website/GrantedResource.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
@@ -54,7 +60,7 @@ public class Granted extends AppCompatActivity {
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("loc_id", "UTF-8") + "=" + URLEncoder.encode(LoginActivity.loc_id, "UTF-8");
+                String data = URLEncoder.encode("loc_id", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -110,7 +116,7 @@ public class Granted extends AppCompatActivity {
                 Demand_Id=jo.getString("Demand_Id");
                 Date_Of_Demand=jo.getString("Date_Of_Demand");
                 GrantedRes c = new GrantedRes(Demand_Id, Resource_Type, No_Of_Resources, Date_Of_Demand);
-                grantedRes.add(c);
+                f.add(c);
                 count++;
 
             }
