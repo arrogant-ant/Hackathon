@@ -139,9 +139,13 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         } else if (id == R.id.nav_requested_demands) {
+            Intent i=new Intent(this,ShowUserDemand.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_granted_demands) {
 
+            Intent i=new Intent(this,Granted.class);
+            startActivity(i);
         } else if (id == R.id.nav_guidelines_user) {
 
         }

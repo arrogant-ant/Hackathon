@@ -36,7 +36,7 @@ public class GrantedResAdapter extends ArrayAdapter<GrantedRes> {
 
     }
 
-    @NonNull
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row=convertView;

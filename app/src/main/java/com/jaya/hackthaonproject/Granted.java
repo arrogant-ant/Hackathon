@@ -31,6 +31,9 @@ public class Granted extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_granted);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Granted Demands");
         listView= (ListView) findViewById(R.id.listview_granted);
         listView.setAdapter(new GrantedResAdapter(getApplicationContext(),R.layout.granted_row,grantedRes));
         ShowGranted showGranted= new  ShowGranted();
@@ -42,7 +45,7 @@ public class Granted extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url= new URL("granted php url");
+                URL url= new URL("http://www.wangle.website/GrantedResources.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);

@@ -85,7 +85,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
-        <activity android:name=".ShowUserDemand"></activity>
+        <activity android:name=".ShowUserDemand">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Admin" />
+        </activity>
+        <activity android:name=".Granted">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Admin" />
+        </activity>
     </application>
 
 </manifest>

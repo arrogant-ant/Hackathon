@@ -151,15 +151,9 @@
                 android:textColor="#FF4081"
                 android:gravity="center"
                 android:textSize="15dp"
-                android:layout_weight="209"
+                android:layout_weight="210"
                 />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:background="#FF4081"
-                android:layout_weight="1"
-                >
-            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
