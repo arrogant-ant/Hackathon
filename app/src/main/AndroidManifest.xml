@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Call"/>
+        <activity android:name=".Call" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -59,9 +59,9 @@
             android:theme="@style/AppTheme.NoActionBars" />
         <activity android:name=".NewDemand" />
         <activity android:name=".Track">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.jaya.hackthaonproject.Admin" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
         <activity android:name=".Timeline">
             <meta-data
@@ -76,15 +76,16 @@
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
         <activity android:name=".Allocated">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.jaya.hackthaonproject.Register" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Register" />
         </activity>
         <activity android:name=".Available">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
+        <activity android:name=".ShowUserDemand"></activity>
     </application>
 
 </manifest>

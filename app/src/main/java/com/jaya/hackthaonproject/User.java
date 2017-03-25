@@ -2,7 +2,7 @@ package com.jaya.hackthaonproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -13,16 +13,69 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+
+//import com.github.clans.fab.FloatingActionMenu;
+//import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+
 
 public class User extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+  //  FloatingActionMenu materialDesignFAM;
+    //com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_user);
+
+        ImageView im=new ImageView(this);
+        im.setImageResource(R.drawable.plus);
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(im).setBackgroundDrawable(R.drawable.selector_button_pink).build();
+      SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+      itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_blue));
+        ImageView itemIcon = new ImageView(this);
+        itemIcon.setImageResource(R.drawable.bookopen);
+        SubActionButton button1 = itemBuilder.setContentView(itemIcon).build();
+        ImageView itemIcon1 = new ImageView(this);
+        itemIcon1.setImageResource(R.drawable.email);
+        SubActionButton button2 = itemBuilder.setContentView(itemIcon1).build();
+        ImageView itemIcon2 = new ImageView(this);
+        itemIcon2.setImageResource(R.drawable.phone);
+        SubActionButton button3 = itemBuilder.setContentView(itemIcon2).build();
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this).addSubActionView(button1)
+                .addSubActionView(button2).addSubActionView(button3).attachTo(actionButton)
+                .build();
+
+
+
+       /* materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
+        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu first item clicked
+
+            }
+        });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu second item clicked
+
+            }
+        });
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu third item clicked
+
+            }
+        });*/
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_user);
@@ -34,7 +87,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_user);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    public void demands(View v)
+   public void demands(View v)
     {
 
         Intent i=new Intent(this,NewDemand.class);
