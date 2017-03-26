@@ -1,6 +1,5 @@
 package com.jaya.hackthaonproject;
 
-
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,33 +21,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
-public class Granted extends AppCompatActivity {
-
-
+public class Free extends AppCompatActivity {
     ListView listView;
     String location_id;
-    GrantedResAdapter f;
+    FreeResAdapter f;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_granted);
+        setContentView(R.layout.activity_free);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Granted Demands");
 
-        listView = (ListView) findViewById(R.id.listview_granted);
-        f = new GrantedResAdapter(getApplicationContext(), R.layout.granted_row);
+        listView = (ListView) findViewById(R.id.listview_free);
+        f = new FreeResAdapter(getApplicationContext(), R.layout.granted_row);
         listView.setAdapter(f);
         location_id = LoginActivity.loc_id;
-        ShowGranted showGranted = new ShowGranted();
-        showGranted.execute(location_id);
+        ShowRes showRes = new ShowRes();
+        showRes.execute(location_id);
     }
 
 
     //getting data
-    private class ShowGranted extends AsyncTask<String, String, String> {
+    private class ShowRes extends AsyncTask<String, String, String> {
         StringBuffer buffer = new StringBuffer();
 
         @Override
@@ -108,19 +105,16 @@ public class Granted extends AppCompatActivity {
             jsonObject = new JSONObject(j);
             jsonArray = jsonObject.getJSONArray("server_response");
             int count = 0;
-            String Resource_Type;
-            String No_Of_Resources;
-            String Demand_Id;
-            String Date_Of_Demand;
+            String resource_Type;
+            String res_Id;
+
 
             while (count < jsonArray.length()) {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
-                Resource_Type = jo.getString("Resource_Type");
-                No_Of_Resources = jo.getString("No_Of_Resources");
-                Demand_Id = jo.getString("Demand_Id");
-                Date_Of_Demand = jo.getString("Date_Of_Demand");
-                GrantedRes c = new GrantedRes(Demand_Id, Resource_Type, No_Of_Resources, Date_Of_Demand);
+                resource_Type = jo.getString("Resource_Type");
+                res_Id = jo.getString("Demand_Id");
+                FreeRes c = new FreeRes(res_Id, resource_Type);
                 f.add(c);
                 count++;
 
@@ -129,8 +123,4 @@ public class Granted extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 }
-
-
