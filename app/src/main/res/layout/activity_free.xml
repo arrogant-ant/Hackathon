@@ -83,7 +83,7 @@
     </LinearLayout>
     <ListView
         android:layout_below="@+id/activity_granted"
-        android:id="@+id/listview_granted"
+        android:id="@+id/listview_free"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></ListView>
 </RelativeLayout>

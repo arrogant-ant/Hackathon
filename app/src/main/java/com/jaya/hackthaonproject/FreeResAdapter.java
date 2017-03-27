@@ -40,7 +40,7 @@ public class FreeResAdapter extends ArrayAdapter<FreeRes> {
         if(row==null)
         {
             LayoutInflater inflater= (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=inflater.inflate(R.layout.free_res_row,parent);
+            row=inflater.inflate(R.layout.free_res_row,parent,false);
             h= new Holder();
             h.id= (TextView) row.findViewById(R.id.id_free);
             h.type= (TextView) row.findViewById(R.id.type_free);

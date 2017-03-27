@@ -95,11 +95,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
-        <activity android:name=".FreeResource">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jaya.hackthaonproject.Admin" />
-        </activity>
         <activity android:name=".Free"></activity>
     </application>
 
