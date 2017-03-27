@@ -191,6 +191,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
 
         } else if (id == R.id.nav_guidelines) {
 
+        }else if (id == R.id.nav_allocate_demands_manually) {
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);

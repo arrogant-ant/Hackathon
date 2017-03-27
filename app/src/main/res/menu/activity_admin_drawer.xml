@@ -27,6 +27,11 @@
             android:id="@+id/nav_allocate_demand"
             android:icon="@drawable/ic_allocate_demand"
             android:title="View Demands" />
+        <item
+            android:id="@+id/nav_allocate_demands_manually"
+            android:icon="@drawable/ic_allocate_demand"
+            android:title="Allocate Demand Manually " />
+
     </group>
 
     <item android:title="Site Manager">
