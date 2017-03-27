@@ -136,7 +136,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_release_resource) {
-            Intent i=new Intent(this,FreeResource.class);
+            Intent i=new Intent(this,Free.class);
             startActivity(i);
 
 
@@ -149,6 +149,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
             Intent i=new Intent(this,Granted.class);
             startActivity(i);
         } else if (id == R.id.nav_guidelines_user) {
+
 
         }
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_user);

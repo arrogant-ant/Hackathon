@@ -1,5 +1,6 @@
 package com.jaya.hackthaonproject;
 
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Granted extends AppCompatActivity {
 
@@ -29,6 +29,7 @@ public class Granted extends AppCompatActivity {
     ListView listView;
     String location_id;
     GrantedResAdapter f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,21 +38,24 @@ public class Granted extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Granted Demands");
 
-        listView= (ListView) findViewById(R.id.listview_granted);
-        f=new GrantedResAdapter(getApplicationContext(),R.layout.granted_row);
+        listView = (ListView) findViewById(R.id.listview_granted);
+        f = new GrantedResAdapter(getApplicationContext(), R.layout.granted_row);
         listView.setAdapter(f);
-        location_id=LoginActivity.loc_id;
-        ShowGranted showGranted= new  ShowGranted();
+        location_id = LoginActivity.loc_id;
+        ShowGranted showGranted = new ShowGranted();
         showGranted.execute(location_id);
     }
 
-    private class ShowGranted extends AsyncTask<String,String,String> {
+
+    //getting data
+    private class ShowGranted extends AsyncTask<String, String, String> {
         StringBuffer buffer = new StringBuffer();
+
         @Override
         protected String doInBackground(String... params) {
             try {
-                String first=params[0];
-                URL url= new URL("http://www.wangle.website/GrantedResource.php");
+                String first = params[0];
+                URL url = new URL("http://www.wangle.website/GrantedResource.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
@@ -93,8 +97,9 @@ public class Granted extends AppCompatActivity {
             parse(s);
         }
     }
-    void parse(String j)
-    {
+
+    //parsing JSON
+    void parse(String j) {
         JSONObject jsonObject;
         JSONArray jsonArray;
 
@@ -111,10 +116,10 @@ public class Granted extends AppCompatActivity {
             while (count < jsonArray.length()) {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
-                Resource_Type=jo.getString("Resource_Type");
+                Resource_Type = jo.getString("Resource_Type");
                 No_Of_Resources = jo.getString("No_Of_Resources");
-                Demand_Id=jo.getString("Demand_Id");
-                Date_Of_Demand=jo.getString("Date_Of_Demand");
+                Demand_Id = jo.getString("Demand_Id");
+                Date_Of_Demand = jo.getString("Date_Of_Demand");
                 GrantedRes c = new GrantedRes(Demand_Id, Resource_Type, No_Of_Resources, Date_Of_Demand);
                 f.add(c);
                 count++;
@@ -124,7 +129,6 @@ public class Granted extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
 
 }

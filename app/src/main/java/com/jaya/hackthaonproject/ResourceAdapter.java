@@ -16,12 +16,12 @@ import java.util.List;
  */
 
 public class ResourceAdapter extends ArrayAdapter<Resource> {
-    List<Resource> list= new ArrayList();
+    List<Resource> list = new ArrayList();
     Context ctx;
 
     public ResourceAdapter(Context context, int resource, List<Resource> objects) {
         super(context, resource, objects);
-        list=objects;
+        list = objects;
     }
    /* public ResourceAdapter(Context context, int resource) {
         super(context, resource);
@@ -47,32 +47,29 @@ public class ResourceAdapter extends ArrayAdapter<Resource> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row;
-        row=convertView;
+        row = convertView;
         ResourceAdapter.ResourceHolder rh;
-        if(row==null)
-        {
-            LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.req_res_row,parent,false);
-            rh=new ResourceAdapter.ResourceHolder();
-            rh.tx_type=(TextView)row.findViewById(R.id.type);
-            rh.tx_no=(TextView)row.findViewById(R.id.no);
-            rh.tx_time=(TextView)row.findViewById(R.id.time);
+        if (row == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = layoutInflater.inflate(R.layout.req_res_row, parent, false);
+            rh = new ResourceAdapter.ResourceHolder();
+            rh.tx_type = (TextView) row.findViewById(R.id.type);
+            rh.tx_no = (TextView) row.findViewById(R.id.no);
+            rh.tx_time = (TextView) row.findViewById(R.id.time);
 
             row.setTag(rh);
-        }
-        else
-        {
-            rh=(ResourceAdapter.ResourceHolder)row.getTag();
+        } else {
+            rh = (ResourceAdapter.ResourceHolder) row.getTag();
 
         }
-        Resource resource= (Resource) list.get(position);
+        Resource resource = (Resource) list.get(position);
         rh.tx_type.setText(resource.getType());
         rh.tx_no.setText(resource.getNo());
         rh.tx_time.setText(resource.getTime());
         return row;
     }
-     class ResourceHolder
-    {
+
+    class ResourceHolder {
         TextView tx_type;
         TextView tx_no;
         TextView tx_time;
