@@ -7,12 +7,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.*;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -294,7 +292,7 @@ public class Manua extends AppCompatActivity {
 
                 if(result_needed.equals("1"))
                 {
-                    Intent i=new Intent(ctx,Ramu.class);
+                    Intent i=new Intent(ctx,Prempt.class);
                     i.putExtra("demand_id",demand_id_individual);
                     i.putExtra("resource_type",resource_type_individual);
                     i.putExtra("no_of_resources",no_of_resources_individual);

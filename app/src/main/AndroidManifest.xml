@@ -101,7 +101,7 @@
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
         <activity android:name=".Manua" />
-        <activity android:name=".Ramu" />
+        <activity android:name=".Prempt" />
         <activity android:name=".NotRamu"></activity>
         <service android:name=".FCMService">
             <intent-filter>

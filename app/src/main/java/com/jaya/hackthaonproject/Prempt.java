@@ -5,13 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.*;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,12 +20,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Ramu extends AppCompatActivity {
+public class Prempt extends AppCompatActivity {
 String accept_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ramu);
+        setContentView(R.layout.activity_prempt);
         final String s=getIntent().getExtras().getString("demand_id");
        final String s2=getIntent().getExtras().getString("resource_type");
        final  String s3=getIntent().getExtras().getString("no_of_resources");
@@ -38,7 +33,7 @@ String accept_data;
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Accept a=new Accept(Ramu.this);
+                Accept a=new Accept(Prempt.this);
                 a.execute(s,s2,s3);
             }
         });
