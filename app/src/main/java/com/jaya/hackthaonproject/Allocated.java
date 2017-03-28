@@ -22,7 +22,7 @@ import java.net.URL;
 public class Allocated extends AppCompatActivity {
     String result;
     TextView tx;
-    ContactAdapterallocated ca;
+    AllocatedResAdapter ca;
     ListView listView;
     @Override
        protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class Allocated extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Allocated Resources");
-        ca = new ContactAdapterallocated(this, R.layout.layout_individual_allocated_demand);
+        ca = new AllocatedResAdapter(this, R.layout.allocated_row);
         listView = (ListView) findViewById(R.id.list_view_alocated);
         listView.setAdapter(ca);
       ShowviewssDatas show = new ShowviewssDatas(this);
@@ -123,7 +123,7 @@ public class Allocated extends AppCompatActivity {
                     Resource_Type=jo.getString("Resource_Type");
                     No_Of_Resources = jo.getString("No_Of_Resources");
 
-                    Contacts_allocated c = new Contacts_allocated( Resource_Type, No_Of_Resources);
+                    AllocatedRes c = new AllocatedRes( Resource_Type, No_Of_Resources);
                     ca.add(c);
                     count++;
 

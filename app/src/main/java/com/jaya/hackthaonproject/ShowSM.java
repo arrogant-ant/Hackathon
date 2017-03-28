@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,17 +18,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class show extends AppCompatActivity {
+public class ShowSM extends AppCompatActivity {
     String result;
-    TextView tx;
-    ContactAdapter ca;
+
+    ShowSMResAdapter ca;
     ListView listView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        ca=new ContactAdapter(this,R.layout.individual_layout);
+        ca=new ShowSMResAdapter(this,R.layout.individual_layout);
         listView=(ListView)findViewById(R.id.listitem1);
         listView.setAdapter(ca);
         Showviews show =new Showviews(this);
@@ -50,7 +49,7 @@ public class show extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/try.php";
+            json_url = "http://www.wangle.website/show_sm_database.php";
 
         }
 
@@ -127,7 +126,7 @@ public class show extends AppCompatActivity {
                 password = jo.getString("password");
                 emailid = jo.getString("emailid");
                 phone_no = jo.getString("phone_no");
-                Contacts c = new Contacts(empid, password, emailid, phone_no);
+                ShowSMRes c = new ShowSMRes(empid, password, emailid, phone_no);
                 ca.add(c);
                 count++;
 

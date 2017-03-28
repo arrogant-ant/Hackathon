@@ -72,7 +72,7 @@ public class Add extends Fragment implements AdapterView.OnItemSelectedListener,
         no = no_of_resources.getText().toString();
         time = completion_time.getText().toString();
         comm.response(type,no,time);
-        //Toast.makeText(getActivity(),"data"+type+no+time,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"data"+type+no+time,Toast.LENGTH_SHORT).ShowSM();
 
     }
 }

@@ -15,12 +15,12 @@ import java.util.List;
  * Created by shubham on 3/25/2017.
  */
 
-public class ContactAdapterShowUserDemand extends ArrayAdapter {
+public class ShowDemandResAdapter extends ArrayAdapter {
      List l=new ArrayList();
-    public ContactAdapterShowUserDemand(Context context, int resource) {
+    public ShowDemandResAdapter(Context context, int resource) {
         super(context, resource);
     }
-    public void add(ContactsShowUserDemand c)
+    public void add(ShowDemandRes c)
     {
        super.add(c);
         l.add(c);
@@ -46,7 +46,7 @@ public class ContactAdapterShowUserDemand extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater li=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-           row= li.inflate(R.layout.individual_show_user_demand,parent,false);
+           row= li.inflate(R.layout.show_demand_row,parent,false);
              ch=new Contacthoder();
             ch.t1=(TextView)row.findViewById(R.id.demand_id_user_demand);
             ch.t2=(TextView)row.findViewById(R.id.resource_type_user_demand);
@@ -65,7 +65,7 @@ public class ContactAdapterShowUserDemand extends ArrayAdapter {
         {
          ch=(Contacthoder)row.getTag();
         }
-        ContactsShowUserDemand cus=(ContactsShowUserDemand)this.getItem(position);
+        ShowDemandRes cus=(ShowDemandRes)this.getItem(position);
         ch.t1.setText(cus.getDemand_id());
         ch.t2.setText(cus.getResource_type());
         ch.t3.setText(cus.getNo_of_resources());

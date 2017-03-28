@@ -3,7 +3,7 @@ package com.jaya.hackthaonproject;
 /**
  * Created by shubham on 3/25/2017.
  */
-public class ContactsShowUserDemand {
+public class ShowDemandRes {
     private String demand_id;
 
     public String getResource_type() {
@@ -72,7 +72,7 @@ public class ContactsShowUserDemand {
 
     private String location_id;
     private String date_of_demand;
-    public ContactsShowUserDemand(String demand_id,String resource_type,String no_of_resources,String completion_time,String priority,String location_id,String date_of_demand ) {
+    public ShowDemandRes(String demand_id, String resource_type, String no_of_resources, String completion_time, String priority, String location_id, String date_of_demand ) {
     this.demand_id=demand_id;
         this.resource_type=resource_type;
         this.no_of_resources=no_of_resources;

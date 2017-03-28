@@ -78,6 +78,7 @@ public class Home extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent i = new Intent(this, LoginActivity.class);
+            i.putExtra("error"," ");
             startActivity(i);
             return true;
         }

@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +20,7 @@ import java.net.URL;
 
 public class ViewDemands extends AppCompatActivity {
     String result;
-    ContactAdapterDemand ca;
+    ViewDemandsResAdapter ca;
     ListView listView;
 
     @Override
@@ -31,7 +30,7 @@ public class ViewDemands extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("View Demands");
-        ca = new ContactAdapterDemand(this, R.layout.activity_layout_individual_admin);
+        ca = new ViewDemandsResAdapter(this, R.layout.view_demands_row);
         listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
         Showviewss show = new Showviewss(this);
@@ -137,7 +136,7 @@ public class ViewDemands extends AppCompatActivity {
                     date_of_demand = date.substring(0, 10);
 
 
-                    Contacts_demand c = new Contacts_demand(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
+                    ViewDemandsRes c = new ViewDemandsRes(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
                     ca.add(c);
                     count++;
 

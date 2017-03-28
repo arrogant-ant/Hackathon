@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_timeline_report"
+            android:id="@+id/timeline_report_pc"
             android:icon="@drawable/ic_timeline_report"
             android:title="Timeline Report" />
 
@@ -12,23 +12,23 @@
 
 
         <item
-            android:id="@+id/nav_track_resources"
+            android:id="@+id/track_resources_pc"
             android:icon="@drawable/ic_track_resources"
             android:title="Track Resources" />
         <item
-            android:id="@+id/nav_view_ALLOCATED"
+            android:id="@+id/available_pc"
             android:icon="@drawable/ic_view_database"
             android:title="View Available Resources"/>
         <item
-            android:id="@+id/nav_view_available"
+            android:id="@+id/allocated_pc"
             android:icon="@drawable/ic_view_database"
             android:title="View Allocated Resources"/>
         <item
-            android:id="@+id/nav_allocate_demand"
+            android:id="@+id/allocate_demand_pc"
             android:icon="@drawable/ic_allocate_demand"
             android:title="View Demands" />
         <item
-            android:id="@+id/nav_allocate_demands_manually"
+            android:id="@+id/preempt_pc"
             android:icon="@drawable/ic_allocate_demand"
             android:title="Allocate Demand Manually " />
 
@@ -37,11 +37,11 @@
     <item android:title="Site Manager">
         <menu>
             <item
-                android:id="@+id/nav_create_sm"
+                android:id="@+id/nav_create_sm_pc"
                 android:icon="@drawable/ic_create_sm"
                 android:title="Create A New SM Account" />
             <item
-                android:id="@+id/nav_view_sm_database"
+                android:id="@+id/view_sm_database_pc"
                 android:icon="@drawable/ic_view_sm_database"
                 android:title="View SM Database" />
         </menu>

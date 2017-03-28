@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactAdapterTrack extends ArrayAdapter {
+public class TrackResAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapterTrack(Context context, int resource) {
+    public TrackResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts_track object) {
+    public void add(TrackRes object) {
         super.add(object);
         list.add(object);
     }
@@ -45,7 +43,7 @@ public class ContactAdapterTrack extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.layout_individual_track_resources,parent,false);
+            row=layoutInflater.inflate(R.layout.track_row,parent,false);
             ch=new ContactHolders();
             ch.Resource_id=(TextView)row.findViewById(R.id.resource_id_track);
             ch.Resource_type=(TextView)row.findViewById(R.id.resource_type_track);
@@ -59,7 +57,7 @@ public class ContactAdapterTrack extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_track contacts=(Contacts_track) this.getItem(position);
+        TrackRes contacts=(TrackRes) this.getItem(position);
         ch.Resource_id.setText(contacts.getResource_id());
         ch.Resource_type.setText(contacts.getResource_type());
         ch.location_id.setText(contacts.getLocation_id());

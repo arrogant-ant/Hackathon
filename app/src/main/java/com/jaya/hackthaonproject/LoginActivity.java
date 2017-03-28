@@ -59,9 +59,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String result;
     EditText et;
     EditText et2;
-    TextView error_tx;
+    TextView error_tx, progress_tx;
     boolean my_show;
     int my_shortAnimTime;
+    String error_msg;
     static String emp_id, loc_id;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -94,6 +95,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         error_tx= (TextView) findViewById(R.id.error_login);
         Typeface myCustomFont=Typeface.createFromAsset(getAssets(),"fonts/Capture_it.ttf");
         tt.setTypeface(myCustomFont);
+        //storing error
+        error_msg= getIntent().getExtras().getString("error","");
+        error_tx.setText(error_msg);
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.editText);
 
@@ -125,6 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        progress_tx= (TextView) findViewById(R.id.progress_text);
     }
 
     private void populateAutoComplete() {
@@ -215,7 +221,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show first progress spinner, and kick off first background task to
+            // ShowSM first progress spinner, and kick off first background task to
             // perform the user login attempt.
             showProgress(true);
             et=(EditText)findViewById(R.id.editText);
@@ -267,45 +273,54 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
+            progress_tx.setVisibility(show ? View.VISIBLE : View.GONE);
+            progress_tx.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progress_tx.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
+            // The ViewPropertyAnimator APIs are not available, so simply ShowSM
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            progress_tx.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
     ///to remove progress barr
-   /* private void removeProgress(final boolean show) {
-        my_show=show;
+   /* private void removeProgress(final boolean ShowSM) {
+        my_show=ShowSM;
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
             my_shortAnimTime=shortAnimTime;
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    ShowSM ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
                 }
             });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                    ShowSM ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
+            // The ViewPropertyAnimator APIs are not available, so simply ShowSM
             // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
+            mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
         }
     }*/
     @Override
@@ -320,7 +335,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
 
-                // Show primary email addresses first. Note that there won't be
+                // ShowSM primary email addresses first. Note that there won't be
                 // first primary email address if the user hasn't specified one.
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
@@ -343,7 +358,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        //Create adapter to tell the AutoCompleteTextView what to ShowSM in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
@@ -471,12 +486,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 NewDemand.setEmpID(emp_id);
                 if(priority==true)
                 {
-                    Intent i=new Intent(ctx,Admin.class);
+                    Intent i=new Intent(ctx,PC.class);
                     ctx.startActivity(i);
 
                 }
                 else {
-                    Intent ip=new Intent(ctx,User.class);
+                    Intent ip=new Intent(ctx,SM.class);
                     ctx.startActivity(ip);
                 }
 
@@ -484,7 +499,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             else
             {
                 Toast.makeText(LoginActivity.this,"login failed",Toast.LENGTH_LONG);
-                mLoginFormView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+               /* mLoginFormView.setVisibility(my_show ? View.VISIBLE : View.GONE);
                 mLoginFormView.animate().setDuration(my_shortAnimTime).alpha(
                         my_show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                     @Override
@@ -501,7 +516,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
                     }
                 });
-                error_tx.setText("Invalid Credentials!! TRY AGAIN");
+                progress_tx.setVisibility(my_show ? View.GONE : View.VISIBLE);
+                progress_tx.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        progress_tx.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
+                //for listner
+               */
+                Intent intent= new Intent(LoginActivity.this,LoginActivity.class);
+                intent.putExtra("error","Invalid Credentials!! TRY AGAIN");
+                finish();
+                startActivity(intent);
 
             }
 
@@ -515,6 +543,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }
 

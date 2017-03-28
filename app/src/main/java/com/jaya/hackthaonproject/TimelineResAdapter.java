@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactAdapterTimeline extends ArrayAdapter {
+public class TimelineResAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapterTimeline(Context context, int resource) {
+    public TimelineResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts_timeline object) {
+    public void add(TimelineRes object) {
         super.add(object);
         list.add(object);
     }
@@ -45,7 +43,7 @@ public class ContactAdapterTimeline extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.layout_individual_timeline_report,parent,false);
+            row=layoutInflater.inflate(R.layout.timeline_row,parent,false);
             ch=new ContactHolders();
             ch.Demand_id=(TextView)row.findViewById(R.id.demand_id_timeline);
             ch.Resource_type=(TextView)row.findViewById(R.id.resource_type_timeline);
@@ -61,7 +59,7 @@ public class ContactAdapterTimeline extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_timeline contacts=(Contacts_timeline) this.getItem(position);
+        TimelineRes contacts=(TimelineRes) this.getItem(position);
         ch.Demand_id.setText(contacts.getDemand_id());
         ch.Resource_type.setText(contacts.getResource_type());
         ch.No_of_resources.setText(contacts.getNo_of_resources());

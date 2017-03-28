@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="70dp"
 
-    tools:context="com.jaya.hackthaonproject.Admin">
+    tools:context="com.jaya.hackthaonproject.PC">
 
 
 <TextView

@@ -29,9 +29,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.regex.Pattern;
 
-public class Manua extends AppCompatActivity {
+public class Manual extends AppCompatActivity {
     String result;
-    ContactAdapterDemand ca;
+    ViewDemandsResAdapter ca;
     ListView listView;
     String accept_data;
 
@@ -42,7 +42,7 @@ public class Manua extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("View Demands");
-        ca = new ContactAdapterDemand(this, R.layout.activity_layout_individual_admin);
+        ca = new ViewDemandsResAdapter(this, R.layout.view_demands_row);
         listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
 
@@ -64,13 +64,13 @@ public class Manua extends AppCompatActivity {
     void alert(final String no_of_resources,final String resource_type,final String demand_id)
     {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Manua.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Manual.this);
         builder.setTitle(no_of_resources+" Instance of Resource:"+resource_type+"  is Required");
         builder.setMessage("Click Proceed to check availability of resource");
         builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                 Accept a=new Accept(Manua.this,demand_id,resource_type,no_of_resources);
+                 Accept a=new Accept(Manual.this,demand_id,resource_type,no_of_resources);
                 a.execute(resource_type,no_of_resources);
             }
         });
@@ -180,7 +180,7 @@ public class Manua extends AppCompatActivity {
                     date_of_demand = date.substring(0, 10);
 
 
-                    Contacts_demand c = new Contacts_demand(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
+                    ViewDemandsRes c = new ViewDemandsRes(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
                     ca.add(c);
                     count++;
 
@@ -292,7 +292,7 @@ public class Manua extends AppCompatActivity {
 
                 if(result_needed.equals("1"))
                 {
-                    Intent i=new Intent(ctx,Prempt.class);
+                    Intent i=new Intent(ctx,Preempt.class);
                     i.putExtra("demand_id",demand_id_individual);
                     i.putExtra("resource_type",resource_type_individual);
                     i.putExtra("no_of_resources",no_of_resources_individual);

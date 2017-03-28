@@ -3,8 +3,8 @@ package com.jaya.hackthaonproject;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,31 +14,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 //import com.github.clans.fab.FloatingActionMenu;
 //import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 
-public class User extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SM extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   //  FloatingActionMenu materialDesignFAM;
     //com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.sm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
 
         ImageView im=new ImageView(this);
         im.setImageResource(R.drawable.plus);
-        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(im).setBackgroundDrawable(R.drawable.selector_button_pink).build();
+
+        //Floating button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent intent = new Intent(SM.this, NewDemand.class);
+                startActivity(intent);
+            }
+        });
+
+        /* FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(im).setBackgroundDrawable(R.drawable.selector_button_pink).build();
       SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
       itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_blue));
         ImageView itemIcon = new ImageView(this);
@@ -53,7 +59,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this).addSubActionView(button1)
                 .addSubActionView(button2).addSubActionView(button3).attachTo(actionButton)
                 .build();
-
+        */
 
 
        /* materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
@@ -124,6 +130,8 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_user) {
             Intent i = new Intent(this, LoginActivity.class);
+            i.putExtra("error"," ");
+            finish();
             startActivity(i);
             return true;
         }
@@ -141,7 +149,7 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         } else if (id == R.id.nav_requested_demands) {
-            Intent i=new Intent(this,ShowUserDemand.class);
+            Intent i=new Intent(this,ShowDemand.class);
             startActivity(i);
 
         } else if (id == R.id.nav_granted_demands) {

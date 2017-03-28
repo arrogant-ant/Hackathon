@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -78,7 +77,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         FragmentManager manager= getFragmentManager();
         FragmentTransaction transaction= manager.beginTransaction();
         transaction.add(R.id.req_res,resource).commit();
-        //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).ShowSM();
         ReqResource res = (ReqResource) manager.findFragmentById(R.id.req_res);
         res.setText(type,no,time);
 
@@ -126,7 +125,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent i = new Intent(NewDemand.this, User.class);
+                    Intent i = new Intent(NewDemand.this, SM.class);
                     startActivity(i);
                 }
             });

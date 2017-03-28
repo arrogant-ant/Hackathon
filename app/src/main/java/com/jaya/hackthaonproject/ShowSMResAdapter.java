@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +15,14 @@ import java.util.List;
  * Created by shubham on 3/12/2017.
  */
 
-public class ContactAdapter extends ArrayAdapter {
+public class ShowSMResAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapter(Context context, int resource) {
+    public ShowSMResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts object) {
+    public void add(ShowSMRes object) {
         super.add(object);
         list.add(object);
     }
@@ -61,11 +59,11 @@ public class ContactAdapter extends ArrayAdapter {
           ch=(ContactHolder)row.getTag();
 
         }
-       Contacts contacts=(Contacts)this.getItem(position);
-        ch.tx_empid.setText(contacts.getEmpid());
-        ch.tx_password.setText(contacts.getPassword());
-        ch.tx_email.setText(contacts.getEmailid());
-        ch.tx_phone_no.setText(contacts.getPhone_no());
+       ShowSMRes showSMRes =(ShowSMRes)this.getItem(position);
+        ch.tx_empid.setText(showSMRes.getEmpid());
+        ch.tx_password.setText(showSMRes.getPassword());
+        ch.tx_email.setText(showSMRes.getEmailid());
+        ch.tx_phone_no.setText(showSMRes.getPhone_no());
        return row;
     }
     static class ContactHolder

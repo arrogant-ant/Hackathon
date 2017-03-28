@@ -4,12 +4,12 @@ package com.jaya.hackthaonproject;
  * Created by shubham on 3/12/2017.
  */
 
-public class Contacts {
+public class ShowSMRes {
     private String empid;
     private String password;
     private String emailid;
     private String phone_no;
-    public Contacts(String empid,String password,String emailid,String phone_no)
+    public ShowSMRes(String empid, String password, String emailid, String phone_no)
     {
         this.empid=empid;
         this.password=password;

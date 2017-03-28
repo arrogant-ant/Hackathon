@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,8 +20,7 @@ import java.net.URL;
 
 public class Available extends AppCompatActivity {
     String result;
-    TextView tx;
-    ContactsAdapteravailabe ca;
+    AvailableResAdapter ca;
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class Available extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Available Resources");
-        ca = new ContactsAdapteravailabe(this, R.layout.layout_individula_available);
+        ca = new AvailableResAdapter(this, R.layout.available_row);
         listView = (ListView) findViewById(R.id.list_view_available);
         listView.setAdapter(ca);
         ShowviewssDatas show = new ShowviewssDatas(this);
@@ -123,7 +121,7 @@ public class Available extends AppCompatActivity {
                     Resource_Type=jo.getString("Resource_Type");
                     No_Of_Resources = jo.getString("No_Of_Resources");
 
-                    contacts_available c = new contacts_available( Resource_Type, No_Of_Resources);
+                    AvailableRes c = new AvailableRes( Resource_Type, No_Of_Resources);
                     ca.add(c);
                     count++;
 

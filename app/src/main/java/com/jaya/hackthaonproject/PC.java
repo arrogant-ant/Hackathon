@@ -3,8 +3,6 @@ package com.jaya.hackthaonproject;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -20,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +35,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Admin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PC extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String result;
     TextView tx;
     ContactAdapterFulfill ca;
@@ -51,7 +48,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_pc);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
         ////////////////////////////////////
@@ -92,20 +89,20 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
     void alert(final String demand_id,final String resource_type,final String no_of_resources)
     {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Admin.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PC.this);
         builder.setTitle("Request from:"+demand_id);
         builder.setMessage("what should be done?");
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Accept a=new Accept(Admin.this);
+                Accept a=new Accept(PC.this);
                 a.execute(demand_id,resource_type,no_of_resources);
             }
         });
         builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Delete d=new Delete(Admin.this);
+                Delete d=new Delete(PC.this);
                 d.execute(demand_id);
 
 
@@ -145,6 +142,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_admin) {
             Intent i = new Intent(this, LoginActivity.class);
+            i.putExtra("error"," ");
+            finish();
             startActivity(i);
             return true;
         }
@@ -158,41 +157,41 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_timeline_report) {
+        if (id == R.id.timeline_report_pc) {
             Intent i=new Intent(this,Timeline.class);
             startActivity(i);
 
 
-        } else if (id == R.id.nav_view_available) {
+        } else if (id == R.id.allocated_pc) {
 
       Intent i=new Intent(this,Allocated.class);
            startActivity(i);
 
         }
-        else if (id == R.id.nav_view_ALLOCATED) {
+        else if (id == R.id.available_pc) {
             Intent i=new Intent(this,Available.class);
             startActivity(i);
 
 
-        }else if (id == R.id.nav_track_resources) {
+        }else if (id == R.id.track_resources_pc) {
             Intent i=new Intent(this,Track.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_allocate_demand) {
+        } else if (id == R.id.allocate_demand_pc) {
             Intent i=new Intent(this,ViewDemands.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_create_sm) {
-            Intent i = new Intent(this, Register.class);
+        } else if (id == R.id.nav_create_sm_pc) {
+            Intent i = new Intent(this, RegisterSM.class);
             startActivity(i);
-        } else if (id == R.id.nav_view_sm_database) {
-            Intent i = new Intent(this, show.class);
+        } else if (id == R.id.view_sm_database_pc) {
+            Intent i = new Intent(this, ShowSM.class);
             startActivity(i);
 
         } else if (id == R.id.nav_guidelines) {
 
-        }else if (id == R.id.nav_allocate_demands_manually) {
-             Intent i=new Intent(this,Manua.class);
+        }else if (id == R.id.preempt_pc) {
+             Intent i=new Intent(this,Manual.class);
             startActivity(i);
         }
 
@@ -386,7 +385,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 Boolean b=jp.getBoolean("final");
 
 
-                Intent i=new Intent(ctx,Admin.class);
+                Intent i=new Intent(ctx,PC.class);
                 startActivity(i);
 
 
@@ -487,7 +486,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 JSONObject jp = new JSONObject(accept_data);
                 Boolean b=jp.getBoolean("final");
 
-                Intent i=new Intent(ctx,Admin.class);
+                Intent i=new Intent(ctx,PC.class);
                 startActivity(i);
 
 

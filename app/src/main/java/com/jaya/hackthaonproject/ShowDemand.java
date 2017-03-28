@@ -22,19 +22,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class ShowUserDemand extends AppCompatActivity {
-    ContactAdapterShowUserDemand ca;
+public class ShowDemand extends AppCompatActivity {
+    ShowDemandResAdapter ca;
     ListView listView;
     String result;
     String location_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_user_demand);
+        setContentView(R.layout.activity_show_sm_demand);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Requested Demands");
-        ca = new ContactAdapterShowUserDemand(this,R.layout.individual_show_user_demand);
+        ca = new ShowDemandResAdapter(this,R.layout.show_demand_row);
         listView = (ListView) findViewById(R.id.list_view_show_user_demand);
         listView.setAdapter(ca);
         ShowUserView show = new ShowUserView(this);
@@ -149,7 +149,7 @@ public class ShowUserDemand extends AppCompatActivity {
                     date_of_demand=jo.getString("date_of_demand");
 
 
-                    ContactsShowUserDemand c = new ContactsShowUserDemand(Demand_id, Resource_type, No_of_resources, completion_time,priority,location_id,date_of_demand);
+                    ShowDemandRes c = new ShowDemandRes(Demand_id, Resource_type, No_of_resources, completion_time,priority,location_id,date_of_demand);
                     ca.add(c);
                     count++;
 

@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +21,7 @@ import java.net.URL;
 public class Track extends AppCompatActivity {
     String result;
       ListView listView;
-    ContactAdapterTrack ca;
+    TrackResAdapter ca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class Track extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Track Resources");
 
-        ca = new ContactAdapterTrack(this, R.layout.layout_individual_track_resources);
+        ca = new TrackResAdapter(this, R.layout.track_row);
         listView = (ListView) findViewById(R.id.list_view_track);
         listView.setAdapter(ca);
       TracksResources show = new TracksResources(this);
@@ -131,7 +130,7 @@ public class Track extends AppCompatActivity {
                     Status = jo.getString("Status");
 
 
-                    Contacts_track c = new Contacts_track(Resource_id, Resource_type, location_id, Status);
+                    TrackRes c = new TrackRes(Resource_id, Resource_type, location_id, Status);
                     ca.add(c);
                     count++;
 

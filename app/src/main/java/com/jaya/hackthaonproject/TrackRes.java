@@ -1,7 +1,7 @@
 package com.jaya.hackthaonproject;
 
 
-public class Contacts_track {
+public class TrackRes {
 
 
 
@@ -13,7 +13,7 @@ public class Contacts_track {
     private String location_id;
     private String Status;
 
-    public Contacts_track(String Resource_id,String Resource_type,String location_id,String Status)
+    public TrackRes(String Resource_id, String Resource_type, String location_id, String Status)
     {
         this.Resource_id=Resource_id;
         this.Resource_type=Resource_type;

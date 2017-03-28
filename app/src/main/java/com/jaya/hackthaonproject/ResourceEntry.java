@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.*;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +29,7 @@ import java.net.URLEncoder;
 
 public class ResourceEntry extends AppCompatActivity {
     String result;
-    ContactAdapterresourceuser ca;
+    ResourceEntryResAdapter ca;
     ListView listView;
     String loc_id;
     TextView t;
@@ -41,7 +40,7 @@ public class ResourceEntry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource_entry);
-        ca = new ContactAdapterresourceuser(this, R.layout.individual_resource_entry);
+        ca = new ResourceEntryResAdapter(this, R.layout.resource_entry_row);
         listView = (ListView) findViewById(R.id.resource_entry);
         listView.setAdapter(ca);
         loc_id=LoginActivity.loc_id;
@@ -160,7 +159,7 @@ public class ResourceEntry extends AppCompatActivity {
                     Resource_Type=jo.getString("Resource_Type");
                     resource_id = jo.getString("resource_id");
 
-                    ContactsShowUserResources c = new ContactsShowUserResources( Resource_Type, resource_id);
+                    ResourceEntryRes c = new ResourceEntryRes( Resource_Type, resource_id);
                     ca.add(c);
                     count++;
 

@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactAdapterDemand extends ArrayAdapter {
+public class ViewDemandsResAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapterDemand(Context context, int resource) {
+    public ViewDemandsResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts_demand object) {
+    public void add(ViewDemandsRes object) {
         super.add(object);
         list.add(object);
     }
@@ -45,7 +43,7 @@ public class ContactAdapterDemand extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.activity_layout_individual_admin,parent,false);
+            row=layoutInflater.inflate(R.layout.view_demands_row,parent,false);
             ch=new ContactHolders();
             ch.resource_type=(TextView)row.findViewById(R.id.resource_type);
             ch.no_of_resources=(TextView)row.findViewById(R.id.no_of_resources);
@@ -62,7 +60,7 @@ public class ContactAdapterDemand extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_demand contacts=(Contacts_demand)this.getItem(position);
+        ViewDemandsRes contacts=(ViewDemandsRes)this.getItem(position);
         ch.demand_id.setText(contacts.getDemand_id());
         ch.resource_type.setText(contacts.getResource_type());
         ch.no_of_resources.setText(contacts.getNo_of_resources());

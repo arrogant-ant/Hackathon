@@ -15,12 +15,12 @@ import java.util.List;
  * Created by shubham on 3/25/2017.
  */
 
-public class ContactAdapterresourceuser extends ArrayAdapter {
+public class ResourceEntryResAdapter extends ArrayAdapter {
     List l=new ArrayList();
-    public ContactAdapterresourceuser(Context context, int resource) {
+    public ResourceEntryResAdapter(Context context, int resource) {
         super(context, resource);
     }
-    public void add(ContactsShowUserResources c)
+    public void add(ResourceEntryRes c)
     {
         super.add(c);
         l.add(c);
@@ -46,7 +46,7 @@ public class ContactAdapterresourceuser extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater li=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row= li.inflate(R.layout.individual_resource_entry,parent,false);
+            row= li.inflate(R.layout.resource_entry_row,parent,false);
             ch=new Contacthoder();
             ch.t1=(TextView)row.findViewById(R.id.resource_id_entry);
             ch.t2=(TextView)row.findViewById(R.id.resource_type_entry);
@@ -61,7 +61,7 @@ public class ContactAdapterresourceuser extends ArrayAdapter {
         {
             ch=(Contacthoder)row.getTag();
         }
-        ContactsShowUserResources cus=(ContactsShowUserResources) this.getItem(position);
+        ResourceEntryRes cus=(ResourceEntryRes) this.getItem(position);
         ch.t1.setText(cus.getResource_id());
         ch.t2.setText(cus.getResource_type());
 

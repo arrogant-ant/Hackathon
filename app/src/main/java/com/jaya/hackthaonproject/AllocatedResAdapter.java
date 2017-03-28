@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactsAdapteravailabe extends ArrayAdapter {
+public class AllocatedResAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactsAdapteravailabe(Context context, int resource) {
+    public AllocatedResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(contacts_available object) {
+    public void add(AllocatedRes object) {
         super.add(object);
         list.add(object);
     }
@@ -45,10 +43,10 @@ public class ContactsAdapteravailabe extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.layout_individula_available,parent,false);
+            row=layoutInflater.inflate(R.layout.allocated_row,parent,false);
             ch=new ContactHolders();
-            ch.Resource_Type=(TextView)row.findViewById(R.id.resource_type_available);
-            ch.No_Of_Resources=(TextView)row.findViewById(R.id.no_of_resources_available);
+            ch.Resource_Type=(TextView)row.findViewById(R.id.resource_type_allocated);
+            ch.No_Of_Resources=(TextView)row.findViewById(R.id.no_of_resources_allocated);
 
             row.setTag(ch);
         }
@@ -57,7 +55,7 @@ public class ContactsAdapteravailabe extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        contacts_available contacts=(contacts_available) this.getItem(position);
+        AllocatedRes contacts=(AllocatedRes) this.getItem(position);
         ch.Resource_Type.setText(contacts.getResource_Type());
         ch.No_Of_Resources.setText(contacts.getNo_Of_Resources());
         return row;

@@ -4,7 +4,7 @@ package com.jaya.hackthaonproject;
  * Created by shubham on 3/19/2017.
  */
 
-public class Contacts_timeline{
+public class TimelineRes {
 
 
 
@@ -63,7 +63,7 @@ public class Contacts_timeline{
         private String Status;
     private String Modified_by;
     private String Modified_on;
-        public Contacts_timeline(String Demand_id,String Resource_type,String No_of_resources,String Status,String Modified_by,String Modified_on)
+        public TimelineRes(String Demand_id, String Resource_type, String No_of_resources, String Status, String Modified_by, String Modified_on)
         {
             this.Demand_id=Demand_id;
             this.Resource_type=Resource_type;

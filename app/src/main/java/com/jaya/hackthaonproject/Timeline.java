@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Timeline extends AppCompatActivity {
-    ContactAdapterTimeline ca;
+    TimelineResAdapter ca;
     ListView listView;
     String result;
     @Override
@@ -29,7 +29,7 @@ public class Timeline extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Timeline Report");
-        ca = new ContactAdapterTimeline(this, R.layout.layout_individual_timeline_report);
+        ca = new TimelineResAdapter(this, R.layout.timeline_row);
         listView = (ListView) findViewById(R.id.list_view_timeline);
         listView.setAdapter(ca);
         Timelineview show = new Timelineview(this);
@@ -130,7 +130,7 @@ public class Timeline extends AppCompatActivity {
                     Modified_on = jo.getString("Modified_on");
 
 
-                    Contacts_timeline c = new Contacts_timeline(Demand_id, Resource_type, No_of_resources, Status,Modified_by,Modified_on);
+                    TimelineRes c = new TimelineRes(Demand_id, Resource_type, No_of_resources, Status,Modified_by,Modified_on);
                     ca.add(c);
                     count++;
 
