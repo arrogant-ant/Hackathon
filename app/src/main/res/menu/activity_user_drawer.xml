@@ -16,6 +16,10 @@
             android:id="@+id/nav_granted_demands"
             android:icon="@drawable/ic_granted_demands"
             android:title="Granted Demands"/>
+        <item
+            android:id="@+id/nav_resource_entry"
+            android:icon="@drawable/ic_guidelines_user"
+            android:title="Resource Entry"/>
 
         <item
             android:id="@+id/nav_guidelines_user"

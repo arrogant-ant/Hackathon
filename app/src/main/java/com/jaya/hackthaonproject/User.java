@@ -152,6 +152,11 @@ public class User extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         }
+        else if(id == R.id.nav_resource_entry)
+        {
+            Intent i=new Intent(this,ResourceEntry.class);
+            startActivity(i);
+        }
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_user);
             drawer.closeDrawer(GravityCompat.START);
             return true;

@@ -192,7 +192,7 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
         } else if (id == R.id.nav_guidelines) {
 
         }else if (id == R.id.nav_allocate_demands_manually) {
-            Intent i=new Intent(this,Manua.class);
+             Intent i=new Intent(this,Manua.class);
             startActivity(i);
         }
 
@@ -487,8 +487,8 @@ public class Admin extends AppCompatActivity implements NavigationView.OnNavigat
                 JSONObject jp = new JSONObject(accept_data);
                 Boolean b=jp.getBoolean("final");
 
-                  Intent i=new Intent(ctx,Admin.class);
-                    startActivity(i);
+                Intent i=new Intent(ctx,Admin.class);
+                startActivity(i);
 
 
 

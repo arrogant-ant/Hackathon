@@ -95,12 +95,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
-        <activity android:name=".FreeResource">
+        <activity android:name=".Free">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
-        <activity android:name=".Manua"></activity>
+        <activity android:name=".Manua" />
+        <activity android:name=".Ramu" />
+        <activity android:name=".NotRamu"></activity>
+        <service android:name=".FCMService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FCMInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".ResourceEntry" />
+
     </application>
 
 </manifest>

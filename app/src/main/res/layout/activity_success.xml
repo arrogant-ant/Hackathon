@@ -11,7 +11,7 @@
     tools:context="com.jaya.hackthaonproject.success">
 
     <TextView
-        android:text="Successesfully Added SiteManager"
+        android:text="Successes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
