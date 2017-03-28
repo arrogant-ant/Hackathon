@@ -16,16 +16,16 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 
-public class MainActivity extends AppCompatActivity
+public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     CarouselView carouselView;
 
-    int[] sampleImages = {R.drawable.first, R.drawable.time, R.drawable.boost, R.drawable.userfriendlys, R.drawable.easiest};
+    int[] sampleImages = {R.drawable.home_one, R.drawable.home_two, R.drawable.home_three, R.drawable.home_four, R.drawable.home_five};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,23 +91,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_gallery) {
+        if (id == R.id.features) {
             Intent i = new Intent(this, Features.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.how_to_use) {
+
+
+        } else if (id == R.id.about_us) {
             Intent i=new Intent(this,About.class);
             startActivity(i);
-        } else if (id == R.id.nav_manage) {
-            Intent i=new Intent(this,Multiple.class);
-            startActivity(i);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.call) {
             Intent i = new Intent(this,Call.class);
             startActivity(i);
 
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.mail) {
          Intent i=new Intent(Intent.ACTION_SEND);
          i.setData(Uri.parse("mailto:"));
          String to="shubhamjpc@gmail.com";

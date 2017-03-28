@@ -16,7 +16,7 @@ public class About extends AppCompatActivity {
 
     CarouselView carouselView_about;
 
-    int[] sampleImages = {R.drawable.pragya, R.drawable.shubham, R.drawable.jaya, R.drawable.shiv,R.drawable.pragya};
+    int[] sampleImages = {R.drawable.sud, R.drawable.shubham, R.drawable.jaya,R.drawable.pinky,R.drawable.pragya,R.drawable.shiv};
 
 
     protected void onCreate(Bundle savedInstanceState) {

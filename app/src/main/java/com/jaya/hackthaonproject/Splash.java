@@ -14,11 +14,11 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                Intent i = new Intent(getApplicationContext(),Home.class);
                 startActivity(i);
                 finish();
             }
-        },2000);
+        },1500);
 
 
     }

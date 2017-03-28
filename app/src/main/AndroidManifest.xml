@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".Call" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
@@ -69,7 +69,6 @@
                 android:value="com.jaya.hackthaonproject.Admin" />
         </activity>
         <activity android:name=".View" />
-        <activity android:name=".Multiple" />
         <activity android:name=".ViewDemands">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -59,6 +59,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String result;
     EditText et;
     EditText et2;
+    TextView error_tx;
+    boolean my_show;
+    int my_shortAnimTime;
     static String emp_id, loc_id;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -88,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         TextView tt=(TextView)findViewById(R.id.text_head);
+        error_tx= (TextView) findViewById(R.id.error_login);
         Typeface myCustomFont=Typeface.createFromAsset(getAssets(),"fonts/Capture_it.ttf");
         tt.setTypeface(myCustomFont);
         // Set up the login form.
@@ -239,12 +243,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
+        my_show=show;
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
+            my_shortAnimTime=shortAnimTime;
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
@@ -270,6 +275,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    ///to remove progress barr
+   /* private void removeProgress(final boolean show) {
+        my_show=show;
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            my_shortAnimTime=shortAnimTime;
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }*/
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -445,8 +483,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
             else
             {
+                Toast.makeText(LoginActivity.this,"login failed",Toast.LENGTH_LONG);
+                mLoginFormView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                mLoginFormView.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
 
-                Toast.makeText(ctx,"login failed",Toast.LENGTH_SHORT).show();
+                mProgressView.setVisibility(my_show ? View.GONE : View.VISIBLE);
+                mProgressView.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
+                error_tx.setText("Invalid Credentials!! TRY AGAIN");
 
             }
 

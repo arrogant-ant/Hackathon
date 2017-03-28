@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jaya.hackthaonproject.MainActivity">
+    tools:context="com.jaya.hackthaonproject.Home">
     <com.synnapps.carouselview.CarouselView
         android:layout_marginTop="50dp"
         android:id="@+id/carouselView"
@@ -46,7 +46,7 @@
         android:layout_margin="10dp"
         android:lineSpacingExtra="5dp"
         android:textColor="#000000"
-        android:text="Wangle is a project developed by ministry of steel and is useful in allocating the resources dynamically .It saves the time of the Project Cordinator and Site Manager.It Can Track Resource.It is an efficient way of allocating the resources.It gives a userfriendly enviroment to work.It is a hassle free Application"
+        android:text="Wangle is a project developed for Ministry of Steel and is useful in realtime and efficient allocation of resources. It saves the time of the Project Cordinator and Site Manager. It Can Track Resource.It provides a userfriendly enviroment to work.It is a HASSEL FREE Application"
         android:textAlignment="center"
         android:fontFamily="sans-serif"
 
