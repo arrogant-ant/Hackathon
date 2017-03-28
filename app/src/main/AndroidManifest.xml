@@ -44,16 +44,15 @@
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme.NoActionBars" />
-        <activity android:name=".success">
+        <activity android:name=".SMRegSuccess">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.Register" />
         </activity>
-        <activity android:name=".failure" />
+        <activity android:name=".SMRegFailure" />
         <activity
             android:name=".ShowSM"
             android:theme="@style/AppTheme.NoActionBars" />
-        <activity android:name=".Demand" />
         <activity
             android:name=".About"
             android:theme="@style/AppTheme.NoActionBars" />
@@ -68,7 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.PC" />
         </activity>
-        <activity android:name=".View" />
         <activity android:name=".ViewDemands">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -77,7 +75,7 @@
         <activity android:name=".Allocated">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jaya.hackthaonproject.Register" />
+                android:value="com.jaya.hackthaonproject.PC" />
         </activity>
         <activity android:name=".Available">
             <meta-data

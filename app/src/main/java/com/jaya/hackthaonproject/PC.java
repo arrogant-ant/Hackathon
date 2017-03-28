@@ -38,7 +38,7 @@ import java.net.URLEncoder;
 public class PC extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String result;
     TextView tx;
-    ContactAdapterFulfill ca;
+    AdminFulfillAdapter ca;
     ListView listView;
     String delete;
     String accept_data;
@@ -61,7 +61,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_admin);
         navigationView.setNavigationItemSelectedListener(this);
 ///////////////////////////////////////////////////////////////
-        ca = new ContactAdapterFulfill(this, R.layout.layout_individual_fulfil);
+        ca = new AdminFulfillAdapter(this, R.layout.fulfill_row);
         listView = (ListView) findViewById(R.id.listitems_fulfill);
         listView.setAdapter(ca);
         ShowviewssData show = new ShowviewssData(this);
@@ -290,7 +290,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
                     No_Of_Resources = jo.getString("No_Of_Resources");
                     Demand_Id=jo.getString("Demand_Id");
                     Date_Of_Demand=jo.getString("Date_Of_Demand");
-                    Contacts_demand_fulfill c = new Contacts_demand_fulfill( Resource_Type, No_Of_Resources,Demand_Id,Date_Of_Demand);
+                    AdminFulfillRes c = new AdminFulfillRes( Resource_Type, No_Of_Resources,Demand_Id,Date_Of_Demand);
                     ca.add(c);
                     count++;
 

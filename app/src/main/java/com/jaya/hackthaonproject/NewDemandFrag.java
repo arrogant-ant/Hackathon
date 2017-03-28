@@ -11,13 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Add extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class NewDemandFrag extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     Button btn;
     Spinner type_spinner ;
@@ -26,7 +25,7 @@ public class Add extends Fragment implements AdapterView.OnItemSelectedListener,
     EditText no_of_resources, completion_time;
     String type,no,time;
     Communicator comm;
-    public Add() {
+    public NewDemandFrag() {
         // Required empty public constructor
     }
 
@@ -36,15 +35,15 @@ public class Add extends Fragment implements AdapterView.OnItemSelectedListener,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_new_demand, container, false);
         no_of_resources= (EditText)v.findViewById(R.id.no_of_resources);
         completion_time= (EditText)v.findViewById(R.id.completion_time);
         btn= (Button) v.findViewById(R.id.more);
         type_spinner= (Spinner)v.findViewById(R.id.typeSpinner);
         type_adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,resource_type);
         type_spinner.setAdapter(type_adapter);
-        type_spinner.setOnItemSelectedListener(Add.this);
-        btn.setOnClickListener(Add.this);
+        type_spinner.setOnItemSelectedListener(NewDemandFrag.this);
+        btn.setOnClickListener(NewDemandFrag.this);
 
         return v;
     }

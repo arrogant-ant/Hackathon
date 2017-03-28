@@ -5,7 +5,7 @@
     android:layout_marginBottom="5dp"
     android:orientation="vertical"
     android:paddingTop="5dp"
-    tools:context="com.jaya.hackthaonproject.Add">
+    tools:context="com.jaya.hackthaonproject.NewDemandFrag">
 
     <LinearLayout
         android:layout_width="match_parent"
