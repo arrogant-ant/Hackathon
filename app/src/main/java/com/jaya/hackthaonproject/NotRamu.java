@@ -18,7 +18,6 @@ TextView t1,t2;
         String res_type=getIntent().getExtras().getString("resource_type");
         t1=(TextView)findViewById(R.id.textViews1);
         t2=(TextView)findViewById(R.id.textViews2);
-         b=(Button)findViewById(R.id.success_button_sec);
         t1.setText(res_no);
         t2.setText(res_type);
       /*  b.setOnClickListener(new View.OnClickListener() {

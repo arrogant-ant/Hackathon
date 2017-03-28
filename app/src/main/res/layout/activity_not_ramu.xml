@@ -4,73 +4,90 @@
     android:id="@+id/activity_not_ramu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
     android:orientation="vertical"
-    tools:context="com.jaya.hackthaonproject.NotRamu">
-
-    <TextView
-        android:text="Not Enough Resource"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:id="@+id/textView6"
-        android:textColor="#000000"
-        android:textSize="25dp"/>
+    tools:context="com.jaya.hackthaonproject.NotRamu"
+    android:weightSum="2">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="vertical"
+        android:weightSum="3">
         <TextView
             android:text="Not Enough Resource"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:paddingTop="20dp"
-            android:paddingLeft="40dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
-            android:id="@+id/textViews1" />
-        <TextView
-            android:text="More Required"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:paddingTop="20dp"
+            android:textSize="20sp"
             android:textColor="#000000"
-            android:textSize="20dp"
-            android:id="@+id/textViews2" />
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:text="Not Enough Resource"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:id="@+id/textViews1"
+                android:paddingTop="10dp"
+                android:layout_weight="0.6"/>
 
+            <TextView
+                android:text="More Required"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:id="@+id/textViews2"
+                android:layout_weight="0.6"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
 
+            <TextView
+                android:text="More Required"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="15dp"
+                android:paddingTop="10dp"
+                android:layout_weight="0.8"
+                android:gravity="left"/>
+        </LinearLayout>
+
+        <TextView
+            android:text="If You Want To Preempt Resource Click
+             On The Resource and proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:paddingTop="10dp"
+            android:textSize="15dp"
+            android:id="@+id/textView7"
+            android:layout_weight="1"
+            />
     </LinearLayout>
-    <TextView
-        android:text="If You Want To Preempt Resource Click Proceed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-       android:layout_marginTop="90dp"
-        android:layout_gravity="center"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="15dp"
-        android:id="@+id/textView7"
-        />
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Proceed"
-        android:textColor="#ffffff"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="10dp"
-        android:id="@+id/success_button_sec"/>
+        android:layout_height="0dp"
+        android:layout_weight="1.4">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list"></ListView>
+    </LinearLayout>
 </LinearLayout>
