@@ -11,15 +11,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Sabita_Sant on 29/03/17.
+ */
 
-public class TrackResAdapter extends ArrayAdapter {
-    List list=new ArrayList();
-    public TrackResAdapter(Context context, int resource) {
+public class TransportResAdapter extends ArrayAdapter<TransportRes> {
+    List<TransportRes> list=new ArrayList();
+    public TransportResAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(TrackRes object) {
+    public void add(TransportRes object) {
         super.add(object);
         list.add(object);
     }
@@ -30,7 +33,7 @@ public class TrackResAdapter extends ArrayAdapter {
     }
 
 
-    public Object getItem(int position) {
+    public TransportRes getItem(int position) {
         return list.get(position);
     }
 
@@ -43,12 +46,12 @@ public class TrackResAdapter extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.track_row,parent,false);
+            row=layoutInflater.inflate(R.layout.transport_row,parent,false);
             ch=new ContactHolders();
-            ch.demand_id =(TextView)row.findViewById(R.id.resource_id_track);
-            ch.des_id =(TextView)row.findViewById(R.id.resource_type_track);
-            ch.no =(TextView)row.findViewById(R.id.location_id_track);
-            ch.res_type =(TextView)row.findViewById(R.id.status_track);
+            ch.demand_id =(TextView)row.findViewById(R.id.demand_id_transport);
+            ch.des_id =(TextView)row.findViewById(R.id.des_id_transport);
+            ch.no =(TextView)row.findViewById(R.id.res_no_transport);
+            ch.res_type =(TextView)row.findViewById(R.id.res_type_transport);
 
             row.setTag(ch);
         }
@@ -57,11 +60,11 @@ public class TrackResAdapter extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        TrackRes contacts=(TrackRes) this.getItem(position);
-        ch.demand_id.setText(contacts.getResource_id());
-        ch.des_id.setText(contacts.getResource_type());
-        ch.no.setText(contacts.getLocation_id());
-        ch.res_type.setText(contacts.getStatus());
+        TransportRes contacts= this.getItem(position);
+        ch.demand_id.setText(contacts.getDemand_id());
+        ch.des_id.setText(contacts.getDes_id());
+        ch.no.setText(contacts.getNo());
+        ch.res_type.setText(contacts.getRes_type());
 
         return row;
     }
@@ -69,10 +72,9 @@ public class TrackResAdapter extends ArrayAdapter {
     {
         TextView demand_id;
         TextView des_id;
-        TextView no;
         TextView res_type;
+        TextView no;
 
 
     }
 }
-

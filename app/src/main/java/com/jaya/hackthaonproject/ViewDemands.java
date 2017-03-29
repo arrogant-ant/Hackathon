@@ -131,7 +131,7 @@ public class ViewDemands extends AppCompatActivity {
                     completion_time = jo.getString("completion_time");
                     priority = jo.getString("priority");
                     Deadline = jo.getString("Deadline");
-                    location_id = jo.getString("location_id");
+                    location_id = jo.getString("no");
                     date = jo.getString("date_of_demand");
                     date_of_demand = date.substring(0, 10);
 

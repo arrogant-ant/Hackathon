@@ -477,7 +477,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             priority=js.getBoolean("is_admin");
             find=js.getString("status");
             emp_id= js.getString("emp_id");
-            loc_id= js.getString("location_id");
+            loc_id= js.getString("no");
 
 
 

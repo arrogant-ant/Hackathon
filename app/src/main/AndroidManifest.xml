@@ -99,7 +99,8 @@
         </activity>
         <activity android:name=".Manual" />
         <activity android:name=".Preempt" />
-        <activity android:name=".NotRamu"></activity>
+        <activity android:name=".NotRamu" />
+
         <service android:name=".FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -112,7 +113,7 @@
         </service>
 
         <activity android:name=".ResourceEntry" />
-
+        <activity android:name=".Transport"></activity>
     </application>
 
 </manifest>
