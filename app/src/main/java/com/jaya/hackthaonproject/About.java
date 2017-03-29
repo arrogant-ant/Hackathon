@@ -42,5 +42,10 @@ public class About extends AppCompatActivity {
         Intent i=new Intent(this,NewDemand.class);
         startActivity(i);
     }
+
+    public void trans(View view) {
+        Intent i=new Intent(this,Transport.class);
+        startActivity(i);
+    }
 }
 

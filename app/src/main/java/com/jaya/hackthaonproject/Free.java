@@ -150,7 +150,7 @@ public class Free extends AppCompatActivity {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
                 resource_Type = jo.getString("Resource_Type");
-                res_Id = jo.getString("Resource_id");
+                res_Id = jo.getString("demand_id");
                 FreeRes c = new FreeRes(res_Id, resource_Type);
                 f.add(c);
                 count++;

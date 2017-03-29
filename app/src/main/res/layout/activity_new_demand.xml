@@ -41,8 +41,8 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.jaya.hackthaonproject.Add"
-        tools:layout="@layout/fragment_add"/>
+        android:name="com.jaya.hackthaonproject.NewDemandFrag"
+        tools:layout="@layout/fragment_new_demand"/>
 
     <TextView
         android:layout_marginTop="10dp"

@@ -18,29 +18,34 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Timeline extends AppCompatActivity {
-    TimelineResAdapter ca;
+public class Transport extends AppCompatActivity {
+   // String result;
     ListView listView;
-    String result;
+    TransportResAdapter ca;
+    String des_id,demand_id, res_type,no;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_track);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Timeline Report");
-        ca = new TimelineResAdapter(this, R.layout.timeline_row);
-        listView = (ListView) findViewById(R.id.list_view_timeline);
+        getSupportActionBar().setTitle("Track Resources");
+
+        ca = new TransportResAdapter(this, R.layout.transport_row);
+        listView = (ListView) findViewById(R.id.list_view_track);
         listView.setAdapter(ca);
-        Timelineview show = new Timelineview(this);
+        TrackResources show = new TrackResources(this);
         show.execute();
+
+
     }
-    class Timelineview extends AsyncTask<String, String, String> {
+
+    class TrackResources extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Timelineview(Context ctx) {
+        TrackResources(Context ctx) {
             this.ctx = ctx;
 
 
@@ -50,7 +55,7 @@ public class Timeline extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/timeline.php";
+            json_url = "http://www.wangle.website/transporter.php";
 
         }
 
@@ -85,25 +90,16 @@ public class Timeline extends AppCompatActivity {
             return null;
         }
 
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-
-        }
 
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            result = s;
-
-
-            parse(ctx);
+            parse(s);
 
 
         }
 
 
-        void parse(Context ctx) {
+        void parse(String result) {
             JSONObject jsonObject;
             JSONArray jsonArray;
 
@@ -112,25 +108,16 @@ public class Timeline extends AppCompatActivity {
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-
-                String Demand_id;
-                String Resource_type;
-                String No_of_resources;
-                String Status;
-                String Modified_by;
-                String Modified_on;
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    Demand_id = jo.getString("Demand_id");
-                    Resource_type = jo.getString("des_id");
-                    No_of_resources = jo.getString("No_of_resources");
-                    Status = jo.getString("res_type");
-                    Modified_by = jo.getString("Modified_by");
-                    Modified_on = jo.getString("Modified_on");
+                    demand_id = jo.getString("demand_id");
+                    des_id = jo.getString("des_id");
+                    no = jo.getString("no");
+                    res_type = jo.getString("res_type");
 
 
-                    TimelineRes c = new TimelineRes(Demand_id, Resource_type, No_of_resources, Status,Modified_by,Modified_on);
+                    TransportRes c = new TransportRes(demand_id, res_type, no, des_id);
                     ca.add(c);
                     count++;
 
@@ -139,4 +126,5 @@ public class Timeline extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }}
+    }
+}

@@ -103,7 +103,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         String location_id;
         JSONObject js =new JSONObject(s);
         demand_id= js.getString("demand_id");
-        location_id= js.getString("location_id");
+        location_id= js.getString("no");
         Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id,Toast.LENGTH_SHORT).show();
         add.execute(priority,deadline,demand_id,location_id);
     }
@@ -259,7 +259,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                             "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8") +
                             "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority, "UTF-8") +
                             "&" + URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(demand_id, "UTF-8") +
-                            "&" + URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
+                            "&" + URLEncoder.encode("no", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
                             "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8");
                     bufferedWriter.write(data);
                     bufferedWriter.flush();

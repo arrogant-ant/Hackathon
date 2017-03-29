@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactAdapterFulfill extends ArrayAdapter {
+public class AdminFulfillAdapter extends ArrayAdapter {
     List list=new ArrayList();
-    public ContactAdapterFulfill(Context context, int resource) {
+    public AdminFulfillAdapter(Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(Contacts_demand_fulfill object) {
+    public void add(AdminFulfillRes object) {
         super.add(object);
         list.add(object);
     }
@@ -45,7 +43,7 @@ public class ContactAdapterFulfill extends ArrayAdapter {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.layout_individual_fulfil,parent,false);
+            row=layoutInflater.inflate(R.layout.fulfill_row,parent,false);
             ch=new ContactHolders();
             ch.Resource_Type=(TextView)row.findViewById(R.id.Resource_Type_fulfill);
             ch.No_Of_Resources=(TextView)row.findViewById(R.id.No_Of_Resources_fulfill);
@@ -59,7 +57,7 @@ public class ContactAdapterFulfill extends ArrayAdapter {
             ch=(ContactHolders)row.getTag();
 
         }
-        Contacts_demand_fulfill contacts=(Contacts_demand_fulfill) this.getItem(position);
+        AdminFulfillRes contacts=(AdminFulfillRes) this.getItem(position);
         ch.Resource_Type.setText(contacts.getResource_Type());
         ch.No_Of_Resources.setText(contacts.getNo_Of_Resources());
         ch.Demand_Id.setText(contacts.getDemand_Id());

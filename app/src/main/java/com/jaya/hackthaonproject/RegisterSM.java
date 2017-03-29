@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -169,13 +167,13 @@ public class RegisterSM extends AppCompatActivity {
             inserted = jp.getString("is_inserted");
 
             if(inserted.equals("true")) {
-                Intent i = new Intent(ctx, success.class);
+                Intent i = new Intent(ctx, SMRegSuccess.class);
                 ctx.startActivity(i);
 
 
             } else
             {
-                Intent i=new Intent(this,failure.class);
+                Intent i=new Intent(this,SMRegFailure.class);
                 ctx.startActivity(i);
 
             }

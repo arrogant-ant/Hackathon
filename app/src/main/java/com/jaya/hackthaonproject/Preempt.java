@@ -117,7 +117,7 @@ String accept_data;
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             accept_data=s;
-           Intent i=new Intent(ctx,success.class);
+           Intent i=new Intent(ctx,SMRegSuccess.class);
             startActivity(i);
 
 

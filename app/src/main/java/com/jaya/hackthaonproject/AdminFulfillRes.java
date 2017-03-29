@@ -1,7 +1,7 @@
 package com.jaya.hackthaonproject;
 
 
-public class Contacts_demand_fulfill {
+public class AdminFulfillRes {
 
 
    private String Resource_Type;
@@ -9,7 +9,7 @@ public class Contacts_demand_fulfill {
     private String Demand_Id;
      private String Date_Of_Demand;
 
-    public Contacts_demand_fulfill(String Resource_Type, String No_Of_Resources, String Demand_Id, String Date_Of_Demand) {
+    public AdminFulfillRes(String Resource_Type, String No_Of_Resources, String Demand_Id, String Date_Of_Demand) {
         this.Resource_Type = Resource_Type;
         this.No_Of_Resources = No_Of_Resources;
         this.Demand_Id = Demand_Id;
