@@ -288,7 +288,7 @@ public class Manual extends AppCompatActivity {
                     demand_id = jo.getString("demand_id");
                      String[] datas=demand_id.split(Pattern.quote("$"));
                 String resource=datas[0];
-                String result_needed=datas[1];
+              /*  String result_needed=datas[1];
 
                 if(result_needed.equals("1"))
                 {
@@ -299,12 +299,12 @@ public class Manual extends AppCompatActivity {
                     startActivity(i);
                 }
                  else
-                {
+                {*/
                   Intent i=new Intent(ctx,NotRamu.class);
                     i.putExtra("resource_no",resource);
                     i.putExtra("resource_type",resource_type_individual);
                     startActivity(i);
-                }
+                //}
 
 
 

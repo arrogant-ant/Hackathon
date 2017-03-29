@@ -34,7 +34,7 @@ public class Allocated extends AppCompatActivity {
         ca = new AllocatedResAdapter(this, R.layout.allocated_row);
         listView = (ListView) findViewById(R.id.list_view_alocated);
         listView.setAdapter(ca);
-      ShowviewssDatas show = new ShowviewssDatas(this);
+        ShowviewssDatas show = new ShowviewssDatas(this);
         show.execute();
     }
     class ShowviewssDatas extends AsyncTask<String, String, String> {
