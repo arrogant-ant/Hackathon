@@ -1,12 +1,15 @@
 package com.jaya.hackthaonproject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,10 +28,12 @@ public class Transport extends AppCompatActivity {
     ListView listView;
     TransportResAdapter ca;
     String des_id,demand_id, res_type,no;
+    TextView type_tx, id_tx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track);
+        setContentView(R.layout.activity_transport);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Track Resources");
@@ -39,7 +44,14 @@ public class Transport extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+                String type,dem_id;
+                type_tx= (TextView) view.findViewById(R.id.res_type_transport);
+                id_tx= (TextView) view.findViewById(R.id.demand_id_transport);
+                dem_id= id_tx.getText().toString();
+                type= type_tx.getText().toString();
+                transport(dem_id,type);
+
+
             }
         });
         TrackResources show = new TrackResources(this);
@@ -47,6 +59,22 @@ public class Transport extends AppCompatActivity {
 
 
     }
+    void transport(String dem_id, String type){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Transport.this);
+        builder.setTitle("Confirmation").setMessage("Proceed to process Demand ID : "+dem_id);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("Cancel",null);
+
+        AlertDialog dialog= builder.create();
+        dialog.show();
+
+    }
+
 
     class TrackResources extends AsyncTask<String, String, String> {
         String json_string;

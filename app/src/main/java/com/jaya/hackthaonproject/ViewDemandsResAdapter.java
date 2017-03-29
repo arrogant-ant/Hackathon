@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class ViewDemandsResAdapter extends ArrayAdapter {
-    List list=new ArrayList();
+    List<ViewDemandsRes> list=new ArrayList();
     public ViewDemandsResAdapter(Context context, int resource) {
         super(context, resource);
     }

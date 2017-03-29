@@ -89,6 +89,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     public void submit(View view) {
+        Toast.makeText(NewDemand.this,"teesting dude ",Toast.LENGTH_SHORT).show();
         deadline= dealine_et.getText().toString();
         GetID d_ID= new GetID();
         d_ID.execute();
@@ -103,8 +104,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         String location_id;
         JSONObject js =new JSONObject(s);
         demand_id= js.getString("demand_id");
-        location_id= js.getString("no");
-        Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id,Toast.LENGTH_SHORT).show();
+        location_id= js.getString("location_id");
+        Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id+" d= "+deadline,Toast.LENGTH_SHORT).show();
         add.execute(priority,deadline,demand_id,location_id);
     }
 
@@ -175,7 +176,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
-
                 while ((line = bufferedReader.readLine()) != null) {
                     buffer.append(line);
                 }
@@ -235,8 +235,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             url_string="http://www.wangle.website/place_demand.php";
             String priority = params[0];
             String deadline = params[1];
-            String demand_id = params[1];
-            String location_id = params[1];
+            String demand_id = params[2];
+            String location_id = params[3];
 
             try
             {
@@ -259,7 +259,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                             "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8") +
                             "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority, "UTF-8") +
                             "&" + URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(demand_id, "UTF-8") +
-                            "&" + URLEncoder.encode("no", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
+                            "&" + URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
                             "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8");
                     bufferedWriter.write(data);
                     bufferedWriter.flush();

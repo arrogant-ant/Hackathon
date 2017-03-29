@@ -33,15 +33,15 @@ public class ViewDemands extends AppCompatActivity {
         ca = new ViewDemandsResAdapter(this, R.layout.view_demands_row);
         listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
-        Showviewss show = new Showviewss(this);
+        ShowViews show = new ShowViews(this);
         show.execute();
     }
-    class Showviewss extends AsyncTask<String, String, String> {
+    class ShowViews extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
 
-        Showviewss(Context ctx) {
+        ShowViews(Context ctx) {
             this.ctx = ctx;
 
 
@@ -107,21 +107,21 @@ public class ViewDemands extends AppCompatActivity {
         void parse(Context ctx) {
             JSONObject jsonObject;
             JSONArray jsonArray;
+            String demand_id;
+            String resource_type;
+            String no_of_resources;
+            String completion_time;
+            String Deadline;
+            String location_id;
+            String date_of_demand;
+            String priority;
+            String date;
 
 
             try {
                 jsonObject = new JSONObject(result);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
-                String demand_id;
-                String resource_type;
-                String no_of_resources;
-                String completion_time;
-                String Deadline;
-                String location_id;
-                String date_of_demand;
-                String priority;
-                String date;
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
@@ -131,7 +131,7 @@ public class ViewDemands extends AppCompatActivity {
                     completion_time = jo.getString("completion_time");
                     priority = jo.getString("priority");
                     Deadline = jo.getString("Deadline");
-                    location_id = jo.getString("no");
+                    location_id = jo.getString("location_id");
                     date = jo.getString("date_of_demand");
                     date_of_demand = date.substring(0, 10);
 
