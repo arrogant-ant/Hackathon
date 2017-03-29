@@ -32,7 +32,7 @@ public class Track extends AppCompatActivity {
         getSupportActionBar().setTitle("Track Resources");
 
         ca = new TrackResAdapter(this, R.layout.track_row);
-        listView = (ListView) findViewById(R.id.list_view_track);
+        listView = (ListView) findViewById(R.id.list_view_transport);
         listView.setAdapter(ca);
       TracksResources show = new TracksResources(this);
         show.execute();

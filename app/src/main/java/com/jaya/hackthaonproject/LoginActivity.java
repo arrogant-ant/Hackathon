@@ -228,7 +228,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             et2=(EditText)findViewById(R.id.editText2);
             String s1=et.getText().toString();
             String s2=et2.getText().toString();
-             g=new Getjason(this);
+            g=new Getjason(this);
             g.execute(s1,s2);
 
         }
@@ -477,7 +477,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             priority=js.getBoolean("is_admin");
             find=js.getString("status");
             emp_id= js.getString("emp_id");
-            loc_id= js.getString("no");
+            loc_id= js.getString("location_id");
 
 
 
@@ -498,7 +498,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
             else
             {
+                Toast.makeText(LoginActivity.this,"login failed",Toast.LENGTH_LONG);
+               /* mLoginFormView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                mLoginFormView.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
 
+                mProgressView.setVisibility(my_show ? View.GONE : View.VISIBLE);
+                mProgressView.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
+                progress_tx.setVisibility(my_show ? View.GONE : View.VISIBLE);
+                progress_tx.animate().setDuration(my_shortAnimTime).alpha(
+                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        progress_tx.setVisibility(my_show ? View.VISIBLE : View.GONE);
+                    }
+                });
+                //for listner
+               */
                 Intent intent= new Intent(LoginActivity.this,LoginActivity.class);
                 intent.putExtra("error","Invalid Credentials!! TRY AGAIN");
                 finish();

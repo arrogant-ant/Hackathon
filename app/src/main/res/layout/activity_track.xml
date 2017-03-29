@@ -137,7 +137,7 @@
     </LinearLayout>
     <ListView
         android:layout_below="@+id/layout_track_resources"
-        android:id="@+id/list_view_track"
+        android:id="@+id/list_view_transport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></ListView>
 

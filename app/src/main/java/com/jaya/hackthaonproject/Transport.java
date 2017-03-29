@@ -32,7 +32,7 @@ public class Transport extends AppCompatActivity {
         getSupportActionBar().setTitle("Track Resources");
 
         ca = new TransportResAdapter(this, R.layout.transport_row);
-        listView = (ListView) findViewById(R.id.list_view_track);
+        listView = (ListView) findViewById(R.id.list_view_transport);
         listView.setAdapter(ca);
         TrackResources show = new TrackResources(this);
         show.execute();
@@ -111,10 +111,10 @@ public class Transport extends AppCompatActivity {
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    demand_id = jo.getString("demand_id");
-                    des_id = jo.getString("des_id");
-                    no = jo.getString("no");
-                    res_type = jo.getString("res_type");
+                    demand_id = jo.getString("Demand_Id");
+                    des_id = jo.getString("Destination_Id");
+                    no = jo.getString("No_Of_Resources");
+                    res_type = jo.getString("Resource_Type");
 
 
                     TransportRes c = new TransportRes(demand_id, res_type, no, des_id);
