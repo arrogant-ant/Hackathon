@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -34,6 +36,12 @@ public class Transport extends AppCompatActivity {
         ca = new TransportResAdapter(this, R.layout.transport_row);
         listView = (ListView) findViewById(R.id.list_view_transport);
         listView.setAdapter(ca);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+        });
         TrackResources show = new TrackResources(this);
         show.execute();
 
