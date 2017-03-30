@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#00897B"
+        android:weightSum="220"
+        android:layout_marginTop="10dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="5"
+            >
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/resID_res_loc"
+            android:text="Resource ID"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_weight="104"
+
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="1"
+            >
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:id="@+id/srcID_res_loc"
+            android:text="Source ID"
+            android:textColor="#00897B"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:background="#DCDCDC"
+            android:layout_weight="105"
+
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="5"
+            >
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

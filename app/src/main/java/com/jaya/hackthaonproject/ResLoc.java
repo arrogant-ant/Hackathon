@@ -3,7 +3,6 @@ package com.jaya.hackthaonproject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,50 +23,45 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Transport extends AppCompatActivity {
-   // String result;
+public class ResLoc extends AppCompatActivity {
+
+    ResLocResAdapter adapter;
     ListView listView;
-    TransportResAdapter ca;
-    String des_id,demand_id, res_type,no;
-    TextView type_tx, id_tx;
+    TextView src_tx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transport);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        setContentView(R.layout.activity_res_loc);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Transport Resources");
 
-        ca = new TransportResAdapter(this, R.layout.transport_row);
-        listView = (ListView) findViewById(R.id.listview_transport);
-        listView.setAdapter(ca);
+        adapter = new ResLocResAdapter(this, R.layout.res_loc_row);
+        listView = (ListView) findViewById(R.id.listview_res_loc);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String type,dem_id;
-                type_tx= (TextView) view.findViewById(R.id.res_type_transport);
-                id_tx= (TextView) view.findViewById(R.id.demand_id_transport);
-                dem_id= id_tx.getText().toString();
-                type= type_tx.getText().toString();
-                transport(dem_id,type);
+                String src;
+                src_tx= (TextView) view.findViewById(R.id.srcID_res_loc);
+                src=src_tx.getText().toString();
+                transport(src);
 
 
             }
         });
-        TrackResources show = new TrackResources(this);
+        GetSource show = new GetSource();
         show.execute();
 
 
     }
-    void transport(String dem_id, String type){
-        AlertDialog.Builder builder = new AlertDialog.Builder(Transport.this);
-        builder.setTitle("Confirmation").setMessage("Proceed to process Demand ID : "+dem_id);
+    void transport(String src){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ResLoc.this);
+        builder.setTitle("Confirmation").setMessage("Move resource from : "+src);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent= new Intent(Transport.this,ResLoc.class);
-                startActivity(intent);
 
             }
         });
@@ -79,22 +73,14 @@ public class Transport extends AppCompatActivity {
     }
 
 
-    class TrackResources extends AsyncTask<String, String, String> {
-        String json_string;
+    class GetSource extends AsyncTask<String, String, String> {
+
         String json_url;
-        Context ctx;
-
-        TrackResources(Context ctx) {
-            this.ctx = ctx;
-
-
-        }
-
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/transporter.php";
+            json_url = "http://www.wangle.website/res_loc.php";
 
         }
 
@@ -141,6 +127,7 @@ public class Transport extends AppCompatActivity {
         void parse(String result) {
             JSONObject jsonObject;
             JSONArray jsonArray;
+            String res_id,src_id;
 
 
             try {
@@ -150,14 +137,13 @@ public class Transport extends AppCompatActivity {
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    demand_id = jo.getString("Demand_Id");
-                    des_id = jo.getString("Destination_Id");
-                    no = jo.getString("No_Of_Resources");
-                    res_type = jo.getString("Resource_Type");
+                    src_id = jo.getString("src_id");
+                    res_id = jo.getString("res_id");
 
 
-                    TransportRes c = new TransportRes(demand_id, res_type, no, des_id);
-                    ca.add(c);
+
+                    ResLocRes c = new ResLocRes(res_id,src_id);
+                    adapter.add(c);
                     count++;
 
                 }

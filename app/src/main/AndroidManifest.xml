@@ -47,7 +47,7 @@
         <activity android:name=".SMRegSuccess">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jaya.hackthaonproject.Register" />
+                android:value="com.jaya.hackthaonproject.PC" />
         </activity>
         <activity android:name=".SMRegFailure" />
         <activity
@@ -113,7 +113,8 @@
         </service>
 
         <activity android:name=".ResourceEntry" />
-        <activity android:name=".Transport"></activity>
+        <activity android:name=".Transport" />
+        <activity android:name=".ResLoc"></activity>
     </application>
 
 </manifest>
