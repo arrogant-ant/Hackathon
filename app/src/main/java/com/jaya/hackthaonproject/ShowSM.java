@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +33,15 @@ public class ShowSM extends AppCompatActivity {
         ca=new ShowSMResAdapter(this,R.layout.individual_layout);
         listView=(ListView)findViewById(R.id.listitem1);
         listView.setAdapter(ca);
-        Showviews show =new Showviews(this);
-        show.execute();
+
+
+
+
+        ////////////////////////
+        /*Showviews show =new Showviews(this);
+        show.execute();*/
     }
-    class Showviews extends AsyncTask<String, String, String> {
+    /*class Showviews extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
@@ -100,7 +107,7 @@ public class ShowSM extends AppCompatActivity {
          /*  Intent i=new Intent(ctx,result.class);
             i.putExtra("result",result);
             startActivity(i);*/
-
+/*
 
         }
     }
@@ -135,5 +142,5 @@ public class ShowSM extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+*/
 }

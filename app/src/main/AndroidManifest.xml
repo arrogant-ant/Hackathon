@@ -113,8 +113,10 @@
         </service>
 
         <activity android:name=".ResourceEntry" />
-        <activity android:name=".Transport" />
-        <activity android:name=".ResLoc"></activity>
+        <activity android:name=".Transport"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ResLoc" />
+        <activity android:name=".Transporter"></activity>
     </application>
 
 </manifest>

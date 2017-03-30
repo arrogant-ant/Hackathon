@@ -473,28 +473,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             JSONObject js=new JSONObject(result);
 
             String find;
-            Boolean priority;
-            priority=js.getBoolean("is_admin");
+
+
             find=js.getString("status");
             emp_id= js.getString("emp_id");
             loc_id= js.getString("location_id");
 
 
 
-            if(find.equals("successful"))
+            if(find.equals("success"))
             {
                 NewDemand.setEmpID(emp_id);
-                if(priority==true)
+
+                if(emp_id.contains("@ADMIN"))
                 {
                     Intent i=new Intent(ctx,PC.class);
                     ctx.startActivity(i);
 
                 }
-                else {
+                else if(emp_id.contains("@SM")){
                     Intent ip=new Intent(ctx,SM.class);
                     ctx.startActivity(ip);
                 }
-
+                else
+                {
+                    Intent ip=new Intent(ctx,Transporter.class);
+                    ctx.startActivity(ip);
+                }
             }
             else
             {
