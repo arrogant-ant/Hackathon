@@ -12,6 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +32,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Free extends AppCompatActivity {
     ListView listView;
@@ -34,7 +41,7 @@ public class Free extends AppCompatActivity {
     FreeResAdapter f;
     String resID, resType;
     TextView id_tx, type_tx;
-
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +65,56 @@ public class Free extends AppCompatActivity {
             }
         });
         location_id = LoginActivity.loc_id;
-        ShowRes showRes = new ShowRes();
-        showRes.execute(location_id);
+
+       // ShowRes showRes = new ShowRes();
+        //showRes.execute(location_id);
+//////////////////////////
+
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                parse(response);
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("loc_id",location_id);
+
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //////////////
+
 
     private void freeConfirmation(final String resID, final String resType) {
         AlertDialog.Builder builder =new AlertDialog.Builder(Free.this);
@@ -69,9 +123,34 @@ public class Free extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                RemoveRes remove= new RemoveRes();
-                remove.execute(location_id,resType,resID);
+               /*RemoveRes remove= new RemoveRes();
+                remove.execute(location_id,resType,resID);*/
+                StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
+                        parset(response);
+
+                    }
+                },new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                    }
+                }){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("loc_id",location_id);
+                        params.put("resource_type",resType);
+                        params.put("resource_id", resID);
+                        return params;
+                    }
+
+                };
+
+                VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
             }
         });
@@ -79,10 +158,41 @@ public class Free extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    void parse(String result)
+    {
+        finish();
+        startActivity(getIntent());
+    }
 
+    void parset(String result) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            String resource_Type;
+            String res_Id;
+
+
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                resource_Type = jo.getString("Resource_Type");
+                res_Id = jo.getString("demand_id");
+                FreeRes c = new FreeRes(res_Id, resource_Type);
+                f.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     //getting data
-    private class ShowRes extends AsyncTask<String, String, String> {
+    /*private class ShowRes extends AsyncTask<String, String, String> {
         StringBuffer buffer = new StringBuffer();
 
         @Override
@@ -130,10 +240,10 @@ public class Free extends AppCompatActivity {
             super.onPostExecute(s);
             parse(s);
         }
-    }
+    }*/
 
     //parsing JSON
-    void parse(String j) {
+    /*void parse(String j) {
         JSONObject jsonObject;
         JSONArray jsonArray;
 
@@ -158,11 +268,11 @@ public class Free extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     //to free res
-    private class RemoveRes extends AsyncTask<String, String, String> {
+   /* private class RemoveRes extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -211,5 +321,5 @@ public class Free extends AppCompatActivity {
             Toast.makeText(Free.this,"activity restarted",Toast.LENGTH_SHORT).show();
 
         }
-    }
+    }*/
 }
