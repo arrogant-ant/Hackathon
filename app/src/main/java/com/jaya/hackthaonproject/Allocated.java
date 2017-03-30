@@ -46,7 +46,7 @@ public class Allocated extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
+                //Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
                 parse(response);
 
             }

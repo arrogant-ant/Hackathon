@@ -5,6 +5,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,8 +26,9 @@ import java.net.URL;
 
 public class Track extends AppCompatActivity {
     String result;
-      ListView listView;
+    ListView listView;
     TrackResAdapter ca;
+    String url="http://www.wangle.website/Track.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +41,29 @@ public class Track extends AppCompatActivity {
         ca = new TrackResAdapter(this, R.layout.track_row);
         listView = (ListView) findViewById(R.id.list_view_track);
         listView.setAdapter(ca);
-      TracksResources show = new TracksResources(this);
-        show.execute();
+        //TracksResources show = new TracksResources(this);
+        //show.execute();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
+                parse(response);
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Track.this,"Error in volley",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
 
     }
 
+    /*
     class TracksResources extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
@@ -138,6 +162,39 @@ public class Track extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+
+    }*/
+    void parse(String result) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            String Resource_id;
+            String Resource_type;
+            String location_id;
+            String Status;
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                Resource_id = jo.getString("demand_id");
+                Resource_type = jo.getString("des_id");
+                location_id = jo.getString("no");
+                Status = jo.getString("res_type");
+
+
+                TrackRes c = new TrackRes(Resource_id, Resource_type, location_id, Status);
+                ca.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

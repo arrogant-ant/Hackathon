@@ -290,39 +290,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    ///to remove progress barr
-   /* private void removeProgress(final boolean ShowSM) {
-        my_show=ShowSM;
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-            my_shortAnimTime=shortAnimTime;
-            mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    ShowSM ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
-                }
-            });
 
-            mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    ShowSM ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply ShowSM
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(ShowSM ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(ShowSM ? View.GONE : View.VISIBLE);
-        }
-    }*/
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -453,10 +421,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             super.onPostExecute(s);
 
             result=s;
-
-         /*  Intent i=new Intent(ctx,result.class);
-            i.putExtra("result",result);
-            startActivity(i);*/
             parse(ctx);
 
 
@@ -504,33 +468,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             else
             {
                 Toast.makeText(LoginActivity.this,"login failed",Toast.LENGTH_LONG);
-               /* mLoginFormView.setVisibility(my_show ? View.VISIBLE : View.GONE);
-                mLoginFormView.animate().setDuration(my_shortAnimTime).alpha(
-                        my_show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
-                    }
-                });
 
-                mProgressView.setVisibility(my_show ? View.GONE : View.VISIBLE);
-                mProgressView.animate().setDuration(my_shortAnimTime).alpha(
-                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mProgressView.setVisibility(my_show ? View.VISIBLE : View.GONE);
-                    }
-                });
-                progress_tx.setVisibility(my_show ? View.GONE : View.VISIBLE);
-                progress_tx.animate().setDuration(my_shortAnimTime).alpha(
-                        my_show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        progress_tx.setVisibility(my_show ? View.VISIBLE : View.GONE);
-                    }
-                });
-                //for listner
-               */
                 Intent intent= new Intent(LoginActivity.this,LoginActivity.class);
                 intent.putExtra("error","Invalid Credentials!! TRY AGAIN");
                 finish();

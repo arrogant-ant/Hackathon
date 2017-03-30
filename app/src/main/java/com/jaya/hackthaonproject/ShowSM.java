@@ -5,8 +5,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +27,7 @@ import java.net.URL;
 
 public class ShowSM extends AppCompatActivity {
     String result;
-
+    String url = "http://www.wangle.website/show_sm_database.php";
     ShowSMResAdapter ca;
     ListView listView;
 
@@ -30,17 +35,32 @@ public class ShowSM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        ca=new ShowSMResAdapter(this,R.layout.individual_layout);
-        listView=(ListView)findViewById(R.id.listitem1);
+        ca = new ShowSMResAdapter(this, R.layout.individual_layout);
+        listView = (ListView) findViewById(R.id.listitem1);
         listView.setAdapter(ca);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
+                parse(response);
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ShowSM.this, "Error in volley", Toast.LENGTH_LONG).show();
 
+            }
+        });
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
 
         ////////////////////////
         /*Showviews show =new Showviews(this);
         show.execute();*/
     }
+
     /*class Showviews extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
@@ -143,4 +163,34 @@ public class ShowSM extends AppCompatActivity {
         }
     }
 */
+    void parse(String result) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            String empid;
+            String password;
+            String emailid;
+            String phone_no;
+
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                empid = jo.getString("empid");
+                password = jo.getString("password");
+                emailid = jo.getString("emailid");
+                phone_no = jo.getString("phone_no");
+                ShowSMRes c = new ShowSMRes(empid, password, emailid, phone_no);
+                ca.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

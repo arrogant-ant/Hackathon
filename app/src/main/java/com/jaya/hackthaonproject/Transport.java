@@ -18,6 +18,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +43,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     TransportResAdapter ca;
     String des_id,demand_id, res_type,no;
     TextView type_tx, id_tx;
+    String url= "http://www.wangle.website/transporter.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,22 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
         });
        // TrackResources show = new TrackResources(this);
         //show.execute();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
+                parse(response);
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Transport.this,"Error in volley",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
 
     }
@@ -182,7 +205,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-    class TrackResources extends AsyncTask<String, String, String> {
+    /*class TrackResources extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
@@ -267,6 +290,34 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }*/
+
+    void parse(String result) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                demand_id = jo.getString("Demand_Id");
+                des_id = jo.getString("Destination_Id");
+                no = jo.getString("No_Of_Resources");
+                res_type = jo.getString("Resource_Type");
+
+
+                TransportRes c = new TransportRes(demand_id, res_type, no, des_id);
+                ca.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

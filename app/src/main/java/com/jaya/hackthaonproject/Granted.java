@@ -5,6 +5,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +28,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Granted extends AppCompatActivity {
@@ -28,6 +37,7 @@ public class Granted extends AppCompatActivity {
 
     ListView listView;
     String location_id;
+    String url = "http://www.wangle.website/GrantedResource.php";
     GrantedResAdapter f;
 
     @Override
@@ -42,13 +52,37 @@ public class Granted extends AppCompatActivity {
         f = new GrantedResAdapter(getApplicationContext(), R.layout.granted_row);
         listView.setAdapter(f);
         location_id = LoginActivity.loc_id;
-        ShowGranted showGranted = new ShowGranted();
-        showGranted.execute(location_id);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(Granted.this," In volley",Toast.LENGTH_LONG).show();
+                parse(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Granted.this, "Error in volley", Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("loc_id", location_id);
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
+        //  ShowGranted showGranted = new ShowGranted();
+        //  showGranted.execute(location_id);
     }
 
 
     //getting data
-    private class ShowGranted extends AsyncTask<String, String, String> {
+ /* private class ShowGranted extends AsyncTask<String, String, String> {
         StringBuffer buffer = new StringBuffer();
 
         @Override
@@ -129,8 +163,39 @@ public class Granted extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    */
+
+    void parse(String j) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
 
 
+        try {
+            jsonObject = new JSONObject(j);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            String Resource_Type;
+            String No_Of_Resources;
+            String Demand_Id;
+            String Date_Of_Demand;
+
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                Resource_Type = jo.getString("Resource_Type");
+                No_Of_Resources = jo.getString("No_Of_Resources");
+                Demand_Id = jo.getString("Demand_Id");
+                Date_Of_Demand = jo.getString("Date_Of_Demand");
+                GrantedRes c = new GrantedRes(Demand_Id, Resource_Type, No_Of_Resources, Date_Of_Demand);
+                f.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 
 

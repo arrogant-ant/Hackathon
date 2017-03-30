@@ -5,6 +5,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +28,8 @@ public class ViewDemands extends AppCompatActivity {
     String result;
     ListView listView;
     ViewDemandsResAdapter ca;
+    String url="http://www.wangle.website/demand.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +41,27 @@ public class ViewDemands extends AppCompatActivity {
         ca = new ViewDemandsResAdapter(this, R.layout.view_demands_row);
         listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);
-        ShowViews show = new ShowViews(this);
-        show.execute();
+        //ShowViews show = new ShowViews(this);
+        //show.execute();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(Allocated.this," In volley",Toast.LENGTH_LONG).show();
+                parse(response);
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ViewDemands.this,"Error in volley",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
     }
-    class ShowViews extends AsyncTask<String, String, String> {
+
+    /*class ShowViews extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
         Context ctx;
@@ -145,4 +170,48 @@ public class ViewDemands extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }}
+
+    }*/
+
+    void parse(String result) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        String demand_id;
+        String resource_type;
+        String no_of_resources;
+        String completion_time;
+        String Deadline;
+        String location_id;
+        String date_of_demand;
+        String priority;
+        String date;
+
+
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                demand_id = jo.getString("demand_id");
+                resource_type = jo.getString("resource_type");
+                no_of_resources = jo.getString("no_of_resources");
+                completion_time = jo.getString("completion_time");
+                priority = jo.getString("priority");
+                Deadline = jo.getString("Deadline");
+                location_id = jo.getString("location_id");
+                date = jo.getString("date_of_demand");
+                date_of_demand = date.substring(0, 10);
+
+
+                ViewDemandsRes c = new ViewDemandsRes(resource_type, no_of_resources, completion_time, priority, Deadline, location_id, date_of_demand, demand_id);
+                ca.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+}
