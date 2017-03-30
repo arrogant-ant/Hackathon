@@ -112,6 +112,7 @@
             </intent-filter>
         </service>
 
+
         <activity android:name=".ResourceEntry" />
         <activity android:name=".Transport"
             android:theme="@style/AppTheme.NoActionBar"/>
