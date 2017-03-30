@@ -59,6 +59,8 @@ TextView t1,t2;
                 String item="";
                 for (String x:al)
                 {
+                    PreemptRes preemptRes =new PreemptRes();
+                    preemptRes.execute(x);
 
                 }
             }
@@ -204,4 +206,61 @@ TextView t1,t2;
             }
         }
     }
+
+
+//Async to preempt
+    class PreemptRes extends AsyncTask<String, String, String> {
+
+    String json_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            json_url = "http://www.wangle.website/ResourcesPreempt.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                String res_id=params[0];
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+                ////////////////////////////////
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("Resource_ID", "UTF-8") + "=" + URLEncoder.encode(res_id, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                ///////////////
+                InputStream inputStream = httpURLConnection.getInputStream();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+
+    }
+
+
 }
