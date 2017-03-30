@@ -59,9 +59,8 @@ TextView t1,t2;
                 String item="";
                 for (String x:al)
                 {
-                    item=item+x;
+
                 }
-                t1.setText(item);
             }
         });
      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

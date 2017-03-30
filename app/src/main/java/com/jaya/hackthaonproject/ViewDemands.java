@@ -20,9 +20,8 @@ import java.net.URL;
 
 public class ViewDemands extends AppCompatActivity {
     String result;
-    ViewDemandsResAdapter ca;
     ListView listView;
-
+    ViewDemandsResAdapter ca;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +29,7 @@ public class ViewDemands extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("View Demands");
+
         ca = new ViewDemandsResAdapter(this, R.layout.view_demands_row);
         listView = (ListView) findViewById(R.id.listitems);
         listView.setAdapter(ca);

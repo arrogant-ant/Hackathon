@@ -42,7 +42,7 @@
             android:name=".Features"
             android:theme="@style/AppTheme.NoActionBars" />
         <activity
-            android:name=".Register"
+            android:name=".RegisterSM"
             android:theme="@style/AppTheme.NoActionBars" />
         <activity android:name=".SMRegSuccess">
             <meta-data
