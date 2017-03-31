@@ -51,35 +51,36 @@ public class Manual extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView t=(TextView)view.findViewById(R.id.no_of_resources);
-                String no_of_resources=t.getText().toString();
-                TextView t1=(TextView)view.findViewById(R.id.resource_type);
-                String resource_type=t1.getText().toString();
-                TextView t2=(TextView)view.findViewById(R.id.demand_id);
-                String demand_id=t2.getText().toString();
-                alert(no_of_resources,resource_type,demand_id);
+                TextView t = (TextView) view.findViewById(R.id.no_of_resources);
+                String no_of_resources = t.getText().toString();
+                TextView t1 = (TextView) view.findViewById(R.id.resource_type);
+                String resource_type = t1.getText().toString();
+                TextView t2 = (TextView) view.findViewById(R.id.demand_id);
+                String demand_id = t2.getText().toString();
+                alert(no_of_resources, resource_type, demand_id);
             }
         });
     }
-    void alert(final String no_of_resources,final String resource_type,final String demand_id)
-    {
+
+    void alert(final String no_of_resources, final String resource_type, final String demand_id) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Manual.this);
-        builder.setTitle(no_of_resources+" Instance of Resource:"+resource_type+"  is Required");
+        builder.setTitle(no_of_resources + " Instance of Resource:" + resource_type + "  is Required");
         builder.setMessage("Click Proceed to check availability of resource");
         builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                 Accept a=new Accept(Manual.this,demand_id,resource_type,no_of_resources);
-                a.execute(resource_type,no_of_resources);
+                Accept a = new Accept(Manual.this, demand_id, resource_type, no_of_resources);
+                a.execute(resource_type, no_of_resources);
             }
         });
 
-        builder.setNeutralButton("cancel",null);
-        AlertDialog alertDialog= builder.create();
+        builder.setNeutralButton("cancel", null);
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
     }
+
     class Showviewss extends AsyncTask<String, String, String> {
         String json_string;
         String json_url;
@@ -314,6 +315,6 @@ public class Manual extends AppCompatActivity {
             }
         }
 
-    }
+}
 
 }
