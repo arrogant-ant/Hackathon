@@ -41,7 +41,8 @@ public class Free extends AppCompatActivity {
     FreeResAdapter f;
     String resID, resType;
     TextView id_tx, type_tx;
-    String url;
+    String url="http://www.wangle.website/list_of_resources_user.php";
+    String removeUrl="http://www.wangle.website/dealocation_user_resources.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class Free extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Toast.makeText(Free.this,"got response",Toast.LENGTH_SHORT).show();
                 parse(response);
 
             }
@@ -87,6 +88,7 @@ public class Free extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("loc_id",location_id);
+                Toast.makeText(Free.this,"outout "+params,Toast.LENGTH_SHORT).show();
 
                 return params;
             }
@@ -96,17 +98,6 @@ public class Free extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -125,11 +116,11 @@ public class Free extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                /*RemoveRes remove= new RemoveRes();
                 remove.execute(location_id,resType,resID);*/
-                StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                StringRequest stringRequest= new StringRequest(Request.Method.POST, removeUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        parset(response);
+                        finish();
+                        startActivity(getIntent());
 
                     }
                 },new Response.ErrorListener() {
@@ -142,6 +133,7 @@ public class Free extends AppCompatActivity {
                     @Override
                     protected Map<String,String> getParams(){
                         Map<String,String> params = new HashMap<String, String>();
+
                         params.put("loc_id",location_id);
                         params.put("resource_type",resType);
                         params.put("resource_id", resID);
@@ -158,13 +150,15 @@ public class Free extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-    void parse(String result)
+    void parset(String result)
     {
         finish();
         startActivity(getIntent());
     }
 
-    void parset(String result) {
+    void parse(String result) {
+        Toast.makeText(Free.this,"parsing response",Toast.LENGTH_SHORT).show();
+
         JSONObject jsonObject;
         JSONArray jsonArray;
 

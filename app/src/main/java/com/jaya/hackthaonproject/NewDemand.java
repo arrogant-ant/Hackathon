@@ -122,16 +122,19 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(NewDemand.this, "Error in volley", Toast.LENGTH_LONG).show();
 
+
             }
         }) {
-            @Override
+            //@Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("emp_id", NewDemand.empID);
+                params.put("emp_id", empID);
+                Toast.makeText(NewDemand.this, "Send volley", Toast.LENGTH_LONG).show();
                 return params;
             }
 
         };
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
 
     }
 
@@ -166,7 +169,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 }
             }) {
 
-                @Override
+              /*  @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Type", NewDemand.type);
@@ -177,8 +180,27 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     params.put("location_id", location_id);
                     params.put("Deadline", deadline);
                     return params;
-                }
+                }*/
 
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+
+                    Toast.makeText(NewDemand.this, "in volley body", Toast.LENGTH_LONG).show();
+                    JSONObject params = new JSONObject();
+                    try {
+                        params.put("Type", NewDemand.type);
+                        params.put("Time", NewDemand.time);
+                        params.put("No", NewDemand.no);
+                        params.put("Priority", priority);
+                        params.put("demand_id", demand_id);
+                        params.put("location_id", location_id);
+                        params.put("Deadline", deadline);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    return params.toString().getBytes();
+                }
             };
         }
     }
