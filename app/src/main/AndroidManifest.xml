@@ -117,7 +117,8 @@
         <activity android:name=".Transport"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ResLoc" />
-        <activity android:name=".Transporter"></activity>
+        <activity android:name=".Transporter"
+            android:theme="@style/AppTheme.NoActionBar"  ></activity>
     </application>
 
 </manifest>

@@ -6,39 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jaya.hackthaonproject.About"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="5">
+
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView_about"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:fillColor="#FFFFFFFF"
+        android:layout_height="0dp"
+        app:fillColor="#DCDCDC"
         app:pageColor="#00000000"
         app:radius="6dp"
         app:slideInterval="2000"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp"
-
+      android:layout_weight="3"
         />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="trans"
-        android:onClick="trans"
-        />
-    <TextView
 
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_weight="2"
+    android:weightSum="7"
+        android:background="#DCDCDC">
+        <TextView
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_marginTop="13dp"
-        android:layout_margin="5dp"
-        android:text="About Publishers"
-        android:textColor="@color/colorAccent"
-        android:textAlignment="center"
-        android:fontFamily="sans-serif"
-        android:elevation="0dp"
-        android:textStyle="italic|bold"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="About Publishers"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="sans-serif"
+            android:elevation="0dp"
+            android:gravity="center"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:id="@+id/th"
+            />
 
 
     <TextView
@@ -52,32 +58,31 @@
         android:elevation="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:id="@+id/t1"
+        android:paddingLeft="10dp"
         />
     <TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:textColor="#000000"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:text="Shubham Choudhary"
-        android:textColor="@color/colorPrimary"
         android:fontFamily="sans-serif"
         android:elevation="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+
+        android:id="@+id/t2"
 
         />
-    <TextView
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:text="Jaya Kumari"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif"
-        android:elevation="0dp" />
-    <TextView
+
+
+        <TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,10 +90,15 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:text="Pragya Bharti"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#000000"
         android:fontFamily="sans-serif"
-        android:elevation="0dp" />
-    <TextView
+        android:elevation="0dp"
+        android:layout_weight="1"
+        android:id="@+id/t4"
+            android:paddingLeft="10dp"
+        />
+
+        <TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,7 +109,25 @@
         android:textColor="#000000"
         android:fontFamily="sans-serif"
         android:elevation="0dp"
-       />
+        android:layout_weight="1"
+        android:id="@+id/t5"
+            android:paddingLeft="10dp"
+        />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Jaya Kumari"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:elevation="0dp"
+            android:layout_weight="1"
+            android:id="@+id/t3"
+            android:paddingLeft="10dp"
+            />
     <TextView
 
         android:layout_width="match_parent"
@@ -108,10 +136,15 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:text="Shivani"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#000000"
         android:fontFamily="sans-serif"
         android:elevation="0dp"
-/>
+        android:layout_weight="1"
+        android:id="@+id/t6"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="10dp"></TextView>
 
+        </LinearLayout>
 
 </LinearLayout>
+
