@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,7 +112,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         StringRequest stringRequest = new StringRequest(Request.Method.POST, demandIDurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(NewDemand.this, " In volley", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(NewDemand.this, " In volley", Toast.LENGTH_LONG).show();
                 try {
                     uploadDemand(response);
                 } catch (JSONException e) {
@@ -122,7 +123,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(NewDemand.this, "Error in volley", Toast.LENGTH_LONG).show();
+                //Toast.makeText(NewDemand.this, "Error in volley", Toast.LENGTH_LONG).show();
 
 
             }
@@ -131,7 +132,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("emp_id", empID);
-                Toast.makeText(NewDemand.this, "Send volley", Toast.LENGTH_LONG).show();
                 return params;
             }
 
@@ -142,11 +142,21 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
     //to upload all demands
     void uploadDemand(String s) throws JSONException {
+        JSONObject jsonObject=new JSONObject(s);
+        JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+        int count = 0;
 
-        JSONObject js = new JSONObject(s);
-        demand_id = js.getString("demand_id");
-        location_id = js.getString("location_id");
-        Toast.makeText(NewDemand.this, "demand " + empID + " " + demand_id + " " + location_id + " d= " + deadline, Toast.LENGTH_SHORT).show();
+        while (count < jsonArray.length()) {
+
+            JSONObject jo = jsonArray.getJSONObject(count);
+            demand_id = jo.getString("demand_id");
+            count++;
+
+        }
+        Toast.makeText(NewDemand.this,s, Toast.LENGTH_LONG).show();
+        location_id= LoginActivity.loc_id;
+      //  location_id = js.getString("location_id");
+      //  Toast.makeText(NewDemand.this, "demand " + empID + " " + demand_id + " " + location_id + " d= " + deadline, Toast.LENGTH_SHORT).show();
         // add= new AddDemand();
         /*for (i = 0; i < demand.size(); i++) {
             Resource r = demand.get(i);
@@ -158,7 +168,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         StringRequest stringRequest = new StringRequest(Request.Method.POST, uploadDemandURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(NewDemand.this, " In volley", Toast.LENGTH_LONG).show();
                 display(response);
 
             }
@@ -173,35 +182,22 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("demand_array", new JSONArray(Arrays.asList(demand)).toString());
+                params.put("demand_json", new Gson().toJson(demand));
+                params.put("Priority", priority);
+                params.put("demand_id", demand_id);
+                params.put("location_id", location_id);
+                params.put("Deadline", deadline);
                 return params;
             }
 
-                /*@Override
-                public byte[] getBody() throws AuthFailureError {
-
-                    Toast.makeText(NewDemand.this, "in volley body", Toast.LENGTH_LONG).show();
-                    JSONObject params = new JSONObject();
-                    try {
-                        params.put("Type", NewDemand.type);
-                        params.put("Time", NewDemand.time);
-                        params.put("No", NewDemand.no);
-                        params.put("Priority", priority);
-                        params.put("demand_id", demand_id);
-                        params.put("location_id", location_id);
-                        params.put("Deadline", deadline);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    return params.toString().getBytes();
-                }*/
         };
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
     }
 
 
 
     void display(String result) {
+        Toast.makeText(NewDemand.this,"receive "+result,Toast.LENGTH_SHORT).show();
         if (result.equals("true")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(NewDemand.this);
             builder.setTitle("Demand Placed");
@@ -225,6 +221,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         } else
             Toast.makeText(NewDemand.this, "demand NOT placed, plz retry", Toast.LENGTH_LONG).show();
+       // Toast.makeText(NewDemand.this, "plz retry", Toast.LENGTH_LONG).show();
     }
 
     public static void setEmpID(String s1) {

@@ -32,14 +32,15 @@ public class ResLoc extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_res_loc);
+        setContentView(R.layout.activity_transport);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Transport Resources");
+        getSupportActionBar().setTitle("Resources Location");
 
-        adapter = new ResLocResAdapter(this, R.layout.res_loc_row);
-        listView = (ListView) findViewById(R.id.listview_res_loc);
+        adapter = new ResLocResAdapter(this, R.layout.transport_row);
+        listView = (ListView) findViewById(R.id.listview_transport);
         listView.setAdapter(adapter);
+        src_tx.setText("Location");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -33,6 +33,7 @@
             android:textColor="#ffffff"
             android:textSize="15dp"
 
+
             />
 
         <LinearLayout
@@ -47,6 +48,7 @@
             android:layout_weight="105"
             android:gravity="center"
             android:text="Destination ID"
+            android:id="@+id/loc_trans"
             android:textColor="#ffffff"
             android:textSize="15dp" />
 
