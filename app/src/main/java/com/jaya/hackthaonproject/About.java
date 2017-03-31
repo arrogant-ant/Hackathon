@@ -2,6 +2,7 @@ package com.jaya.hackthaonproject;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,27 @@ TextView t1,t2,t3,t4,t5,t6,th;
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this).addSubActionView(button1)
                 .addSubActionView(button2).addSubActionView(button3).attachTo(actionButton)
                 .build();
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(About.this,Call.class);
+                startActivity(i);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Intent.ACTION_SEND);
+                i.setData(Uri.parse("mailto:"));
+                String to="shubhamjpc@gmail.com";
+                i.putExtra(Intent.EXTRA_EMAIL,to);
+                i.putExtra(Intent.EXTRA_SUBJECT,"Wangle");
+                i.setType("message/rfc822");
+                Intent.createChooser(i,"send Email");
+                startActivity(i);
+
+            }
+        });
         th=(TextView)findViewById(R.id.th);
         t1=(TextView)findViewById(R.id.t1);
         t2=(TextView)findViewById(R.id.t2);

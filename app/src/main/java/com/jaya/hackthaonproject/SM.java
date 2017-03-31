@@ -14,6 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 //import com.github.clans.fab.FloatingActionMenu;
 //import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
@@ -22,13 +37,17 @@ import android.widget.ImageView;
 public class SM extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   //  FloatingActionMenu materialDesignFAM;
     //com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
-
+    ListView listView;
+    String location_id;
+    String url = "http://www.wangle.website/GrantedResource.php";
+    GrantedResAdapter f;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
+
 
         ImageView im=new ImageView(this);
         im.setImageResource(R.drawable.plus);
@@ -95,7 +114,34 @@ public class SM extends AppCompatActivity implements NavigationView.OnNavigation
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_user);
         navigationView.setNavigationItemSelectedListener(this);
+        listView = (ListView) findViewById(R.id.listview_granted);
+        f = new GrantedResAdapter(getApplicationContext(), R.layout.granted_row);
+        listView.setAdapter(f);
+        location_id = LoginActivity.loc_id;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
+                parse(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("loc_id", location_id);
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
     }
 
 
@@ -170,6 +216,37 @@ public class SM extends AppCompatActivity implements NavigationView.OnNavigation
             return true;
 
 
+
+    }
+    void parse(String j) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+
+
+        try {
+            jsonObject = new JSONObject(j);
+            jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            String Resource_Type;
+            String No_Of_Resources;
+            String Demand_Id;
+            String Date_Of_Demand;
+
+            while (count < jsonArray.length()) {
+
+                JSONObject jo = jsonArray.getJSONObject(count);
+                Resource_Type = jo.getString("Resource_Type");
+                No_Of_Resources = jo.getString("No_Of_Resources");
+                Demand_Id = jo.getString("Demand_Id");
+                Date_Of_Demand = jo.getString("Date_Of_Demand");
+                GrantedRes c = new GrantedRes(Demand_Id, Resource_Type, No_Of_Resources, Date_Of_Demand);
+                f.add(c);
+                count++;
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 }

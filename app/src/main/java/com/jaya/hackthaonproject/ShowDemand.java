@@ -77,7 +77,7 @@ public class ShowDemand extends AppCompatActivity {
 
                OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("no", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8");
+                String data = URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -145,7 +145,7 @@ public class ShowDemand extends AppCompatActivity {
                     No_of_resources = jo.getString("no_of_resources");
                     completion_time = jo.getString("completion_time");
                     priority = jo.getString("priority");
-                    location_id = jo.getString("no");
+                    location_id = jo.getString("location_id");
                     date_of_demand=jo.getString("date_of_demand");
 
 
