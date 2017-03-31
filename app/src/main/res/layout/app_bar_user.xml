@@ -24,7 +24,7 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/activity_user_content_main" />
+    <include layout="@layout/activity_sm_main" />
 <!--    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/material_design_android_floating_action_menu"
         android:layout_width="wrap_content"
