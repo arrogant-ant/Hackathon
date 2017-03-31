@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_demands"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_marginTop="50dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:id="@+id/sm_main">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#ffffff">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="#DCDCDC"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/id_granted"
+                android:text="Demand Id"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="104"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="@color/colorAccent"
+                android:layout_weight="1"
+                >
+            </LinearLayout>
+            <TextView
+
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/date_granted"
+                android:text="Date of Demand"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="105"
+
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/colorAccent"
+            android:weightSum="220"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/type_granted"
+                android:text="Resource Type"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="104"
+
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="1"
+                >
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/no_granted"
+                android:text="No of Resources"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_weight="105"
+                android:textSize="15dp"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:layout_weight="5"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#ffffff">
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_below="@+id/sm_main"
+        android:id="@+id/listview_granted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
+</RelativeLayout>
+
+
+
