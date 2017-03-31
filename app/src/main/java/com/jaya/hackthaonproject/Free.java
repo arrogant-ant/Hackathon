@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -74,7 +75,7 @@ public class Free extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(Free.this,"got response",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Free.this,"got response",Toast.LENGTH_SHORT).show();
                 parse(response);
 
             }
@@ -88,8 +89,6 @@ public class Free extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("loc_id",location_id);
-                Toast.makeText(Free.this,"outout "+params,Toast.LENGTH_SHORT).show();
-
                 return params;
             }
 
@@ -139,6 +138,21 @@ public class Free extends AppCompatActivity {
                         params.put("resource_id", resID);
                         return params;
                     }
+                   /*@Override
+                   public byte[] getBody() throws AuthFailureError {
+
+                       //Toast.makeText(Free.this, "in volley body", Toast.LENGTH_LONG).show();
+                       JSONObject params = new JSONObject();
+                       try {
+                           params.put("loc_id",location_id);
+                           params.put("resource_type",resType);
+                           params.put("resource_id", resID);
+                       } catch (JSONException e) {
+                           e.printStackTrace();
+                       }
+
+                       return params.toString().getBytes();
+                   }*/
 
                 };
 
@@ -149,11 +163,6 @@ public class Free extends AppCompatActivity {
         builder.setNegativeButton("Cancel", null);
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-    void parset(String result)
-    {
-        finish();
-        startActivity(getIntent());
     }
 
     void parse(String result) {
@@ -175,7 +184,7 @@ public class Free extends AppCompatActivity {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
                 resource_Type = jo.getString("Resource_Type");
-                res_Id = jo.getString("demand_id");
+                res_Id = jo.getString("Resource_id");
                 FreeRes c = new FreeRes(res_Id, resource_Type);
                 f.add(c);
                 count++;

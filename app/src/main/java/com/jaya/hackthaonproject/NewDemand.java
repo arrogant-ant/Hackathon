@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +39,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     String demandIDurl, uploadDemandURL;
     String demand_id;
     String location_id;
-    static String  type, no, time;
+    static String type, no, time;
     static int i;
 
     @Override
@@ -146,43 +148,36 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         location_id = js.getString("location_id");
         Toast.makeText(NewDemand.this, "demand " + empID + " " + demand_id + " " + location_id + " d= " + deadline, Toast.LENGTH_SHORT).show();
         // add= new AddDemand();
-        for (i = 0; i < demand.size(); i++) {
+        /*for (i = 0; i < demand.size(); i++) {
             Resource r = demand.get(i);
             NewDemand.type = r.getType();
             NewDemand.no = r.getNo();
             NewDemand.time = r.getTime();
+            */
+        //add.execute(priority,deadline,demand_id,location_id);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, uploadDemandURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(NewDemand.this, " In volley", Toast.LENGTH_LONG).show();
+                display(response);
 
-            //add.execute(priority,deadline,demand_id,location_id);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, uploadDemandURL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Toast.makeText(NewDemand.this, " In volley", Toast.LENGTH_LONG).show();
-                    if(i==demand.size()-1)
-                    display(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(NewDemand.this, "Error in volley", Toast.LENGTH_LONG).show();
 
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(NewDemand.this, "Error in volley", Toast.LENGTH_LONG).show();
+            }
+        }) {
 
-                }
-            }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("demand_array", new JSONArray(Arrays.asList(demand)).toString());
+                return params;
+            }
 
-              /*  @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("Type", NewDemand.type);
-                    params.put("Time", NewDemand.time);
-                    params.put("No", NewDemand.no);
-                    params.put("Priority", priority);
-                    params.put("demand_id", demand_id);
-                    params.put("location_id", location_id);
-                    params.put("Deadline", deadline);
-                    return params;
-                }*/
-
-                @Override
+                /*@Override
                 public byte[] getBody() throws AuthFailureError {
 
                     Toast.makeText(NewDemand.this, "in volley body", Toast.LENGTH_LONG).show();
@@ -200,10 +195,11 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     }
 
                     return params.toString().getBytes();
-                }
-            };
-        }
+                }*/
+        };
     }
+
+
 
     void display(String result) {
         if (result.equals("true")) {
