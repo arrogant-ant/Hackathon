@@ -204,7 +204,7 @@ public class ResourceEntry extends AppCompatActivity {
                 /////////////////
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("res_type", "UTF-8") + "=" + URLEncoder.encode(res_id, "UTF-8")+ "&" + URLEncoder.encode("loc_id", "UTF-8") + "=" + URLEncoder.encode(loc_id, "UTF-8")+ "&" + URLEncoder.encode("emp_id", "UTF-8") + "=" + URLEncoder.encode(emp_id, "UTF-8");
+                String data = URLEncoder.encode("res_id", "UTF-8") + "=" + URLEncoder.encode(res_id, "UTF-8")+ "&" + URLEncoder.encode("loc_id", "UTF-8") + "=" + URLEncoder.encode(loc_id, "UTF-8")+ "&" + URLEncoder.encode("emp_id", "UTF-8") + "=" + URLEncoder.encode(emp_id, "UTF-8");
                 bufferedWriter.write(data);;
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

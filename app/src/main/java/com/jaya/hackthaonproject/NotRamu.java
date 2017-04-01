@@ -1,6 +1,7 @@
 package com.jaya.hackthaonproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,17 +37,22 @@ TextView t1,t2;
     NotRamuResAdapter ca;
     ListView listView;
     Button B;
+    String emp_id;
+    String loc_id;
 
     ArrayList<String> al=new ArrayList<String>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_not_ramu);
-        String res_no=getIntent().getExtras().getString("resource_no");
-        String res_type=getIntent().getExtras().getString("resource_type");
+       final  String res_no=getIntent().getExtras().getString("resource_no");
+       final String res_type=getIntent().getExtras().getString("resource_type");
+        final String demand_id=getIntent().getExtras().getString("demand_id");
         t1=(TextView)findViewById(R.id.textViews1);
         t2=(TextView)findViewById(R.id.textViews2);
         t1.setText(res_no);
         t2.setText(res_type);
+        emp_id=LoginActivity.emp_id;
+        loc_id=LoginActivity.loc_id;
         ca = new NotRamuResAdapter(this, R.layout.not_ramu_row);
         listView = (ListView) findViewById(R.id.listdata_not_ramu);
         listView.setAdapter(ca);
@@ -60,9 +66,13 @@ TextView t1,t2;
                 for (String x:al)
                 {
                     PreemptRes preemptRes =new PreemptRes();
-                    preemptRes.execute(x);
+                    preemptRes.execute(emp_id,x,res_type,loc_id);
 
                 }
+                AllocatedDemand ad=new AllocatedDemand();
+                ad.execute(res_no,res_type,demand_id);
+                Intent i=new Intent(NotRamu.this,SMRegSuccess.class);
+                startActivity(i);
             }
         });
      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -217,7 +227,7 @@ TextView t1,t2;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/ResourcesPreempt.php";
+            json_url = "http://www.wangle.website/ResourceIndividualPreempt.php";
 
         }
 
@@ -225,7 +235,10 @@ TextView t1,t2;
         protected String doInBackground(String... params) {
 
             try {
-                String res_id=params[0];
+                String emp_id=params[0];
+                String resource_id=params[1];
+                String resource_type=params[2];
+                String location_id=params[3];
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -235,7 +248,62 @@ TextView t1,t2;
                 ////////////////////////////////
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("Resource_ID", "UTF-8") + "=" + URLEncoder.encode(res_id, "UTF-8");
+                String data = URLEncoder.encode("emp_id", "UTF-8") + "=" + URLEncoder.encode(emp_id, "UTF-8")+ "&" +  URLEncoder.encode("resource_id", "UTF-8") + "=" + URLEncoder.encode(resource_id, "UTF-8")+ "&" +  URLEncoder.encode("resource_type", "UTF-8") + "=" + URLEncoder.encode(resource_type, "UTF-8")+ "&" +  URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                ///////////////
+                InputStream inputStream = httpURLConnection.getInputStream();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+
+    }
+    class AllocatedDemand extends AsyncTask<String, String, String> {
+
+        String json_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            json_url = "http://www.wangle.website/allocate_preempt.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                String res_no=params[0];
+                String res_type=params[1];
+                String demand_id=params[2];
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+                ////////////////////////////////
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("res_no", "UTF-8") + "=" + URLEncoder.encode(res_no, "UTF-8")+ "&" +  URLEncoder.encode("res_type", "UTF-8") + "=" + URLEncoder.encode(res_type, "UTF-8")+ "&" +  URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(demand_id, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
