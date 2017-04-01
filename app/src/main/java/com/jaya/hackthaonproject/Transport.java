@@ -49,7 +49,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.activity_transport);
-       
+
         setContentView(R.layout.activity_transporter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
@@ -184,13 +184,14 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-    void transport(String dem_id, String type){
+    void transport(String dem_id, final String type){
         AlertDialog.Builder builder = new AlertDialog.Builder(Transport.this);
         builder.setTitle("Confirmation").setMessage("Proceed to process Demand ID : "+dem_id);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent= new Intent(Transport.this,ResLoc.class);
+                intent.putExtra("type",type);
                 startActivity(intent);
 
             }

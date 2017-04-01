@@ -16,45 +16,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class ResLoc extends AppCompatActivity {
 
     ResLocResAdapter adapter;
     ListView listView;
     TextView src_tx;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transport);
+        setContentView(R.layout.activity_res_loc);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Resources Location");
 
-        adapter = new ResLocResAdapter(this, R.layout.transport_row);
-        listView = (ListView) findViewById(R.id.listview_transport);
+        adapter = new ResLocResAdapter(this, R.layout.req_res_row);
+        listView = (ListView) findViewById(R.id.listview_res_loc);
         listView.setAdapter(adapter);
-        src_tx= (TextView) findViewById(R.id.loc_trans);
-        src_tx.setText("Location");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String src;
-                src_tx= (TextView) view.findViewById(R.id.srcID_res_loc);
+                src_tx= (TextView) view.findViewById(R.id.src_res_loc);
                 src=src_tx.getText().toString();
                 transport(src);
 
 
             }
         });
+        type= getIntent().getExtras().getString("type");
         GetSource show = new GetSource();
-        show.execute();
+        show.execute(type);
 
 
     }
@@ -78,6 +82,7 @@ public class ResLoc extends AppCompatActivity {
     class GetSource extends AsyncTask<String, String, String> {
 
         String json_url;
+        String type;
 
         @Override
         protected void onPreExecute() {
@@ -90,13 +95,20 @@ public class ResLoc extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-
+                type= params[0];
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.connect();
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
@@ -129,7 +141,7 @@ public class ResLoc extends AppCompatActivity {
         void parse(String result) {
             JSONObject jsonObject;
             JSONArray jsonArray;
-            String res_id,src_id;
+            String no,src_id;
 
 
             try {
@@ -139,12 +151,12 @@ public class ResLoc extends AppCompatActivity {
                 while (count < jsonArray.length()) {
 
                     JSONObject jo = jsonArray.getJSONObject(count);
-                    src_id = jo.getString("src_id");
-                    res_id = jo.getString("res_id");
+                    src_id = jo.getString("Source_id");
+                    no = jo.getString("Available_no");
 
 
 
-                    ResLocRes c = new ResLocRes(res_id,src_id);
+                    ResLocRes c = new ResLocRes(no,src_id,type);
                     adapter.add(c);
                     count++;
 

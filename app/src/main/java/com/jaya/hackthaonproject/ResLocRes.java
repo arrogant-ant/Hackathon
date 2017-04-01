@@ -5,22 +5,23 @@ package com.jaya.hackthaonproject;
  */
 
 public class ResLocRes {
-    String res_id,src_id;
+    String res_no,src_id,res_type;
 
-    public ResLocRes(String res_id, String src_id) {
-
-        this.res_id = res_id;
-
+    public ResLocRes(String res_no, String src_id, String res_type) {
+        this.res_no = res_no;
         this.src_id = src_id;
-    }
-    public String getRes_id() {
-        return res_id;
+        this.res_type = res_type;
     }
 
+    public String getRes_no() {
+        return res_no;
+    }
 
     public String getSrc_id() {
         return src_id;
     }
 
-
+    public String getRes_type() {
+        return res_type;
+    }
 }

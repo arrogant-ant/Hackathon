@@ -1,60 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="45dp">
+    android:layout_height="45dp"
+    android:paddingTop="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="#00897B"
-        android:weightSum="220"
-        android:layout_marginTop="10dp"
-        >
+        android:background="#00897b"
+        android:weightSum="193">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:background="#ffffff"
             android:layout_weight="5"
-            >
-        </LinearLayout>
+            android:background="#ffffff"></LinearLayout>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/resID_res_loc"
-            android:text="Resource ID"
-            android:textColor="#ffffff"
+            android:layout_weight="60"
             android:gravity="center"
+            android:text="Source ID"
+            android:textColor="#ffffff"
             android:textSize="15dp"
-            android:layout_weight="104"
+            android:id="@+id/src_res_loc"
 
             />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:background="#ffffff"
             android:layout_weight="1"
-            >
-        </LinearLayout>
+            android:background="#ffffff"></LinearLayout>
 
         <TextView
-
-            android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:id="@+id/srcID_res_loc"
-            android:text="Source ID"
-            android:textColor="#00897B"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
             android:gravity="center"
+            android:text="Resource Type"
+            android:textColor="#00897b"
             android:textSize="15dp"
             android:background="#DCDCDC"
-            android:layout_weight="105"
-
+            android:id="@+id/type_res_loc"
             />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:background="#ffffff"
+            android:layout_weight="1"
+            android:background="#ffffff"></LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
+            android:gravity="center"
+            android:text="Available No"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:id="@+id/no_res_loc"
+
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
             android:layout_weight="5"
-            >
+            android:background="#ffffff">
+
         </LinearLayout>
 
     </LinearLayout>

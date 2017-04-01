@@ -44,10 +44,11 @@ public class ResLocResAdapter extends ArrayAdapter<ResLocRes> {
         if(row==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row=layoutInflater.inflate(R.layout.transport_row,parent,false);
+            row=layoutInflater.inflate(R.layout.res_loc_row,parent,false);
             ch= new ContactHolders();
-            ch.res_id =(TextView)row.findViewById(R.id.resID_res_loc);
-            ch.src_id =(TextView)row.findViewById(R.id.srcID_res_loc);
+            ch.res_no =(TextView)row.findViewById(R.id.no_res_loc);
+            ch.src_id =(TextView)row.findViewById(R.id.src_res_loc);
+            ch.res_type= (TextView) row.findViewById(R.id.type_res_loc);
             row.setTag(ch);
         }
         else
@@ -56,15 +57,16 @@ public class ResLocResAdapter extends ArrayAdapter<ResLocRes> {
 
         }
         ResLocRes contacts= this.getItem(position);
-        ch.res_id.setText(contacts.getRes_id());
+        ch.res_no.setText(contacts.getRes_no());
         ch.src_id.setText(contacts.getSrc_id());
-
+        ch.res_type.setText(contacts.getRes_type());
         return row;
     }
     static class ContactHolders
     {
-        TextView res_id;
+        TextView res_no;
         TextView src_id;
+        TextView res_type;
 
 
 
