@@ -303,6 +303,7 @@ public class Manual extends AppCompatActivity {
                   Intent i=new Intent(ctx,NotRamu.class);
                     i.putExtra("resource_no",resource);
                     i.putExtra("resource_type",resource_type_individual);
+                    i.putExtra("demand_id",demand_id_individual);
                     startActivity(i);
 
 
