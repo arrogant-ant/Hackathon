@@ -162,12 +162,12 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
            startActivity(i);
 
         }
-        else if (id == R.id.available_pc) {
+        else if (id == R.id.track) {
             Intent i=new Intent(this,Available.class);
             startActivity(i);
 
 
-        }else if (id == R.id.track_resources_pc) {
+        }else if (id == R.id.transported_resources_pc) {
             Intent i=new Intent(this,Track.class);
             startActivity(i);
 

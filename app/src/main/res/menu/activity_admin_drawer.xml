@@ -9,11 +9,11 @@
 
 
         <item
-            android:id="@+id/track_resources_pc"
+            android:id="@+id/transported_resources_pc"
             android:icon="@drawable/ic_track_resources"
             android:title="Track Resources" />
         <item
-            android:id="@+id/available_pc"
+            android:id="@+id/track"
             android:icon="@drawable/ic_view_database"
             android:title="View Available Resources"/>
         <item

@@ -64,7 +64,7 @@ TextView t1,t2;
             public void onClick(View v) {
                 String item="";
                 for (String x:al)
-                {
+                {   Toast.makeText(NotRamu.this,"al = "+x,Toast.LENGTH_SHORT).show();
                     PreemptRes preemptRes =new PreemptRes();
                     preemptRes.execute(emp_id,x,res_type,loc_id);
 

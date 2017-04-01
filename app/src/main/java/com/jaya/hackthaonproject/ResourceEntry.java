@@ -130,24 +130,20 @@ public class ResourceEntry extends AppCompatActivity {
 
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            result = s;
-
-
-            parse(ctx);
+            parse(s);
 
 
         }
 
 
-        void parse(Context ctx) {
+        void parse(String reslt) {
             JSONObject jsonObject;
             JSONArray jsonArray;
 
 
 
             try {
-                jsonObject = new JSONObject(result);
+                jsonObject = new JSONObject(reslt);
                 jsonArray = jsonObject.getJSONArray("server_response");
                 int count = 0;
                 String Resource_Type;

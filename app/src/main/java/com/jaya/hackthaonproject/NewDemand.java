@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -41,7 +42,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     ArrayList<Resource> demand;
     EditText dealine_et;
     String priority, deadline;
-    static String empID;
+    static String empID,location_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         String[] priority={"1","2","3","4","5"};
         demand= new ArrayList<>();
         dealine_et= (EditText) findViewById(R.id.deadline);
-
+        empID=LoginActivity.emp_id;
+        location_id= LoginActivity.loc_id;
         priority_ad=new ArrayAdapter<>(NewDemand.this,android.R.layout.simple_spinner_dropdown_item,priority);
         priority_sp= (Spinner) findViewById(R.id.prioritySpinner);
         priority_sp.setAdapter(priority_ad);
@@ -78,7 +80,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         FragmentManager manager= getFragmentManager();
         FragmentTransaction transaction= manager.beginTransaction();
         transaction.add(R.id.req_res,resource).commit();
-        //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).ShowSM();
+        //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).show();
         ReqResource res = (ReqResource) manager.findFragmentById(R.id.req_res);
         res.setText(type,no,time);
 
@@ -87,13 +89,14 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         demand.add(r);
 
 
+
     }
 
     public void submit(View view) {
-        Toast.makeText(NewDemand.this,"teesting dude ",Toast.LENGTH_SHORT).show();
         deadline= dealine_et.getText().toString();
         GetID d_ID= new GetID();
         d_ID.execute();
+
 
     }
 
@@ -102,21 +105,22 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         AddDemand add= new AddDemand();
         String demand_id="";
-        String location_id;
-        JSONObject js =new JSONObject(s);
-        JSONArray jsonArray = js.getJSONArray("server_response");
+
+        JSONObject jsonObject;
+        jsonObject = new JSONObject(s);
+        JSONArray jsonArray = jsonObject.getJSONArray("server_response");
         int count = 0;
-        String Resource_Type;
-        String No_Of_Resources;
 
         while (count < jsonArray.length()) {
 
             JSONObject jo = jsonArray.getJSONObject(count);
-            demand_id = jo.getString("demand_id");
+            demand_id= jo.getString("demand_id");
+            count++;
+
         }
 
-        location_id= LoginActivity.loc_id;
-        Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id+" d= "+deadline,Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(NewDemand.this,"demand "+demand_id,Toast.LENGTH_SHORT).show();
         add.execute(priority,deadline,demand_id,location_id);
     }
 
@@ -149,9 +153,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             Toast.makeText(NewDemand.this,"demand NOT placed, plz retry",Toast.LENGTH_LONG).show();
     }
 
-    public static void setEmpID(String s1) {
-        empID=s1;
-    }
+
 
     //to get demand id n loc id
     class GetID extends AsyncTask<String,String,String>
@@ -175,7 +177,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 httpURLConnection.connect();
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data=URLEncoder.encode("emp_ID","UTF-8")+"="+URLEncoder.encode(NewDemand.empID,"UTF-8");
+                String data=URLEncoder.encode("emp_ID","UTF-8")+"="+URLEncoder.encode(location_id,"UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -187,6 +189,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
+
                 while ((line = bufferedReader.readLine()) != null) {
                     buffer.append(line);
                 }
@@ -261,7 +264,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     httpURLConnection.connect();
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    Resource r = demand.get(i);
+                    Resource r = demand.get(0);
                     type = r.getType();
                     no = r.getNo();
                     time = r.getTime();
@@ -276,6 +279,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
+
                     // reading from the server
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -287,8 +291,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
-                }
 
+                }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -304,25 +308,16 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             String result= new String();
-            JSONObject js = null;
+            JSONObject js= null;
             try {
                 js = new JSONObject(s);
-                JSONArray jsonArray = js.getJSONArray("server_response");
-                int count = 0;
-
-
-                while (count < jsonArray.length()) {
-
-                    JSONObject jo = jsonArray.getJSONObject(count);
-                    result = jo.getString("result");
-                }
+                result= js.getString("result");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             display(result);
 
         }
     }
 }
+

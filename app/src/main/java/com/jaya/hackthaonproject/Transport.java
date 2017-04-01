@@ -1,10 +1,8 @@
 package com.jaya.hackthaonproject;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,14 +26,6 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Transport extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
    // String result;
@@ -151,12 +141,12 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
             startActivity(i);
 
         }
-        else if (id == R.id.available_pc) {
-            Intent i=new Intent(this,Available.class);
+        else if (id == R.id.track) {
+            Intent i=new Intent(this,InTransient.class);
             startActivity(i);
 
 
-        }else if (id == R.id.track_resources_pc) {
+        }else if (id == R.id.transported_resources_pc) {
             Intent i=new Intent(this,Track.class);
             startActivity(i);
 

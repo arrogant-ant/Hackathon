@@ -21,7 +21,7 @@ public class NewDemandFrag extends Fragment implements AdapterView.OnItemSelecte
     Button btn;
     Spinner type_spinner ;
     ArrayAdapter<String> type_adapter;
-    String[] resource_type={"Cranes","Cement Mixture","Labour","JCB"};
+    String[] resource_type={"cranes","cement mixture","labour","JCB","truck","engineer"};
     EditText no_of_resources, completion_time;
     String type,no,time;
     Communicator comm;

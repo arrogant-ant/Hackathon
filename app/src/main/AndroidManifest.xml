@@ -112,13 +112,12 @@
             </intent-filter>
         </service>
 
-
         <activity android:name=".ResourceEntry" />
-        <activity android:name=".Transport"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Transport"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ResLoc" />
-        <activity android:name=".Transporter"
-            android:theme="@style/AppTheme.NoActionBar"  ></activity>
+        <activity android:name=".InTransient"></activity>
     </application>
 
 </manifest>
