@@ -40,6 +40,7 @@ public class ResLoc extends AppCompatActivity {
         adapter = new ResLocResAdapter(this, R.layout.transport_row);
         listView = (ListView) findViewById(R.id.listview_transport);
         listView.setAdapter(adapter);
+        src_tx= (TextView) findViewById(R.id.loc_trans);
         src_tx.setText("Location");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
