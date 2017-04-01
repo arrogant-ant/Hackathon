@@ -3,10 +3,7 @@
 
     <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/timeline_report_pc"
-            android:icon="@drawable/ic_timeline_report"
-            android:title="Timeline Report" />
+
 
 
 

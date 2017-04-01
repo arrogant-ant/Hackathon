@@ -142,12 +142,10 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.timeline_report_pc) {
-            Intent i=new Intent(this,Timeline.class);
-            startActivity(i);
 
 
-        } else if (id == R.id.allocated_pc) {
+
+         if (id == R.id.allocated_pc) {
 
             Intent i=new Intent(this,Allocated.class);
             startActivity(i);

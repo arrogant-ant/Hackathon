@@ -156,13 +156,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.timeline_report_pc) {
-            Intent i=new Intent(this,Timeline.class);
-            startActivity(i);
-
-
-        } else if (id == R.id.allocated_pc) {
+        if (id == R.id.allocated_pc) {
 
       Intent i=new Intent(this,Allocated.class);
            startActivity(i);
@@ -181,7 +175,8 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
             Intent i=new Intent(this,ViewDemands.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_create_sm_pc) {
+    }
+    else if (id == R.id.nav_create_sm_pc) {
             Intent i = new Intent(this, RegisterSM.class);
             startActivity(i);
         } else if (id == R.id.view_sm_database_pc) {

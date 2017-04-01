@@ -9,34 +9,34 @@
     tools:context="com.jaya.hackthaonproject.NewDemand"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="80dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Priority"
-        android:textSize="16sp"
-        android:layout_marginLeft="8dp"
-        android:textColor="#000000"/>
-    <Spinner
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/prioritySpinner"
-        android:spinnerMode="dropdown"/>
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Deadline"
-        android:textSize="16sp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#000000"/>
-    <EditText
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/deadline"/>
-</LinearLayout>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Priority"
+            android:textSize="16sp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#000000"/>
+        <Spinner
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/prioritySpinner"
+            android:spinnerMode="dropdown"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Deadline"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"/>
+        <EditText
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deadline"/>
+    </LinearLayout>
     <!-- adding resources -->
     <fragment
         android:layout_width="match_parent"
@@ -44,17 +44,27 @@
         android:name="com.jaya.hackthaonproject.NewDemandFrag"
         tools:layout="@layout/fragment_new_demand"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="10">
     <TextView
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:text="Requested Resources:"
         android:textColor="@color/colorAccent"
-/>
+        />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="0dp"
+        android:layout_weight="7"
         android:layout_marginLeft="15dp"
         android:id="@+id/listScroll">
         <LinearLayout
@@ -73,7 +83,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="Submit"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
@@ -86,7 +96,10 @@
         android:textStyle="bold"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="20dp"
         />
-
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

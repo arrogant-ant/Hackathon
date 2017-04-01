@@ -182,10 +182,10 @@ public class Track extends AppCompatActivity {
             while (count < jsonArray.length()) {
 
                 JSONObject jo = jsonArray.getJSONObject(count);
-                Resource_id = jo.getString("demand_id");
-                Resource_type = jo.getString("des_id");
-                location_id = jo.getString("no");
-                Status = jo.getString("res_type");
+                Resource_id = jo.getString("Resource_id");
+                Resource_type = jo.getString("Resource_type");
+                location_id = jo.getString("location_id");
+                Status = jo.getString("Status");
 
 
                 TrackRes c = new TrackRes(Resource_id, Resource_type, location_id, Status);

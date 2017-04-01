@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,11 +101,21 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     void uploadDemand(String s) throws JSONException {
 
         AddDemand add= new AddDemand();
-        String demand_id;
+        String demand_id="";
         String location_id;
         JSONObject js =new JSONObject(s);
-        demand_id= js.getString("demand_id");
-        location_id= js.getString("location_id");
+        JSONArray jsonArray = js.getJSONArray("server_response");
+        int count = 0;
+        String Resource_Type;
+        String No_Of_Resources;
+
+        while (count < jsonArray.length()) {
+
+            JSONObject jo = jsonArray.getJSONObject(count);
+            demand_id = jo.getString("demand_id");
+        }
+
+        location_id= LoginActivity.loc_id;
         Toast.makeText(NewDemand.this,"demand "+empID+" "+demand_id+" "+location_id+" d= "+deadline,Toast.LENGTH_SHORT).show();
         add.execute(priority,deadline,demand_id,location_id);
     }
@@ -293,13 +304,23 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             String result= new String();
-            JSONObject js= null;
+            JSONObject js = null;
             try {
                 js = new JSONObject(s);
-                result= js.getString("result");
+                JSONArray jsonArray = js.getJSONArray("server_response");
+                int count = 0;
+
+
+                while (count < jsonArray.length()) {
+
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    result = jo.getString("result");
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
             display(result);
 
         }
