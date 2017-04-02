@@ -28,6 +28,10 @@
             android:id="@+id/preempt_pc"
             android:icon="@drawable/ic_allocate_demand"
             android:title="Allocate Demand Manually " />
+        <item
+            android:id="@+id/purpose"
+            android:icon="@drawable/ic_allocate_demand"
+            android:title="View Purpose" />
 
     </group>
 

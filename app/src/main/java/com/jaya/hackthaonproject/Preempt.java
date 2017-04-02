@@ -26,6 +26,9 @@ String accept_data;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prempt);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Preempt");
         final String s=getIntent().getExtras().getString("demand_id");
        final String s2=getIntent().getExtras().getString("resource_type");
        final  String s3=getIntent().getExtras().getString("no_of_resources");

@@ -189,6 +189,10 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
              Intent i=new Intent(this,Manual.class);
             startActivity(i);
         }
+        else if (id == R.id.purpose) {
+            Intent i=new Intent(this,Purpose.class);
+            startActivity(i);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
         drawer.closeDrawer(GravityCompat.START);

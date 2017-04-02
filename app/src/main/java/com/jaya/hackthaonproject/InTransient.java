@@ -28,6 +28,9 @@ public class InTransient extends AppCompatActivity {
         setContentView(R.layout.activity_in_transient);
         ca = new InTransientResAdapter(this, R.layout.transport_row);
         listView = (ListView) findViewById(R.id.listview_transient);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Resources In Transient");
         listView.setAdapter(ca);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

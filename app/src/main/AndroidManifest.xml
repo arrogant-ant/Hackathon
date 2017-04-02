@@ -97,9 +97,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jaya.hackthaonproject.PC" />
         </activity>
-        <activity android:name=".Manual" />
-        <activity android:name=".Preempt" />
-        <activity android:name=".NotRamu" />
+        <activity android:name=".Manual">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.PC" />
+        </activity>
+        <activity android:name=".Preempt" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.jaya.hackthaonproject.PC" />
+            </activity>
+        <activity android:name=".NotRamu" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.jaya.hackthaonproject.Manual" />
+            </activity>
 
         <service android:name=".FCMService">
             <intent-filter>
@@ -116,8 +128,17 @@
         <activity
             android:name=".Transport"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ResLoc" />
-        <activity android:name=".InTransient"></activity>
+        <activity android:name=".ResLoc" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Transport" />
+            </activity>
+        <activity android:name=".InTransient" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jaya.hackthaonproject.Transport" />
+            </activity>
+        <activity android:name=".Purpose"></activity>
     </application>
 
 </manifest>
