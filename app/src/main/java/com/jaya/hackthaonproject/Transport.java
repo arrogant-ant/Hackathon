@@ -31,8 +31,8 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
    // String result;
     ListView listView;
     TransportResAdapter ca;
-    String des_id,demand_id, res_type,no;
-    TextView type_tx, id_tx;
+    String des_id,demand_id, res_type,no, expno;
+    TextView type_tx, id_tx,no_tx;
     String url= "http://www.wangle.website/transporter.php";
 
     @Override
@@ -65,8 +65,10 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
                 String type,dem_id;
                 type_tx= (TextView) view.findViewById(R.id.res_type_transport);
                 id_tx= (TextView) view.findViewById(R.id.demand_id_transport);
+                no_tx= (TextView) view.findViewById(R.id.res_no_transport);
                 dem_id= id_tx.getText().toString();
                 type= type_tx.getText().toString();
+                expno=no_tx.getText().toString();
                 transport(dem_id,type);
 
 
@@ -174,7 +176,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-    void transport(String dem_id, final String type){
+    void transport(final String dem_id, final String type){
         AlertDialog.Builder builder = new AlertDialog.Builder(Transport.this);
         builder.setTitle("Confirmation").setMessage("Proceed to process Demand ID : "+dem_id);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -182,6 +184,8 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent= new Intent(Transport.this,ResLoc.class);
                 intent.putExtra("type",type);
+                intent.putExtra("no",expno);
+                intent.putExtra("demand_id",dem_id);
                 startActivity(intent);
 
             }
