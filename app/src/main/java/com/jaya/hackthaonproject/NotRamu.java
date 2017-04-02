@@ -69,8 +69,8 @@ TextView t1,t2;
                     preemptRes.execute(emp_id,x,res_type,loc_id);
 
                 }
-                AllocatedDemand ad=new AllocatedDemand();
-                ad.execute(res_no,res_type,demand_id);
+               // AllocatedDemand ad=new AllocatedDemand();
+                //ad.execute(res_no,res_type,demand_id);
                 Intent i=new Intent(NotRamu.this,SMRegSuccess.class);
                 startActivity(i);
             }

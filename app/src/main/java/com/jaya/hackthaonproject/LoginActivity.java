@@ -33,6 +33,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -45,7 +51,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +64,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
   String result = "";
+  String key;
   EditText et;
   EditText et2;
   TextView error_tx, progress_tx;
@@ -62,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
   int my_shortAnimTime;
   String error_msg;
   static String emp_id, loc_id;
+  String url1="http://wangle.website/update_fcm.php";
   /**
    * Id to identity READ_CONTACTS permission request.
    */
@@ -350,6 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String json_string;
     String json_url;
     Context ctx;
+    String key;
 
     Getjason(Context ctx) {
       this.ctx = ctx;
@@ -444,6 +456,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       if (find.equals("success")) {
         if (null == fcmToken && sharedPreferences.getString("fcm_token", null) != null) {
           postTokenToServer(emp_id, sharedPreferences.getString("fcm_token", null));
+          key=sharedPreferences.getString("fcm_token", null);
+          StringRequest stringRequest= new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+          },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+          }){
+            @Override
+            protected Map<String,String> getParams(){
+              Map<String,String> params = new HashMap<String, String>();
+              params.put("emp_id",emp_id);
+              params.put("key",key);
+              return params;
+            }
+
+          };
+
+          VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
+
         }
         if (emp_id.contains("@ADMIN")) {
           Intent i = new Intent(ctx, PC.class);
