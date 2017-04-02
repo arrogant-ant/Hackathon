@@ -33,12 +33,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -51,10 +45,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,7 +55,6 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
   String result = "";
-  String key;
   EditText et;
   EditText et2;
   TextView error_tx, progress_tx;
@@ -72,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
   int my_shortAnimTime;
   String error_msg;
   static String emp_id, loc_id;
-  String url1="http://wangle.website/update_fcm.php";
   /**
    * Id to identity READ_CONTACTS permission request.
    */
@@ -361,7 +350,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String json_string;
     String json_url;
     Context ctx;
-    String key;
 
     Getjason(Context ctx) {
       this.ctx = ctx;
@@ -456,30 +444,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       if (find.equals("success")) {
         if (null == fcmToken && sharedPreferences.getString("fcm_token", null) != null) {
           postTokenToServer(emp_id, sharedPreferences.getString("fcm_token", null));
-          key=sharedPreferences.getString("fcm_token", null);
-          StringRequest stringRequest= new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-          },new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-          }){
-            @Override
-            protected Map<String,String> getParams(){
-              Map<String,String> params = new HashMap<String, String>();
-              params.put("emp_id",emp_id);
-              params.put("key",key);
-              return params;
-            }
-
-          };
-
-          VolleySingleton.getInstance(getApplicationContext()).addToReqQueue(stringRequest);
-
         }
         if (emp_id.contains("@ADMIN")) {
           Intent i = new Intent(ctx, PC.class);
@@ -512,7 +476,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
   private void postTokenToServer(String emp_id, String fcm_token) {
 
-    //TODO write a call to server which will update user table for given empid update token
+    PostTokenTask tokenPostTask = new PostTokenTask(this);
+    tokenPostTask.execute(emp_id, fcm_token);
   }
 
   @Override
@@ -526,5 +491,82 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     super.onDestroy();
     finish();
   }
-}
 
+  class PostTokenTask extends AsyncTask<String, String, String> {
+
+    String json_string;
+    String json_url;
+    Context ctx;
+
+    PostTokenTask(Context ctx) {
+      this.ctx = ctx;
+
+
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      json_url = "http://www.wangle.website/token.php";
+
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+      String first = params[0];
+      String second = params[1];
+      try {
+
+        URL url = new URL(json_url);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.setRequestMethod("POST");
+        httpURLConnection.setDoOutput(true);
+        httpURLConnection.setDoInput(true);
+        httpURLConnection.connect();
+
+        OutputStream outputStream = httpURLConnection.getOutputStream();
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        String data = URLEncoder.encode("empID", "UTF-8") + "=" + URLEncoder.encode(first, "UTF-8") + "&" + URLEncoder
+            .encode("fcm_token", "UTF-8") + "=" + URLEncoder.encode(second, "UTF-8");
+        bufferedWriter.write(data);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        outputStream.close();
+
+        // reading from the server
+
+        InputStream inputStream = httpURLConnection.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = "";
+        StringBuffer buffer = new StringBuffer();
+        while ((line = bufferedReader.readLine()) != null) {
+          buffer.append(line);
+        }
+        bufferedReader.close();
+        inputStream.close();
+        httpURLConnection.disconnect();
+        return buffer.toString().trim();
+
+      } catch (MalformedURLException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+      super.onProgressUpdate(values);
+
+    }
+
+    protected void onPostExecute(String s) {
+      super.onPostExecute(s);
+      Toast.makeText(ctx, "Successfully posted Token", Toast.LENGTH_SHORT).show();
+
+
+    }
+  }
+}
