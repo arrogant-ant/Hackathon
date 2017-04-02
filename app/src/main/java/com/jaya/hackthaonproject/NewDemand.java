@@ -35,26 +35,26 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSelectedListener,Communicator {
+public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Communicator {
 
     Spinner priority_sp;
     ArrayAdapter<String> priority_ad;
     ArrayList<Resource> demand;
     EditText dealine_et;
     String priority, deadline;
-    static String empID,location_id;
+    static String empID, location_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_demand);
-        String[] priority={"1","2","3","4","5"};
-        demand= new ArrayList<>();
-        dealine_et= (EditText) findViewById(R.id.deadline);
-        empID=LoginActivity.emp_id;
-        location_id= LoginActivity.loc_id;
-        priority_ad=new ArrayAdapter<>(NewDemand.this,android.R.layout.simple_spinner_dropdown_item,priority);
-        priority_sp= (Spinner) findViewById(R.id.prioritySpinner);
+        String[] priority = {"1", "2", "3", "4", "5"};
+        demand = new ArrayList<>();
+        dealine_et = (EditText) findViewById(R.id.deadline);
+        empID = LoginActivity.emp_id;
+        location_id = LoginActivity.loc_id;
+        priority_ad = new ArrayAdapter<>(NewDemand.this, android.R.layout.simple_spinner_dropdown_item, priority);
+        priority_sp = (Spinner) findViewById(R.id.prioritySpinner);
         priority_sp.setAdapter(priority_ad);
         priority_sp.setOnItemSelectedListener(NewDemand.this);
 
@@ -62,10 +62,9 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        priority= (String) parent.getItemAtPosition(position);
+        priority = (String) parent.getItemAtPosition(position);
 
     }
 
@@ -77,24 +76,23 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     @Override
     public void response(String type, String no, String time) {
         ReqResource resource = new ReqResource();
-        FragmentManager manager= getFragmentManager();
-        FragmentTransaction transaction= manager.beginTransaction();
-        transaction.add(R.id.req_res,resource).commit();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.req_res, resource).commit();
         //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).show();
         ReqResource res = (ReqResource) manager.findFragmentById(R.id.req_res);
-        res.setText(type,no,time);
+        res.setText(type, no, time);
 
         //to add to arraylist
-        Resource r= new Resource(type,no,time);
+        Resource r = new Resource(type, no, time);
         demand.add(r);
-
 
 
     }
 
     public void submit(View view) {
-        deadline= dealine_et.getText().toString();
-        GetID d_ID= new GetID();
+        deadline = dealine_et.getText().toString();
+        GetID d_ID = new GetID();
         d_ID.execute();
 
 
@@ -103,8 +101,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     //to upload all demands
     void uploadDemand(String s) throws JSONException {
 
-        AddDemand add= new AddDemand();
-        String demand_id="";
+        AddDemand add = new AddDemand();
+        String demand_id = "";
 
         JSONObject jsonObject;
         jsonObject = new JSONObject(s);
@@ -114,21 +112,21 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         while (count < jsonArray.length()) {
 
             JSONObject jo = jsonArray.getJSONObject(count);
-            demand_id= jo.getString("demand_id");
+            demand_id = jo.getString("demand_id");
             count++;
 
         }
 
 
-        Toast.makeText(NewDemand.this,"demand "+demand_id,Toast.LENGTH_SHORT).show();
-        add.execute(priority,deadline,demand_id,location_id);
+        Toast.makeText(NewDemand.this, "demand " + demand_id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(NewDemand.this, "Placing your demand", Toast.LENGTH_LONG ).show();
+
+        add.execute(priority, deadline, demand_id, location_id);
     }
 
-    void display(String result)
-    {
-        if(result.equals("true"))
-        {
-            AlertDialog.Builder builder= new AlertDialog.Builder(NewDemand.this);
+    void display(String result) {
+        if (result.equals("true")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(NewDemand.this);
             builder.setTitle("Demand Placed");
             builder.setMessage("Do you want to place another independent demand?");
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -145,20 +143,18 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                     startActivity(i);
                 }
             });
-            AlertDialog alertDialog=builder.create();
+            AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }
-        else
-            Toast.makeText(NewDemand.this,"demand NOT placed, plz retry",Toast.LENGTH_LONG).show();
+        } else
+            Toast.makeText(NewDemand.this, "demand NOT placed, plz retry", Toast.LENGTH_LONG).show();
     }
 
 
-
     //to get demand id n loc id
-    class GetID extends AsyncTask<String,String,String>
-    {
+    class GetID extends AsyncTask<String, String, String> {
         StringBuffer buffer = new StringBuffer();
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -167,7 +163,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         @Override
         protected String doInBackground(String... params) {
-            String url_string="http://www.wangle.website/demand_id.php";
+            String url_string = "http://www.wangle.website/demand_id.php";
             try {
                 URL url = new URL(url_string);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -177,7 +173,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 httpURLConnection.connect();
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data=URLEncoder.encode("emp_ID","UTF-8")+"="+URLEncoder.encode(location_id,"UTF-8");
+                String data = URLEncoder.encode("emp_ID", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -196,8 +192,6 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-
-
 
 
             } catch (UnsupportedEncodingException e) {
@@ -225,18 +219,16 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     //pass the data
-    class AddDemand extends AsyncTask<String,String,String> {
+    class AddDemand extends AsyncTask<String, String, String> {
 
-        String url_string,data;
-        String type, time,no;
+        String url_string, data;
+        String type, time, no;
         int i;
-
 
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
 
 
         }
@@ -246,16 +238,15 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
             StringBuffer buffer = new StringBuffer();
 
-            url_string="http://www.wangle.website/place_demand.php";
+            url_string = "http://www.wangle.website/place_demand.php";
             String priority = params[0];
             String deadline = params[1];
             String demand_id = params[2];
             String location_id = params[3];
 
-            try
-            {
+            try {
                 //sending the demands
-                for (i=0;i<demand.size();i++) {
+                for (i = 0; i < demand.size(); i++) {
                     URL url = new URL(url_string);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -300,22 +291,29 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             }
 
 
-
             return buffer.toString().trim();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String result= new String();
-            JSONObject js= null;
+            String result = new String();
+            JSONObject jsonObject;
             try {
-                js = new JSONObject(s);
-                result= js.getString("result");
+                jsonObject = new JSONObject(s);
+                JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+                int count = 0;
+
+                while (count < jsonArray.length()) {
+
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    result = jo.getString("result");
+                    count++;
+
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            display(result);
 
         }
     }
