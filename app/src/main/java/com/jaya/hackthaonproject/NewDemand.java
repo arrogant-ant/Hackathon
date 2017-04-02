@@ -96,6 +96,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         d_ID.execute();
 
 
+
+
     }
 
     //to upload all demands
@@ -297,23 +299,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String result = new String();
-            JSONObject jsonObject;
-            try {
-                jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("server_response");
-                int count = 0;
-
-                while (count < jsonArray.length()) {
-
-                    JSONObject jo = jsonArray.getJSONObject(count);
-                    result = jo.getString("result");
-                    count++;
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                display("true");
 
         }
     }

@@ -166,7 +166,7 @@ public class Free extends AppCompatActivity {
     }
 
     void parse(String result) {
-        Toast.makeText(Free.this,"parsing response",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Free.this,"parsing response :"+result,Toast.LENGTH_SHORT).show();
 
         JSONObject jsonObject;
         JSONArray jsonArray;
