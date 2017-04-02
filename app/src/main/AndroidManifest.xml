@@ -117,7 +117,8 @@
             android:name=".Transport"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ResLoc" />
-        <activity android:name=".InTransient"></activity>
+        <activity android:name=".InTransient" />
+        <activity android:name=".Purpose"></activity>
     </application>
 
 </manifest>

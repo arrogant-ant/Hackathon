@@ -40,8 +40,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
     Spinner priority_sp;
     ArrayAdapter<String> priority_ad;
     ArrayList<Resource> demand;
-    EditText dealine_et;
-    String priority, deadline;
+    EditText dealine_et,purpose_et;
+    String priority, deadline,purpose;
     static String empID, location_id;
 
     @Override
@@ -51,6 +51,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         String[] priority = {"1", "2", "3", "4", "5"};
         demand = new ArrayList<>();
         dealine_et = (EditText) findViewById(R.id.deadline);
+        purpose_et = (EditText) findViewById(R.id.purpose);
         empID = LoginActivity.emp_id;
         location_id = LoginActivity.loc_id;
         priority_ad = new ArrayAdapter<>(NewDemand.this, android.R.layout.simple_spinner_dropdown_item, priority);
@@ -79,7 +80,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.req_res, resource).commit();
-        //Toast.makeText(NewDemand.this,"got response",Toast.LENGTH_SHORT).show();
+
         ReqResource res = (ReqResource) manager.findFragmentById(R.id.req_res);
         res.setText(type, no, time);
 
@@ -92,6 +93,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void submit(View view) {
         deadline = dealine_et.getText().toString();
+        purpose= purpose_et.getText().toString();
         GetID d_ID = new GetID();
         d_ID.execute();
 
@@ -119,11 +121,9 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         }
 
-
-        Toast.makeText(NewDemand.this, "demand " + demand_id, Toast.LENGTH_SHORT).show();
         Toast.makeText(NewDemand.this, "Placing your demand", Toast.LENGTH_LONG ).show();
 
-        add.execute(priority, deadline, demand_id, location_id);
+        add.execute(priority, deadline, demand_id, location_id,purpose);
     }
 
     void display(String result) {
@@ -245,6 +245,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
             String deadline = params[1];
             String demand_id = params[2];
             String location_id = params[3];
+            String purpose=params[4];
 
             try {
                 //sending the demands
@@ -267,7 +268,8 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
                             "&" + URLEncoder.encode("Priority", "UTF-8") + "=" + URLEncoder.encode(priority, "UTF-8") +
                             "&" + URLEncoder.encode("demand_id", "UTF-8") + "=" + URLEncoder.encode(demand_id, "UTF-8") +
                             "&" + URLEncoder.encode("location_id", "UTF-8") + "=" + URLEncoder.encode(location_id, "UTF-8") +
-                            "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8");
+                            "&" + URLEncoder.encode("Deadline", "UTF-8") + "=" + URLEncoder.encode(deadline, "UTF-8") +
+                            "&" + URLEncoder.encode("purpose", "UTF-8") + "=" + URLEncoder.encode(purpose, "UTF-8");
                     bufferedWriter.write(data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
