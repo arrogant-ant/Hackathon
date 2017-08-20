@@ -73,7 +73,7 @@ public class ResourceEntry extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/ResourceEntry.php";
+            json_url = "http://www.techdrona.net/tech/Hack/ResourceEntry.php";
 
         }
 
@@ -180,7 +180,7 @@ public class ResourceEntry extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/AddREsourceData.php";
+            json_url = "http://www.techdrona.net/tech/Hack/AddREsourceData.php";
 
         }
 

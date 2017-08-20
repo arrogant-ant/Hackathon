@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
   int my_shortAnimTime;
   String error_msg;
   static String emp_id, loc_id;
-  String url1="http://wangle.website/update_fcm.php";
+  String url1="http://www.techdrona.net/tech/update_fcm.php";
   /**
    * Id to identity READ_CONTACTS permission request.
    */
@@ -373,7 +373,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onPreExecute() {
       super.onPreExecute();
-      json_url = "http://www.wangle.website/login.php";
+      json_url = "http://www.techdrona.net/tech/Hack/login.php";
 
     }
 

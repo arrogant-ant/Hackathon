@@ -114,7 +114,7 @@ public class NotRamu extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/ResourcesPreempt.php";
+            json_url = "http://www.techdrona.net/tech/Hack/ResourcesPreempt.php";
 
         }
 
@@ -217,7 +217,7 @@ public class NotRamu extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/ResourceIndividualPreempt.php";
+            json_url = "http://www.techdrona.net/tech/Hack/ResourceIndividualPreempt.php";
 
         }
 
@@ -273,7 +273,7 @@ public class NotRamu extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/allocate_preempt.php";
+            json_url = "http://www.techdrona.net/tech/Hack/allocate_preempt.php";
 
         }
 

@@ -28,7 +28,7 @@ public class Timeline extends AppCompatActivity {
     TimelineResAdapter ca;
     ListView listView;
     String result;
-    String url="http://www.wangle.website/timeline.php";
+    String url="http://www.techdrona.net/tech/Hack/timeline.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class Timeline extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/timeline.php";
+            json_url = "http://www.techdrona.net/tech/Hack/timeline.php";
 
         }
 

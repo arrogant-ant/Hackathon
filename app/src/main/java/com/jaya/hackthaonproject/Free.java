@@ -42,8 +42,8 @@ public class Free extends AppCompatActivity {
     FreeResAdapter f;
     String resID, resType;
     TextView id_tx, type_tx;
-    String url="http://www.wangle.website/list_of_resources_user.php";
-    String removeUrl="http://www.wangle.website/dealocation_user_resources.php";
+    String url="http://www.techdrona.net/tech/Hack/list_of_resources_user.php";
+    String removeUrl="http://www.techdrona.net/tech/Hack/dealocation_user_resources.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,7 +202,7 @@ public class Free extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 String first = params[0];
-                URL url = new URL("http://www.wangle.website/list_of_resources_user.php");
+                URL url = new URL("http://www.techdrona.net/tech/Hack/list_of_resources_user.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
@@ -284,7 +284,7 @@ public class Free extends AppCompatActivity {
                 String resource_type = params[1];
                 String resource_id = params[2];
 
-                URL url = new URL("http://www.wangle.website/dealocation_user_resources.php");
+                URL url = new URL("http://www.techdrona.net/tech/Hack/dealocation_user_resources.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);

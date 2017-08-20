@@ -80,7 +80,7 @@ public class RegisterSM extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/anyone.php";
+            json_url = "http://www.techdrona.net/tech/Hack/anyone.php";
 
         }
 

@@ -39,7 +39,7 @@ public class SM extends AppCompatActivity implements NavigationView.OnNavigation
     //com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
     ListView listView;
     String location_id;
-    String url = "http://www.wangle.website/GrantedResource.php";
+    String url = "http://www.techdrona.net/tech/Hack/GrantedResource.php";
     GrantedResAdapter f;
 
     protected void onCreate(Bundle savedInstanceState) {

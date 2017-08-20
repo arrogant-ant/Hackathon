@@ -37,7 +37,7 @@ public class Granted extends AppCompatActivity {
 
     ListView listView;
     String location_id;
-    String url = "http://www.wangle.website/GrantedResource.php";
+    String url = "http://www.techdrona.net/tech/Hack/GrantedResource.php";
     GrantedResAdapter f;
 
     @Override
@@ -89,7 +89,7 @@ public class Granted extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 String first = params[0];
-                URL url = new URL("http://www.wangle.website/GrantedResource.php");
+                URL url = new URL("http://www.techdrona.net/tech/Hack/GrantedResource.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);

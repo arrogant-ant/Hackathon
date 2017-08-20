@@ -165,7 +165,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
         @Override
         protected String doInBackground(String... params) {
-            String url_string = "http://www.wangle.website/demand_id.php";
+            String url_string = "http://www.techdrona.net/tech/Hack/demand_id.php";
             try {
                 URL url = new URL(url_string);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -240,7 +240,7 @@ public class NewDemand extends AppCompatActivity implements AdapterView.OnItemSe
 
             StringBuffer buffer = new StringBuffer();
 
-            url_string = "http://www.wangle.website/place_demand.php";
+            url_string = "http://www.techdrona.net/tech/Hack/place_demand.php";
             String priority = params[0];
             String deadline = params[1];
             String demand_id = params[2];

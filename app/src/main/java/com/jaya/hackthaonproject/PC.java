@@ -215,7 +215,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/fulfill.php";
+            json_url = "http://www.techdrona.net/tech/Hack/fulfill.php";
 
         }
 
@@ -314,7 +314,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/accept.php";
+            json_url = "http://www.techdrona.net/tech/Hack/accept.php";
 
         }
 
@@ -414,7 +414,7 @@ public class PC extends AppCompatActivity implements NavigationView.OnNavigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/delete.php";
+            json_url = "http://www.techdrona.net/tech/Hack/delete.php";
 
         }
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Hackathon_wipro.iml" filepath="$PROJECT_DIR$/Hackathon_wipro.iml" />
       <module fileurl="file://$PROJECT_DIR$/HackthaonProject-master.iml" filepath="$PROJECT_DIR$/HackthaonProject-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

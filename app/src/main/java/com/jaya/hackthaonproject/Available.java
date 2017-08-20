@@ -28,7 +28,7 @@ public class Available extends AppCompatActivity {
     String result;
     AvailableResAdapter ca;
     ListView listView;
-    String url="http://www.wangle.website/available.php";
+    String url="http://www.techdrona.net/tech/Hack/available.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class Available extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/available.php";
+            json_url = "http://www.techdrona.net/tech/Hack/available.php";
 
         }
 

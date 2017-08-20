@@ -28,7 +28,7 @@ public class ViewDemands extends AppCompatActivity {
     String result;
     ListView listView;
     ViewDemandsResAdapter ca;
-    String url="http://www.wangle.website/demand.php";
+    String url="http://www.techdrona.net/tech/Hack/demand.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class ViewDemands extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/demand.php";
+            json_url = "http://www.techdrona.net/tech/Hack/demand.php";
 
         }
 

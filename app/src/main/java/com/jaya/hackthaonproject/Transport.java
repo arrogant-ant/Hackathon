@@ -33,7 +33,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
     TransportResAdapter ca;
     String des_id,demand_id, res_type,no, expno;
     TextView type_tx, id_tx,no_tx;
-    String url= "http://www.wangle.website/transporter.php";
+    String url= "http://www.techdrona.net/tech/Hack/transporter.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,7 +213,7 @@ public class Transport extends AppCompatActivity implements NavigationView.OnNav
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/transporter.php";
+            json_url = "http://www.techdrona.net/tech/Hack/transporter.php";
 
         }
 

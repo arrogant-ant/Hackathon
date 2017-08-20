@@ -27,7 +27,7 @@ import java.net.URL;
 
 public class ShowSM extends AppCompatActivity {
     String result;
-    String url = "http://www.wangle.website/show_sm_database.php";
+    String url = "http://www.techdrona.net/tech/Hack/show_sm_database.php";
     ShowSMResAdapter ca;
     ListView listView;
 
@@ -76,7 +76,7 @@ public class ShowSM extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/show_sm_database.php";
+            json_url = "http://www.techdrona.net/tech/Hack/show_sm_database.php";
 
         }
 

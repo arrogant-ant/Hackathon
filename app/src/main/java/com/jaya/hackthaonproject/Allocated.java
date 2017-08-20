@@ -30,7 +30,7 @@ public class Allocated extends AppCompatActivity {
     TextView tx;
     AllocatedResAdapter ca;
     ListView listView;
-    String url="http://www.wangle.website/allocated.php";
+    String url="http://www.techdrona.net/tech/Hack/allocated.php";
     @Override
        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +78,7 @@ public class Allocated extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/allocated.php";
+            json_url = "http://www.techdrona.net/tech/Hack/allocated.php";
 
         }
 

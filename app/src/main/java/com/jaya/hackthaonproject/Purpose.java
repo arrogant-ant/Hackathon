@@ -25,7 +25,7 @@ public class Purpose extends AppCompatActivity {
     TextView title_tx,purpose_tx;
     EditText id_tx;
     String purpose, id;
-    String url="http://www.wangle.website/return_purpose.php";
+    String url="http://www.techdrona.net/tech/Hack/return_purpose.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

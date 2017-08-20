@@ -28,7 +28,7 @@ public class Track extends AppCompatActivity {
     String result;
     ListView listView;
     TrackResAdapter ca;
-    String url="http://www.wangle.website/Track.php";
+    String url="http://www.techdrona.net/tech/Hack/Track.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class Track extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/Track.php";
+            json_url = "http://www.techdrona.net/tech/Hack/Track.php";
 
         }
 

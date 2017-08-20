@@ -20,7 +20,7 @@ public class InTransient extends AppCompatActivity {
     ListView listView;
     InTransientResAdapter ca;
     String des_id, demand_id, res_type, no;
-    String url = "http://www.wangle.website/transport_transient.php";
+    String url = "http://www.techdrona.net/tech/Hack/transport_transient.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

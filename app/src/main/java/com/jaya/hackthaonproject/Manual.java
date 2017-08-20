@@ -96,7 +96,7 @@ public class Manual extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/demand.php";
+            json_url = "http://www.techdrona.net/tech/Hack/demand.php";
 
         }
 
@@ -210,7 +210,7 @@ public class Manual extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/like.php";
+            json_url = "http://www.techdrona.net/tech/Hack/like.php";
 
         }
 

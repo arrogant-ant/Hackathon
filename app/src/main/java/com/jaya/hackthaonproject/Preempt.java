@@ -59,7 +59,7 @@ String accept_data;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/delete.php";
+            json_url = "http://www.techdrona.net/tech/Hack/delete.php";
 
         }
 

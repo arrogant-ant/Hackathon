@@ -43,7 +43,7 @@ public class ResLoc extends AppCompatActivity {
     TextView src_tx, available_tx;
     String type;
     String no,demand_id;
-    String url = "http://www.wangle.website/set_on_the_way.php";
+    String url = "http://www.techdrona.net/tech/Hack/set_on_the_way.php";
     String src, available;
     TextView no_tx;
 
@@ -135,7 +135,7 @@ public class ResLoc extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            json_url = "http://www.wangle.website/res_loc.php";
+            json_url = "http://www.techdrona.net/tech/Hack/res_loc.php";
 
         }
 
